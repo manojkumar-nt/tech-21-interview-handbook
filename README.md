@@ -4,12 +4,12 @@
 
 [![GitHub Stars](https://img.shields.io/badge/GitHub-Star%20Repo-blue?style=for-the-badge&logo=github)](https://github.com/manojkumar-nt/tech-21-interview-handbook)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by-nc/4.0/)
-[![Editions: 13 Volumes](https://img.shields.io/badge/Editions-13%20Volumes-success?style=for-the-badge)](#-series-catalog)
-[![Questions: 39 Free / 273 Total](https://img.shields.io/badge/Questions-39%20Free%20%7C%20273%20Total-orange?style=for-the-badge)](#-series-catalog)
+[![Editions: 15 Volumes](https://img.shields.io/badge/Editions-15%20Volumes-success?style=for-the-badge)](#-series-catalog)
+[![Questions: 45 Free / 315 Total](https://img.shields.io/badge/Questions-45%20Free%20%7C%20315%20Total-orange?style=for-the-badge)](#-series-catalog)
 
 Welcome to the official public sampler for the **Tech-21 Series** — a modern, zero-fluff engineering interview guide and conceptual refresher built for software engineers, platform architects, and engineering leaders.
 
-This public repository provides **Questions 01 through 03 + Preface** for all **13 technology editions**, complete with interactive architectural diagrams rendered natively via Mermaid, internal runtime mechanics, and structured pitfall tables.
+This public repository provides **Questions 01 through 03 + Preface** for all **15 technology editions**, complete with interactive architectural diagrams rendered natively via Mermaid, internal runtime mechanics, and structured pitfall tables.
 
 --- 
 
@@ -24,7 +24,7 @@ Most technical books waste the first 80 pages explaining trivial history ("Since
 
 --- 
 
-## 📚 Series Catalog (13 Editions)
+## 📚 Series Catalog (15 Editions)
 
 Explore the free sampler chapters for each edition below:
 
@@ -43,6 +43,8 @@ Explore the free sampler chapters for each edition below:
 | **11** | [**Tech-21: OpenShift**](./books/openshift/README.md) | *Enterprise Cloud* | [Q01](./books/openshift/01-openshift-architecture-and-rhcos.md) • [Q02](./books/openshift/02-crio-and-container-engine-in-openshift.md) • [Q03](./books/openshift/03-operator-lifecycle-manager-olm.md) | [View 21 Questions](./books/openshift/README.md#complete-21-question-syllabus) |
 | **12** | [**Tech-21: System Design & Distributed Systems**](./books/system-design/README.md) | *Distributed Systems* | [Q01](./books/system-design/01-high-level-framework-and-back-of-the-envelope-calculations.md) • [Q02](./books/system-design/02-scalability-horizontal-vs-vertical-and-statelessness.md) • [Q03](./books/system-design/03-load-balancing-algorithms-and-reverse-proxies.md) | [View 21 Questions](./books/system-design/README.md#complete-21-question-syllabus) |
 | **13** | [**Tech-21: Core Technologies for Modern Architects**](./books/architect-technologies/README.md) | *Staff/Principal Architecture* | [Q01](./books/architect-technologies/01-docker-and-containerization.md) • [Q02](./books/architect-technologies/02-kubernetes-container-orchestration.md) • [Q03](./books/architect-technologies/03-apache-kafka-event-streaming.md) | [View 21 Questions](./books/architect-technologies/README.md#complete-21-question-syllabus) |
+| **14** | [**Tech-21: Agentic Software Engineering**](./books/ai-agents/README.md) | *AI & Agentic Engineering* | [Q01](./books/ai-agents/01-what-is-an-agentic-coding-loop.md) • [Q02](./books/ai-agents/02-how-do-coding-agents-index-and-navigate-codebases.md) • [Q03](./books/ai-agents/03-how-does-context-window-degradation-impact-coding-agents.md) | [View 21 Questions](./books/ai-agents/README.md#complete-21-question-syllabus) |
+| **15** | [**Tech-21: Coding with AI Agents**](./books/coding-with-agents/README.md) | *AI & Agentic Engineering* | [Q01](./books/coding-with-agents/01-how-should-you-set-up-your-project-for-ai-coding-agents.md) • [Q02](./books/coding-with-agents/02-how-do-you-write-specifications-that-agents-implement-accurately.md) • [Q03](./books/coding-with-agents/03-how-do-you-manage-context-to-prevent-the-agent-from-getting-confused.md) | [View 21 Questions](./books/coding-with-agents/README.md#complete-21-question-syllabus) |
 
 --- 
 
@@ -115,11 +117,21 @@ Here is a preview of the architectural depth covered across the free chapters:
 - 🟢 **Question 02**: [2. How Does Kubernetes Orchestrate Enterprise Container Workloads at Scale?](./books/architect-technologies/02-kubernetes-container-orchestration.md)
 - 🟢 **Question 03**: [3. How Does Apache Kafka Power High-Throughput Distributed Event Streaming and Log Retention?](./books/architect-technologies/03-apache-kafka-event-streaming.md)
 
+### Vol. 14: [Tech-21: Agentic Software Engineering](./books/ai-agents/README.md)
+- 🟢 **Question 01**: [1. What is an Agentic Coding Loop and How Does the ReAct Engine Actually Execute?](./books/ai-agents/01-what-is-an-agentic-coding-loop.md)
+- 🟢 **Question 02**: [2. How Do Coding Agents Index, Navigate, and Understand Massive Codebases?](./books/ai-agents/02-how-do-coding-agents-index-and-navigate-codebases.md)
+- 🟢 **Question 03**: [3. How Does Context Window Degradation and "Lost in the Middle" Impact Autonomous Coding?](./books/ai-agents/03-how-does-context-window-degradation-impact-coding-agents.md)
+
+### Vol. 15: [Tech-21: Coding with AI Agents](./books/coding-with-agents/README.md)
+- 🟢 **Question 01**: [1. How Should You Set Up Your Project and Rules Files for AI Coding Agents?](./books/coding-with-agents/01-how-should-you-set-up-your-project-for-ai-coding-agents.md)
+- 🟢 **Question 02**: [2. How Do You Write Feature Specifications That Agents Implement Accurately on the First Try?](./books/coding-with-agents/02-how-do-you-write-specifications-that-agents-implement-accurately.md)
+- 🟢 **Question 03**: [3. How Do You Manage Context and Chat History to Prevent the Agent From Getting Confused?](./books/coding-with-agents/03-how-do-you-manage-context-to-prevent-the-agent-from-getting-confused.md)
+
 --- 
 
 ## 📦 Curated Track Bundles (Full Editions)
 
-Looking for the full editions with all 21 questions + reference appendices? The series is organized into 4 cohesive engineering tracks:
+Looking for the full editions with all 21 questions + reference appendices? The series is organized into 5 cohesive engineering tracks:
 
 ### 1. Modern Frontend & Fullstack Suite
 > JavaScript • TypeScript • React • Node.js • Angular  
@@ -136,6 +148,10 @@ Master back-of-the-envelope calculations, distributed consensus (Raft/Paxos), ev
 ### 4. Backend & Systems Programming Suite
 > Java (JVM Internals) • Python (CPython Internals)  
 Understand JVM generational garbage collection (ZGC/G1), JIT compiler tiered compilation (C1/C2), CPython GIL mechanics, and object memory allocations.
+
+### 5. AI & Agentic Engineering Suite
+> Agentic Software Engineering • Coding with AI Agents  
+Master autonomous agent loops (ReAct / Plan-and-Solve), context windows & token economics, tool-use protocols (MCP), multi-agent coordination, test-driven AI pairing, and deterministic CI/CD guardrails.
 
 --- 
 

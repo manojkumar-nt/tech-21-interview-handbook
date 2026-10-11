@@ -54,6 +54,6 @@ The complete edition unlocks **all 21 in-depth questions** and **both architectu
 
 - 📱 **Kindle Edition**: Available on [Amazon Kindle](https://amazon.com)
 - 📄 **Digital DRM-Free Bundle (EPUB + PDF)**: Instant download with high-res interior graphics
-- 📦 **All-Access Pass**: Access all 13 volumes across the entire Tech-21 series
+- 📦 **All-Access Pass**: Access all 15 volumes across the entire Tech-21 series
 
 [← Return to Series Catalog](../../README.md)
