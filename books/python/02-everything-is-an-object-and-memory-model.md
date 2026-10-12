@@ -15,75 +15,84 @@ Variables in Python are **never storage boxes that hold values**; variables are 
 ## 2. Under the Hood: The `PyObject` C Structure & Small Int Cache
 
 ```mermaid
-graph TD
-    subgraph PyObject_C_Header
-        Ref["Reference Count: ob_refcnt (8 bytes)"]
-        Type["Type Pointer: ob_type (8 bytes -> Points to PyTypeObject)"]
-        Val["Value Payload (e.g. long digits or array)"]
+graph LR
+    subgraph Header ["1. PyObject Base Header (16 bytes)"]
+        Ref["ob_refcnt (8 bytes: Ref Count)"]
+        Type["ob_type (8 bytes -> PyTypeObject*)"]
     end
+    subgraph VarHeader ["2. PyVarObject Header Extension"]
+        Size["ob_size (8 bytes: Item Count)"]
+    end
+    subgraph Storage ["3. Value Payload & Pre-allocation"]
+        Digits["Value Payload / Byte Buffer"]
+        Cache["Small Int Cache: [-5 to 256] Singletons"]
+    end
+    Header --> VarHeader --> Storage
 ```
 
-### A. Memory Overhead of a Python Integer
-While a C integer takes 4 bytes, a Python `int` object (`42`) takes **28 bytes on a 64-bit machine**:
-- 8 bytes: `ob_refcnt` (reference count for garbage collection)
-- 8 bytes: `ob_type` pointer (points to `<class 'int'>`)
-- 8 bytes: `ob_size` (sign and digit count)
-- 4+ bytes: integer digits array
+- **Memory Overhead of a Python Integer**: While a C integer takes 4 bytes, a Python `int` object (`42`) takes **28 bytes on a 64-bit machine**:
+  - 8 bytes: `ob_refcnt` (reference count for garbage collection)
+  - 8 bytes: `ob_type` pointer (points to `<class 'int'>`)
+  - 8 bytes: `ob_size` (sign and digit count)
+  - 4+ bytes: integer digits array
+- **The Small Integer Caching Arena**: To avoid thrashing heap memory, CPython pre-allocates and caches an array of singleton integer objects for numbers in the range **`-5` to `256`** during interpreter startup.
 
-### B. The Small Integer Caching Arena
-To avoid thrashing heap memory, CPython pre-allocates and caches an array of singleton integer objects for numbers in the range **`-5` to `256`** during interpreter startup.
-
----
-
-
-| Object Type | CPython C Struct | Header Fields | Payload Memory |
+| Object Category | CPython C Struct | Header Fields | Payload Memory & Allocator |
 | :--- | :--- | :--- | :--- |
-| **Fixed-size (`float`, `complex`)** | `PyObject` | `ob_refcnt`, `ob_type` | Fixed double precision float |
-| **Variable-size (`int`, `str`, `list`)** | `PyVarObject` | `ob_refcnt`, `ob_type`, `ob_size` | Contiguous array of digits / pointers |
-| **GC-Tracked Container (`dict`, `set`)** | `PyGC_Head` + `PyObject` | GC linked list pointers | Hash table bucket array |
+| **Fixed-size (`float`, `complex`)** | `PyObject` | `ob_refcnt`, `ob_type` | 8-byte C `double` scalar |
+| **Variable-size (`int`, `str`, `list`)** | `PyVarObject` | `ob_refcnt`, `ob_type`, `ob_size` | Contiguous array of digits / pointer references |
+| **GC Container (`dict`, `set`, `custom`)** | `PyGC_Head` + `PyObject` | GC linked list pointers + base header | Dynamic hash table buckets / instance `__dict__` |
 
 ---
 
-## 3. Clean Code in Action: Object Identity (`is`) vs Equality (`==`)
+## 3. Clean Code in Action
+
 ### A. Inspecting Object Identity and Memory
-
-
 ```python
+import sys
+
 # 1. Inside the Small Int Cache [-5, 256]:
-a = 100
-b = 100
+a: int = 100
+b: int = 100
 print(a == b)  # True (Logical equality: values are equivalent)
-print(a is b)  # True (Identity equality: point to exact same cached PyObject address!)
+print(a is b)  # True (Identity equality: same pre-allocated singleton address!)
 
 # 2. Outside the Small Int Cache:
-x = 1000
-y = 1000
+x: int = 1000
+y: int = 1000
 print(x == y)  # True (Values match)
-print(x is y)  # False (Distinct heap objects with different memory addresses!)
+print(x is y)  # False (Distinct heap allocations with distinct memory addresses)
 
-# Verify memory addresses via id():
-print(f"id(x): {hex(id(x))}, id(y): {hex(id(y))}")
+print(f"Memory address x: {hex(id(x))}, y: {hex(id(y))}")
 ```
 
-### B. Small Integer Caching Analysis
-Modern Python 3.12+ production implementation:
-
+### B. Memory Footprint Analysis with sys.getsizeof
 ```python
-# Modern clean Python idiom demonstrating robust best practices
+import sys
+
+def inspect_pyobject_overhead(val: object) -> None:
+    size = sys.getsizeof(val)
+    ref_count = sys.getrefcount(val) - 1  # Subtract transient arg reference
+    print(f"Object: {val!r:<10} | Type: {type(val).__name__:<8} | Size: {size:>3} bytes | Refs: {ref_count}")
+
+# Inspect primitive heap allocations vs containers
+inspect_pyobject_overhead(0)          # 28 bytes (PyLongObject header + 0 digits)
+inspect_pyobject_overhead(100)        # 28 bytes (cached singleton)
+inspect_pyobject_overhead(2**64)      # 36 bytes (dynamic digit growth)
+inspect_pyobject_overhead("")         # 49 bytes (empty ASCII string header)
+inspect_pyobject_overhead([])         # 56 bytes (empty PyListObject dynamic array)
 ```
 
 ---
-
 
 ## 4. Common Pitfalls & Interview Traps
 
-
 | Trap / Misconception | Reality |
 | :--- | :--- |
-| **"### 1. Using `is` for Value Comparison"** | Never use `is` to compare numbers or strings. `is` checks whether two pointers point to the exact same memory address (`id(a) == id(b)`). Always use `==` for values. - **Exception**: Always use `is` when comparing against singletons: `if val is None:` or `if val is True:`. --- |
+| **"Using `is` for value comparisons (`a is 1000`)."** | `is` checks memory pointer identity (`id(a) == id(b)`), not logical value equality. Because CPython caches integers from `-5` to `256`, `a is b` succeeds for small numbers but unpredictably fails for larger numbers. Always use `==` for values, reserving `is` exclusively for singletons (`None`, `True`, `False`). |
+| **"Assuming Python variables hold data directly like C/Java primitives."** | Variables in Python are pointer labels bound to heap `PyObject` structs. Executing `x = x + 1` does not mutate the integer in place; it constructs a new `PyObject` for the sum and updates `x` to point to it. |
 
 ---
-
 
 ## 5. 60-Second Memory Anchor
 

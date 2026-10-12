@@ -15,78 +15,87 @@ Every data type in Python is classified as either **Immutable** or **Mutable**:
 ## 2. Under the Hood: Shallow Copy vs Deep Copy
 
 ```mermaid
-graph TD
-    subgraph Shallow_Copy
-        Orig["Original List: [ [1, 2], 3 ]"]
-        SCopy["Shallow Copy: copy.copy()"]
-        Orig --> Sub["Inner List [1, 2]"]
-        SCopy --> Sub
+graph LR
+    subgraph Shallow ["1. Shallow Copy (copy.copy)"]
+        Orig["Original Outer List"] --> ItemA["Scalar Item: 3"]
+        Orig --> Nested["Shared Inner List: [1, 2]"]
+        SCopy["Shallow Copied List"] --> ItemA
+        SCopy --> Nested
     end
-    subgraph Deep_Copy
-        DCopy["Deep Copy: copy.deepcopy()"] --> SubCopy["New Cloned Inner List [1, 2]"]
+    subgraph Deep ["2. Deep Copy (copy.deepcopy)"]
+        DCopy["Deep Copied List"] --> ItemACopy["Scalar Item: 3"]
+        DCopy --> NestedCopy["Cloned Inner List: [1, 2]"]
     end
 ```
 
 - **Shallow Copy (`copy.copy()`, `list.copy()`, `[:]`)**: Creates a new outer collection, but inserts references to the exact same child objects.
-- **Deep Copy (`copy.deepcopy()`)**: Recursively clones all nested objects and collections from scratch.
+- **Deep Copy (`copy.deepcopy()`)**: Recursively traverses the object graph, cloning all nested objects and collections from scratch.
 
----
-
-
-| Operation | Copy Depth | Modification to Outer Object | Modification to Nested Mutable Objects |
+| Operation | Copy Depth | Modification to Outer Container | Modification to Nested Mutable Objects |
 | :--- | :--- | :--- | :--- |
-| **Assignment (`b = a`)** | Zero copy (alias) | Affects both (`a` and `b` share address) | Affects both |
-| **Shallow Copy (`copy.copy`)** | Top-level copy | Independent outer container | Shared nested references |
-| **Deep Copy (`copy.deepcopy`)** | Recursive full copy | Completely isolated | Completely isolated |
+| **Assignment (`b = a`)** | Zero copy (pointer alias) | Affects both (`a` and `b` share address) | Affects both (`a` and `b` identical) |
+| **Shallow Copy (`copy.copy`)** | Top-level container only | Independent outer container | Shared nested references |
+| **Deep Copy (`copy.deepcopy`)** | Recursive full object graph | Completely isolated | Completely isolated |
 
 ---
 
-## 3. Clean Code in Action: The Mutable Default Argument Bug
+## 3. Clean Code in Action
+
 ### A. Default Mutable Argument Anti-Pattern vs Fix
-In Python, **default arguments are evaluated ONCE when the function definition is executed (at import/load time)**, NOT every time the function is called!
+In Python, **default arguments are evaluated ONCE when the function definition is executed (at import/load time)**, NOT every time the function is called:
 
 ```python
-# SEVERE PRODUCTION BUG:
-def append_to_bad(element: int, target_list: list = []) -> list:
-    target_list.append(element)
-    return target_list
-
-print(append_to_bad(1)) # [1]
-print(append_to_bad(2)) # [1, 2] ! (Shares the SAME list across invocations!)
-print(append_to_bad(3)) # [1, 2, 3] !
-
-# CORRECT & IDIOMATIC PYTHON PATTERN:
 from typing import Optional, List
 
-def append_to_safe(element: int, target_list: Optional[List[int]] = None) -> List[int]:
-    if target_list is None:
-        target_list = [] # Fresh list created per call!
+# SEVERE PRODUCTION BUG:
+def append_to_bad(element: int, target_list: list[int] = []) -> list[int]:
     target_list.append(element)
     return target_list
 
-print(append_to_safe(1)) # [1]
-print(append_to_safe(2)) # [2]
+print(append_to_bad(1))  # [1]
+print(append_to_bad(2))  # [1, 2] ! (Shares the SAME list across invocations!)
+
+# CORRECT & IDIOMATIC PYTHON 3.12+ PATTERN:
+def append_to_safe(element: int, target_list: Optional[list[int]] = None) -> list[int]:
+    if target_list is None:
+        target_list = []  # Fresh list allocated per function call
+    target_list.append(element)
+    return target_list
+
+print(append_to_safe(1))  # [1]
+print(append_to_safe(2))  # [2]
 ```
 
 ### B. Shallow vs Deep Copy Mechanics
-Modern Python 3.12+ production implementation:
-
 ```python
-# Modern clean Python idiom demonstrating robust best practices
+import copy
+
+# Nested data structure:
+original: list[object] = [[1, 2], 3]
+
+# 1. Shallow copy:
+shallow_clone = copy.copy(original)
+shallow_clone[0].append(99)  # Mutates the shared inner list!
+print("Original after shallow mutation:", original)        # [[1, 2, 99], 3]
+print("Shallow clone:", shallow_clone)                     # [[1, 2, 99], 3]
+
+# 2. Deep copy:
+isolated: list[object] = copy.deepcopy(original)
+isolated[0].append(1000)     # Mutates strictly its own nested list
+print("Original untouched:", original)                     # [[1, 2, 99], 3]
+print("Deep clone isolated:", isolated)                    # [[1, 2, 99, 1000], 3]
 ```
 
 ---
 
-
 ## 4. Common Pitfalls & Interview Traps
-
 
 | Trap / Misconception | Reality |
 | :--- | :--- |
-| **"### 1. Tuple Containing Mutable Elements"** | A `tuple` is immutable (you cannot add or replace elements), but if a tuple holds a `list`, the inner list can be mutated in-place: ```python t = ([1, 2], 3) t[0].append(99) # Perfectly legal! t is now ([1, 2, 99], 3) ``` --- |
+| **"Tuples are strictly immutable, so their contents can never change."** | A `tuple` is immutable regarding its own references (you cannot add, remove, or swap elements). However, if an element inside a tuple is a mutable object like a `list`, the inner list can be mutated in place (`t[0].append(99)`). |
+| **"Using mutable objects (`[]` or `{}`) as default parameters."** | Python compiles default argument expressions once at function definition time, binding them to `func.__defaults__`. All calls omitting that argument share that exact object reference, leading to state leaks across requests. Always default to `None`. |
 
 ---
-
 
 ## 5. 60-Second Memory Anchor
 
