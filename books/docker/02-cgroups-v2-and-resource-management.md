@@ -77,12 +77,22 @@ graph LR
     CheckMax -->|"Yes"| OOM["OOM Killer Invoked: Process Terminated (Exit 137)"]
 ```
 
+### Architectural Comparison: cgroups v1 vs cgroups v2
+
+| Feature Dimension | cgroups v1 (Legacy) | cgroups v2 (Unified Modern Standard) | Production Operational Impact |
+| :--- | :--- | :--- | :--- |
+| **Hierarchy Structure** | Multiple disconnected trees (`cpu/`, `memory/`, `blkio/`) | Single unified hierarchy tree rooted at `/sys/fs/cgroup` | Eliminates controller desynchronization and race conditions. |
+| **Process Governance** | Threads of a single process could belong to different cgroups | Process-level granularity (all threads in one cgroup) | Predictable lifecycle and atomic task migrations. |
+| **Memory Accounting** | Kernel slabs, page caches, and socket buffers poorly tracked | Comprehensive accounting (buffers, page cache, slabs, anon) | Accurate memory tracking stops hidden container memory leaks. |
+| **Pressure Metrics** | Basic counters (`nr_throttled`); no stall visibility | Pressure Stall Information (PSI): `cpu.pressure`, `memory.pressure` | Real-time saturation detection before latency degradation occurs. |
+| **Resource Tiers** | Binary limit (`memory.limit_in_bytes`) | 4-tier model: `memory.min`, `memory.low`, `memory.high`, `memory.max` | Soft reclamation (`memory.high`) prevents sudden ungraceful OOM terminations. |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Setting Resource Limits via Docker CLI
+### A. Enforcing Production CPU, Memory, and Process Limits via Docker CLI
+
 ```bash
 # Run container with:
 # - Max 1.5 CPU cores
@@ -98,8 +108,8 @@ docker run -d \
   nginx:alpine
 ```
 
-### 2. Inspecting Live cgroup v2 Limits on Host
-### B. Advanced Production Pattern
+### B. Inspecting Live cgroup v2 Accounting on Host and Simulating OOM Termination
+
 ```bash
 # Find the container ID
 CONTAINER_ID=$(docker inspect --format '{}' api-server)
@@ -122,20 +132,17 @@ cat $CGROUP_PATH/memory.pressure
 # Output:
 # some avg10=0.00 avg60=0.00 avg300=0.00 total=0
 # full avg10=0.00 avg60=0.00 avg300=0.00 total=0
-```
 
-### 3. Simulating Memory OOM Termination
-```bash
-# Run a memory allocator script bounded to 50MB
+# Simulate memory ceiling breach and observe OOM killer termination
 docker run --rm -m 50m python:alpine python -c "
 import time
 print('Allocating memory beyond 50MB...')
 x = bytearray(70 * 1024 * 1024) # Allocate 70MB
 "
 
-# Check the exit status
+# Check exit status (137 = 128 + 9 SIGKILL)
 echo $?
-# Output: 137 (Terminated by SIGKILL / OOM Killer)
+# Output: 137
 ```
 
 ---

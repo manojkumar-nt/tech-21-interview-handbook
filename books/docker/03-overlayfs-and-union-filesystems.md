@@ -82,14 +82,11 @@ Merged View:    [ config.json is HIDDEN from directory listings ]
 
 ---
 
-
----
-
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Manual OverlayFS Mount via Linux Kernel Command
-You can construct a working OverlayFS mount manually to observe the mechanics:
+### A. Replicating Container Layering via Kernel-Level OverlayFS Mount
+
+You can construct a working OverlayFS mount manually using native Linux tools to observe Copy-on-Write and layer merging mechanics:
 
 ```bash
 # 1. Create directory structure
@@ -122,8 +119,8 @@ cat /tmp/overlay-demo/lower1/config.txt
 # Output: Base OS Config v1
 ```
 
-### 2. Inspecting Docker's `overlay2` Storage on Host
-### B. Advanced Production Pattern
+### B. Inspecting Docker `overlay2` Storage Driver Diffs and Inodes
+
 ```bash
 # Start a container
 docker run -d --name overlay-test alpine sleep 3600

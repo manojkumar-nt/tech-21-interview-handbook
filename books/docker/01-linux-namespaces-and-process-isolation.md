@@ -73,13 +73,26 @@ graph LR
     ExecCmd --> SetnsCall
 ```
 
+### The 8 Linux Kernel Isolation Namespaces
+
+| Namespace | Kernel Flag | Isolated System Resource | Container Boundary Impact |
+| :--- | :--- | :--- | :--- |
+| **PID** | `CLONE_NEWPID` | Process IDs & Process Hierarchy | Container process becomes PID 1; cannot see or signal host processes. |
+| **NET** | `CLONE_NEWNET` | Network interfaces, routes, iptables | Dedicated virtual loopback and `eth0`; private port bindings. |
+| **MNT** | `CLONE_NEWNS` | Filesystem mount tables | Container root filesystem (`rootfs`) isolated from host mount tree. |
+| **IPC** | `CLONE_NEWIPC` | System V IPC & POSIX message queues | Prevents shared memory corruption across container boundaries. |
+| **UTS** | `CLONE_NEWUTS` | Hostname and NIS domain name | Allows container to define independent hostname without host mutation. |
+| **USER** | `CLONE_NEWUSER`| User and Group ID mappings | Maps unprivileged host UID (e.g. 10000) to container root (UID 0). |
+| **CGROUP** | `CLONE_NEWCGROUP`| Cgroup root view in `/proc` | Masks host cgroup tree; container only sees its own cgroup slice. |
+| **TIME** | `CLONE_NEWTIME`| `CLOCK_MONOTONIC` & `CLOCK_BOOTTIME` | Independent system clock virtualization for testing time travel. |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Inspecting Container Namespaces on Linux
-Every running process exposes its assigned namespace handles in the `/proc` virtual filesystem:
+### A. Inspecting and Entering Container Namespaces via Host CLI
+
+Every running container exposes its assigned namespace file descriptors under `/proc/<PID>/ns/`. Administrators can inspect and attach to these namespaces directly without docker daemon intervention:
 
 ```bash
 # Start a sample container
@@ -99,22 +112,12 @@ ls -la /proc/$CONTAINER_PID/ns/
 # pid    -> 'pid:[4026532299]'
 # user   -> 'user:[4026531837]'
 # uts    -> 'uts:[4026532297]'
-```
 
-### 2. Entering a Container Namespace Directly with `nsenter`
-Instead of using `docker exec`, system administrators can join a container's namespaces directly using the low-level `nsenter` utility (bypassing the Docker daemon entirely during troubleshooting):
-
-### B. Advanced Production Pattern
-```bash
-# Enter the network and PID namespace of the target container PID
+# Join container network and PID namespace directly using nsenter
 sudo nsenter --target $CONTAINER_PID --net --pid /bin/sh
-
-# Inside the container namespace:
-ip addr show          # Displays container's eth0 interface
-ps -ef                # Displays container's isolated PID tree
 ```
 
-### 3. Creating an Isolated Process in C using `clone()`
+### B. Low-Level Process Isolation in C Using `clone()`
 ```c
 #define _GNU_SOURCE
 #include <sched.h>
