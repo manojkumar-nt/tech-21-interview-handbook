@@ -24,7 +24,7 @@ A Kubernetes worker node is a physical or virtual Linux machine responsible for 
 
 ---
 
-## 2. Under the Hood: Es The Kubelet Manage Pod
+## 2. Under the Hood: Kubelet Architecture, CRI Runtime Shims, and PLEG Synchronization
 
 ### Kubelet Architecture & Sub-Controllers
 Inside the Kubelet binary, specialized managers handle discrete node responsibilities:
@@ -69,12 +69,18 @@ How does Kubernetes run the control plane (API server, etcd, scheduler) if Kuber
 - Kubelet launches these **Static Pods** directly via CRI without needing an API server.
 - Once the API server is up, Kubelet creates a **Mirror Pod** on the API server so administrators can see control plane health via `kubectl get pods -n kube-system`.
 
+| Interface / Subsystem | Primary Protocol / IPC | Core Plugins / Implementations | Kubelet Interaction Point | Primary Responsibility |
+| :--- | :--- | :--- | :--- | :--- |
+| **CRI (Container Runtime Interface)** | gRPC Unix Domain Socket (`/run/containerd/containerd.sock`) | containerd, CRI-O | `RuntimeService` & `ImageService` | Container sandbox creation, cgroups configuration, process execution |
+| **CNI (Container Network Interface)** | JSON stdin/stdout executable binary calls | Calico, Cilium, Flannel, AWS VPC CNI | Invoked during pod sandbox network namespace setup | Allocates Pod IP, creates veth pair, programs host routing rules |
+| **CSI (Container Storage Interface)** | gRPC Unix Domain Socket (`/var/lib/kubelet/csi-plugins/...`) | AWS EBS CSI, Ceph-RBD, NFS, Local Storage | `NodeStageVolume` & `NodePublishVolume` | Formats block devices and mounts storage paths into container filesystem |
+| **PLEG (Pod Lifecycle Event Generator)** | Periodic internal relist loop (1Hz) | In-memory event stream inside Kubelet | Relists runtime containers via CRI | Detects pod phase transitions and feeds `StatusManager` updates to API Server |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Kubelet Configuration File (`/var/lib/kubelet/config.yaml`)
+### A. Production Kubelet Daemon Configuration (`/var/lib/kubelet/config.yaml`)
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
@@ -104,8 +110,7 @@ kubeReserved:
   memory: "1Gi"
 ```
 
-### 2. Inspecting Node Health & Allocatable Capacity
-### B. Advanced Production Pattern
+### B. Node Allocatable Capacity & System Reserve Verification
 ```bash
 # View Node Capacity vs Allocatable Resources
 kubectl describe node worker-node-01.internal | grep -A 8 "Allocatable:"

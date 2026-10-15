@@ -24,7 +24,7 @@ In a multi-master Kubernetes cluster, three `kube-apiserver` instances handle in
 
 ---
 
-## 2. Under the Hood: Es Etcd Maintain Consistent Distributed
+## 2. Under the Hood: The Raft Consensus Algorithm, MVCC, and BoltDB Storage Engine
 
 ### Raft Consensus Write Flow in etcd
 When an update arrives at etcd:
@@ -72,12 +72,19 @@ Key: /registry/pods/prod/order-api
   Revision 300: Tombstone (Deleted)
 ```
 
+| Feature / Dimension | etcd (v3) | ZooKeeper | Consul |
+| :--- | :--- | :--- | :--- |
+| **Consensus Algorithm** | Raft | ZAB (ZooKeeper Atomic Broadcast) | Raft |
+| **Concurrency Model** | MVCC (Immutable global 64-bit revision) | Ephemeral zNodes & explicit version integers | MVCC (Index-based) |
+| **Watch Mechanism** | HTTP/2 gRPC streaming multiplexed watches | One-shot watches (Must be re-registered after trigger) | Long-polling HTTP or gRPC streaming |
+| **Storage Backend** | BoltDB (Copy-on-write B+tree on local disk) | In-memory tree with snapshot + log replay | BoltDB / In-memory state store |
+| **Kubernetes Role** | Native, mandatory primary cluster state store | Deprecated legacy (Early Mesos / Hadoop) | Service mesh & multi-cloud service catalog |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Interacting with etcd via `etcdctl` (v3 API)
+### A. etcd Cluster Health Verification and Atomic Snapshot Creation
 ```bash
 # Set etcdctl to use API version 3 and TLS certificates
 export ETCDCTL_API=3
@@ -97,10 +104,9 @@ etcdctl get /registry/namespaces/ --prefix --keys-only
 etcdctl snapshot save /var/backups/etcd-backup-$(date +%F).db
 ```
 
-### 2. etcd Compaction & Defragmentation
-Because MVCC retains all historical key revisions indefinitely, the BoltDB database file grows continuously until it hits the **Quota Limit (Default: 2GB or 8GB)**, putting etcd into a read-only alarm state (`NOSPACE`).
+### B. Automated History Compaction, Defragmentation, and Storage Alarms
+Because MVCC retains all historical key revisions indefinitely, the BoltDB database file grows continuously until it hits the Quota Limit (Default: 2GB or 8GB), putting etcd into a read-only alarm state (`NOSPACE`):
 
-### B. Advanced Production Pattern
 ```bash
 # 1. Compact all historical revisions up to revision 50000
 etcdctl compact 50000

@@ -22,7 +22,7 @@ Kubernetes operates on **Declarative State Reconciliation**:
 
 ---
 
-## 2. Under the Hood: Es The Kubernetes Control Plane
+## 2. Under the Hood: Control Plane Architecture and Request Admission Pipeline
 
 ### The 4 Core Control Plane Components
 1. **`kube-apiserver`**: The front door of the cluster. A stateless REST API gateway that handles Authentication, Authorization (RBAC), Admission Webhooks (Mutating/Validating), and OpenAPI schema validation. **The API server is the ONLY component in the entire cluster that communicates with `etcd`.**
@@ -85,18 +85,24 @@ flowchart LR
     ValidateHook --> EtcdCommit[("7. Commit to etcd Store")]
 ```
 
+| Component | State Storage | Scaling Pattern | Leader Election? | Failure Impact |
+| :--- | :--- | :--- | :--- | :--- |
+| **`kube-apiserver`** | Stateless (Delegates to etcd) | Horizontal active-active behind L4 LB | No | Total cluster API freeze; existing pods keep running |
+| **`etcd`** | Stateful (Raft log on disk) | Fixed odd quorum (3 or 5 nodes) | Yes (Raft Leader) | Cluster cannot modify state or schedule new pods |
+| **`kube-scheduler`** | In-memory cache + API watch | Active-passive (Multiple standby replicas) | Yes (Coordination Lease) | New pods remain in `Pending` phase |
+| **`kube-controller-manager`** | In-memory cache + API watch | Active-passive (Multiple standby replicas) | Yes (Coordination Lease) | Drift unreconciled; dead pods not replaced |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. High-Availability Control Plane Architecture
-In production, the Control Plane runs across 3 or 5 master nodes behind a Layer-4 load balancer (HAProxy, AWS NLB):
+### A. High-Availability Control Plane Health & Leader Lease Inspection
+In production, the Control Plane runs across 3 or 5 master nodes behind a Layer-4 load balancer (HAProxy, AWS NLB). Use diagnostic commands to inspect component health and distributed coordination leases:
 
 ```bash
 # Verify health of all control plane components
 kubectl get componentstatuses
-# Or query the livez/readyz health endpoints
+# Query the comprehensive livez/readyz health endpoints
 kubectl get --raw='/readyz?verbose'
 
 # View active leader for scheduler and controller-manager
@@ -107,20 +113,19 @@ kubectl get leases -n kube-system
 # kube-scheduler            master-node-01.internal 45d
 ```
 
-### 2. Auditing Control Plane Requests
-Enable API Server Audit Logging in `/etc/kubernetes/manifests/kube-apiserver.yaml`:
+### B. Production API Server Audit Policy
+Enable API Server Audit Logging in `/etc/kubernetes/manifests/kube-apiserver.yaml` via `--audit-policy-file` to record sensitive operations while filtering high-frequency reads:
 
-### B. Advanced Production Pattern
 ```yaml
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-  # Log pod changes at RequestResponse level for security forensics
+  # Log pod changes and secret accesses at RequestResponse level for security forensics
   - level: RequestResponse
     resources:
       - group: ""
         resources: ["pods", "secrets"]
-  # Log metadata only for high-volume watch calls
+  # Log metadata only for high-volume watch and list calls to avoid disk saturation
   - level: Metadata
     verbs: ["watch", "list"]
 ```
