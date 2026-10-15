@@ -20,11 +20,9 @@ When you run `helm create my-chart`, Helm generates a standardized directory tre
 - **`charts/`**: Directory holding unpacked subcharts (managed via `Chart.lock`).
 - **`crds/`**: Directory holding Custom Resource Definitions installed before any template execution.
 
-
-
 ---
 
-## 2. Under the Hood: The Anatomical Structure Of A
+## 2. Under the Hood: Anatomical Directory Architecture, Chart Contracts, and SemVer 2.0
 
 ### SemVer 2.0: `version` vs `appVersion`
 A common source of confusion in `Chart.yaml` is the distinction between `version` and `appVersion`:
@@ -32,26 +30,39 @@ A common source of confusion in `Chart.yaml` is the distinction between `version
 - **`appVersion` (Underlying Software Version)**: Arbitrary string representing the actual container application version (e.g., `v2.4.1` or `2026.10`).
 
 ```mermaid
-flowchart LR
-    ChartRelease["Helm Chart: my-app"] --> VersionField["Chart.yaml: version = '1.4.0' (SemVer of Helm Chart Package)"]
-    ChartRelease --> AppVersionField["Chart.yaml: appVersion = '2026.10.1' (Software App Version)"]
+graph LR
+    subgraph ChartPackage ["Helm Chart Package Context"]
+        ChartRelease["Helm Chart: 'my-app'"]
+        VersionField["Chart.yaml: version = '1.4.0'"]
+        AppVersionField["Chart.yaml: appVersion = '2026.10.1'"]
+        ChartRelease --> VersionField
+        ChartRelease --> AppVersionField
+    end
 
-    VersionField -.->|"Used by Helm Repository Index"| PackageTarball["my-app-1.4.0.tgz"]
-    AppVersionField -.->|"Injected into Deployment YAML"| ContainerImage["image: my-app:2026.10.1"]
+    subgraph PackagingEcosystem ["Packaging & Runtime Consumers"]
+        PackageTarball["Tarball Artifact: my-app-1.4.0.tgz"]
+        ContainerImage["Pod Spec: image: 'my-app:2026.10.1'"]
+    end
+
+    VersionField -->|"Used by Helm OCI & Index"| PackageTarball
+    AppVersionField -->|"Injected into Deployment Spec"| ContainerImage
 ```
 
-### Application Charts vs Library Charts (`type: application` vs `type: library`)
-In `Chart.yaml`, the `type` field defines how Helm treats the package:
-1. **`type: application` (Default)**: A standalone, installable chart containing concrete Kubernetes workloads.
-2. **`type: library`**: A non-installable helper chart that contains only named template helper definitions (`_helpers.tpl`). Used across enterprise organizations to share boilerplate Kubernetes manifests without code duplication.
+### Chart Classification & Architectural Roles
+
+| Chart Characteristic | Application Chart (`type: application`) | Library Chart (`type: library`) | Umbrella / Metachart |
+| :--- | :--- | :--- | :--- |
+| **Deployability** | Directly installable via `helm install` | Non-installable; rejected by CLI if deployed standalone | Directly installable via `helm install` |
+| **Primary Artifact** | Concrete Kubernetes manifests (`deployment.yaml`, etc.) | Reusable Go template definitions (`_helpers.tpl`) | Dependency coordinator (`Chart.yaml` dependencies) |
+| **`templates/` Contents** | Production runtime workload templates | Only helper files (prefixed with `_` or macros) | Usually empty or minimal routing/ingress glue |
+| **Version Lifecycle** | Tracks application packaging updates | Follows shared enterprise API standards | Tracks composite stack release milestones |
+| **Use Case** | Single microservice, database, ingress controller | Centralized enterprise compliance baselines | Complete enterprise environments (e-commerce suite) |
 
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Production Configuration and Implementation
-### C. Production-Grade `Chart.yaml` (apiVersion: v2)
+### A. Production-Grade `Chart.yaml` (apiVersion: v2)
 ```yaml
 apiVersion: v2
 name: enterprise-order-service
@@ -88,8 +99,7 @@ dependencies:
       - database
 ```
 
-### 2. Post-Install User Instructions (`templates/NOTES.txt`)
-### B. Advanced Production Pattern
+### B. Dynamic Context-Aware Post-Install Instructions (`templates/NOTES.txt`)
 ```text
 ========================================================================
 🎉 {{ .Chart.Name }} (v{{ .Chart.Version }}) successfully deployed!
@@ -119,7 +129,6 @@ To access the Order Service API:
 
 ## 4. Common Pitfalls & Interview Traps
 
-
 | Trap / Misconception | Reality |
 | :--- | :--- |
 | **"Forgetting `Chart.lock` in Git Version Control"** | Defining dependencies in `Chart.yaml`, running `helm dependency build`, and adding `Chart.lock` to `.gitignore`. In CI/CD pipelines, `helm dependency update` resolves floating dependency ranges (e.g., `^15.0.0`), inadvertently pulling a new major or breaking minor subchart release during a production deployment! **Always commit `Chart.lock` to Git** to ensure deterministic, reproducible dependency builds. |
@@ -127,9 +136,7 @@ To access the Order Service API:
 
 ---
 
-
 ## 5. 60-Second Memory Anchor
-
 
 > **"Commit `Chart.lock`: Guarantees reproducible builds in CI/CD. `crds/` Safety Guarantee: Helm never mutates CRDs during upgrades."**
 

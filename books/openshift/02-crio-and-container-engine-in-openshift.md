@@ -4,51 +4,31 @@
 
 # 2. How Does CRI-O Serve as the Immutable Container Engine Behind OpenShift Nodes? 
 
-OpenShift was the first major enterprise Kubernetes distribution to completely deprecate the Docker daemon in favor of **CRI-O** as its sole, default container engine. Designed with a singular purpose—to implement the Kubernetes Container Runtime Interface (CRI) with minimal overhead—CRI-O delivers enterprise security, lightweight memory footprints, and native support for OCI image specifications.
+OpenShift was the first major enterprise Kubernetes distribution to completely deprecate the Docker daemon in favor of **CRI-O** as its sole, default container engine. Designed with a singular purpose—to implement the Kubernetes Container Runtime Interface (CRI) with minimal overhead—CRI-O delivers enterprise security, lightweight memory footprints, and native support for Open Container Initiative (OCI) image specifications.
 
 ---
 
 ## 1. The Core Concept & Intuition
 
-Unlike legacy container engines (like Docker) that include CLI clients, background daemons, swarm managers, volume drivers, and build tools, **CRI-O is strictly an execution gateway for Kubernetes**.
+Unlike legacy container engines like Docker that bundle developer CLI clients, background daemons, swarm managers, volume drivers, and build engines, **CRI-O is strictly an execution gateway for Kubernetes**.
 
-```
-  Legacy Docker Daemon Approach                 OpenShift CRI-O Approach
- +-------------------------------+         +-------------------------------+
- | Kubelet                       |         | Kubelet                       |
- +-------------------------------+         +-------------------------------+
-                 |                                         | (gRPC)
-                 v                                         v
- | dockershim -> dockerd         |         | CRI-O Engine (crio daemon)    |
- +-------------------------------+         +-------------------------------+
-                 |                                         |
-                 v                                         v
- | containerd -> runc            |         | conmon -> runc / crun         |
- +-------------------------------+         +-------------------------------+
-                 |                                         |
-                 v                                         v
- | [ Container Linux Process ]   |         | [ Container Linux Process ]   |
- +-------------------------------+         +-------------------------------+
-```
+In upstream Kubernetes, the Kubelet communicates over gRPC using the Container Runtime Interface. In legacy environments, this required a translation layer (`dockershim`) which forwarded commands to the monolithic Docker daemon, which called `containerd`, which spawned `runc`. CRI-O eliminates this chain: the Kubelet communicates directly over a local UNIX socket (`/var/run/crio/crio.sock`) with the lightweight CRI-O daemon.
 
-### Why CRI-O?
-- **Zero Extraneous Logic**: No build engines, no CLI baggage, no network bridging daemon—only pure CRI implementation.
-- **`conmon` Architecture**: A lightweight C monitoring utility (`conmon`) monitors each container lifecycle, capturing standard I/O and exit codes without keeping heavy daemon processes in memory.
-- **Strict OCI Compliance**: Directly supports OCI-standard images (pulled via `containers/image`) and runtime specifications (via `runc` or `crun`).
+CRI-O delegates process monitoring to **`conmon`**, an ultra-lightweight C monitoring utility. A separate `conmon` process is spawned for each container to handle standard streams (stdin, stdout, stderr), manage TTYs, monitor the container process, and record its exit code without requiring a heavyweight daemon to remain in the execution loop.
 
 ---
 
-## 2. Under the Hood: Es Cri-o Serve As The
+## 2. Under the Hood: CRI-O Architecture, Conmon & OCI Execution Lifecycle
 
 ### Container Creation Lifecycle in CRI-O
 
 ```mermaid
 graph LR
-    subgraph KubeletLayer["Kubernetes Worker Node"]
+    subgraph KubeletLayer ["Kubernetes Worker Node"]
         Kubelet["Kubelet Daemon"]
     end
 
-    subgraph CRIOStack["CRI-O Architecture"]
+    subgraph CRIOStack ["CRI-O Architecture"]
         Socket["/var/run/crio/crio.sock (gRPC)"]
         CRIODaemon["CRI-O Daemon: crio"]
         ImageStorage["containers/image & storage (/var/lib/containers)"]
@@ -56,7 +36,7 @@ graph LR
         OCI["runc / crun OCI Runtime"]
     end
 
-    subgraph LinuxKernel["Linux Kernel"]
+    subgraph LinuxKernel ["Linux Kernel"]
         Namespaces["Namespaces: pid, net, mount, ipc, user"]
         Cgroups["cgroups v2: memory, cpu limits"]
         SEC["SELinux & Seccomp Enforcements"]
@@ -72,38 +52,45 @@ graph LR
     OCI --> SEC
 ```
 
+### Architectural Comparison: Container Runtimes in Kubernetes
+
+| Architectural Dimension | CRI-O (OpenShift Default) | containerd (Standard K8s) | Docker Engine (Legacy) |
+| :--- | :--- | :--- | :--- |
+| **Primary Design Objective** | Exclusively Kubernetes CRI compliance; zero standalone features | General-purpose container runtime with CRI plugin | Desktop/monolithic developer tool with Swarm & build kit |
+| **Daemon Overhead & Footprint** | Minimal; daemon serves gRPC socket; delegates monitoring to `conmon` | Low; runs containerd daemon and shim per container | Heavy; multi-threaded dockerd process holding state in memory |
+| **Process Monitoring** | Lightweight C utility (`conmon`) tracks PID, I/O, and exit codes | Go-based `containerd-shim` per container | Monitored directly by parent dockerd process |
+| **SELinux Integration** | Deep, native MCS labeling on every file and IPC channel by default | Supported via plugin configuration, often optional | Often disabled or running in permissive mode |
+| **Image Management** | Uses `containers/image` and `containers/storage` (shared with Podman) | Internal containerd content store | Internal Docker graphdriver (`overlay2`) |
+
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Production Configuration and Implementation
-### Inspecting Containers via `crictl`
+### A. Low-Level Node Runtime Inspection with crictl
 
-In OpenShift, administrators use `crictl` to interact directly with the CRI-O daemon on worker nodes without going through Kubernetes API:
+In OpenShift, administrators use `crictl` to interact directly with the CRI-O daemon on worker nodes without going through the Kubernetes API server:
 
 ```bash
 # SSH into OpenShift node via oc debug
 oc debug node/worker-1.cluster.corp.io
 
-# Inside node debug shell (chroot /host)
+# Inside node debug shell (chroot to host filesystem)
 chroot /host
 
 # List all running containers managed by CRI-O
 crictl ps
 
-# Inspect container details and cgroup configuration
+# Inspect container details, mounts, and cgroup configuration
 crictl inspect <container-id>
 
 # View container logs directly from CRI-O
 crictl logs <container-id>
 ```
 
-### Tuning CRI-O Configuration via `ContainerRuntimeConfig`
+### B. Declarative CRI-O Tuning via ContainerRuntimeConfig
 
 OpenShift allows declarative configuration of CRI-O settings (such as PID limits, log sizes, and image registries) using the `ContainerRuntimeConfig` CRD:
 
-### B. Advanced Production Pattern
 ```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: ContainerRuntimeConfig
@@ -130,11 +117,9 @@ spec:
 
 ---
 
-
 ## 5. 60-Second Memory Anchor
 
-
-> **"```."**
+> **"CRI-O is purpose-built solely for Kubernetes: it strips away the daemon bloat of Docker, delegating process tracking to conmon and execution to OCI runtimes under strict SELinux isolation."**
 
 ---
 

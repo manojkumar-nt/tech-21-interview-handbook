@@ -21,11 +21,9 @@ In Go templates, the **dot (`.`)** represents the **Current Context**:
 - If you enter a loop (`range`) or a context block (`with`), **the value of `.` changes** to represent the inner item!
 - If you need to access global values from inside an inner loop, you must use the **`$` (Root Context)** variable.
 
-
-
 ---
 
-## 2. Under the Hood: Es The Go Template Engine
+## 2. Under the Hood: Go Template AST Parsing, Pipeline Streams, and Whitespace Collapsing
 
 ### Pipelines (`|`) & The Sprig Function Library
 Helm integrates over **100+ helper functions** from the **Sprig Template Library**. Pipelines allow chaining the output of one function directly into the input of the next using the UNIX pipe operator (`|`):
@@ -33,14 +31,18 @@ Helm integrates over **100+ helper functions** from the **Sprig Template Library
 $$\text{value} \mid \text{function1} \mid \text{function2}$$
 
 ```mermaid
-flowchart LR
-    InputVal[".Values.replicaCount (e.g. nil)"] --> Pipe1["default 1"]
-    Pipe1 --> Pipe2["int"]
-    Pipe2 --> OutputResult["Rendered YAML: '1'"]
+graph LR
+    subgraph ValuePipeline ["Numerical Default Pipeline"]
+        InputVal[".Values.replicaCount (e.g. nil)"] --> Pipe1["default 1"]
+        Pipe1 --> Pipe2["int"]
+        Pipe2 --> OutputResult["Rendered YAML: '1'"]
+    end
 
-    RawName[".Release.Name (e.g. 'my-order-service-app')"] --> Trunc["trunc 63"]
-    Trunc --> Trim["trimSuffix '-'"]
-    Trim --> SafeName["Rendered: 'my-order-service-app' (K8s Safe DNS)"]
+    subgraph StringPipeline ["DNS Normalization Pipeline"]
+        RawName[".Release.Name ('my-order-service-app')"] --> Trunc["trunc 63"]
+        Trunc --> Trim["trimSuffix '-'"]
+        Trim --> SafeName["Rendered: 'my-order-service-app'"]
+    end
 ```
 
 ### Whitespace Control: The `{{-` and `-}}` Modifiers
@@ -49,33 +51,22 @@ YAML is strictly indentation-sensitive. A single rogue newline or extra space ca
 - **`{{-` (Left Trim)**: Strips **all whitespace, tabs, and newlines to the left** of the tag until non-whitespace text is reached.
 - **`-}}` (Right Trim)**: Strips **all whitespace, tabs, and newlines to the right** of the tag.
 
-```
-Template Code:
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: test-cm
-data:
-  {{- if .Values.enabled }}
-  status: "active"
-  {{- end }}
+### Template Directive & Modifier Behavior
 
-Rendered Output (Zero blank lines!):
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: test-cm
-data:
-  status: "active"
-```
+| Directive / Modifier | Syntax | Mechanics & Execution Impact | Common Use Case |
+| :--- | :--- | :--- | :--- |
+| **Standard Delimiter** | `{{ .Values.foo }}` | Preserves all surrounding whitespace and newlines verbatim | Inline single-value substitutions |
+| **Left Trim Modifier** | `{{- .Values.foo }}` | Strips all spaces and newlines immediately to the left | Conditionals (`{{- if ... }}`) to prevent empty lines |
+| **Right Trim Modifier**| `{{ .Values.foo -}}` | Strips all spaces and newlines immediately to the right | Eliminating trailing line breaks before closing tags |
+| **`nindent <N>`** | `{{ toYaml . \| nindent 4 }}` | Inserts a newline first, then indents every serialized line by $N$ spaces | Serializing complex maps/structs into YAML blocks |
+| **`indent <N>`** | `{{ toYaml . \| indent 4 }}` | Indents all lines EXCEPT the first line | Avoid for multiline blocks; causes invalid YAML |
+| **Root Context Anchor**| `$.Release.Name` | Always binds to the root template evaluation context | Accessing top-level variables inside `range` or `with` |
 
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Production Configuration and Implementation
-### C. The `toYaml` and `nindent` Power Combo
+### A. Safe Map Serialization with `toYaml` and `nindent`
 The most common Helm templating task is injecting complex nested dictionaries (such as `resources`, `nodeSelector`, or `affinity`) from `values.yaml` into Kubernetes YAML.
 - **`toYaml`**: Serializes a Go map/struct into YAML text.
 - **`nindent <N>`**: Adds a newline and indents every line by exactly $N$ spaces.
@@ -102,65 +93,45 @@ spec:
           {{- end }}
 ```
 
-### 2. Corresponding `values.yaml`
-### B. Advanced Production Pattern
+### B. Root Scope Preservation with Dollar (`$`) Anchor and Conditionals
 ```yaml
-image:
-  repository: nginx
-  tag: "1.25.3"
-
-resources:
-  requests:
-    cpu: 100m
-    memory: 128Mi
-  limits:
-    cpu: 500m
-    memory: 512Mi
-
-nodeSelector:
-  disktype: ssd
-  topology.kubernetes.io/zone: us-east-1a
-```
-
-### 3. Generated Clean Output
-```yaml
+# templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-release-api
+  name: {{ .Release.Name }}-worker
 spec:
   template:
     spec:
       containers:
-        - name: app
-          image: "nginx:1.25.3"
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
-          nodeSelector:
-            disktype: ssd
-            topology.kubernetes.io/zone: us-east-1a
+        - name: worker
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- with .Values.podSecurity }}
+          securityContext:
+            runAsUser: {{ .runAsUser }}
+            runAsNonRoot: {{ .runAsNonRoot }}
+            # Notice '$' is required to access .Release from inside 'with':
+            fsGroup: {{ $.Values.global.fsGroup | default 10001 }}
+          {{- end }}
+          env:
+            - name: RELEASE_NAME
+              value: {{ $.Release.Name | quote }}
+            - name: ENVIRONMENT
+              value: {{ $.Values.env | default "production" | quote }}
 ```
 
 ---
 
 ## 4. Common Pitfalls & Interview Traps
 
-
 | Trap / Misconception | Reality |
 | :--- | :--- |
-| **"Using `indent` Instead of `nindent` with `toYaml`"** | ```yaml resources: {{- toYaml .Values.resources \| indent 4 }} # BUG! ``` `indent 4` indents every line *except the first line*. The first line appears with 2 spaces instead of 4, producing invalid YAML syntax. **Always use `nindent`** (`toYaml . \| nindent 4`). `nindent` explicitly inserts a newline first and then applies uniform indentation to all lines. |
-| **"Losing Root Scope Inside `range` or `with`"** | ```yaml {{- with .Values.securityContext }} securityContext: runAsUser: {{ .runAsUser }} # BUG: .Release.Name is undefined because '.' is currently .Values.securityContext! runAsGroup: {{ .Release.Name }} {{- end }} ``` Template engine panics with `nil pointer evaluating interface {}`. Use the global **`$`** root anchor: `{{ $.Release.Name }}`. |
+| **"Using `indent` Instead of `nindent` with `toYaml`"** | Writing `resources: {{- toYaml .Values.resources \| indent 4 }}` causes a syntax bug. `indent 4` indents every line *except the first line*. The first line appears with 2 spaces instead of 4, producing invalid YAML. **Always use `nindent`** (`toYaml . \| nindent 4`). `nindent` explicitly inserts a newline first and then applies uniform indentation to all lines. |
+| **"Losing Root Scope Inside `range` or `with`"** | Inside `with .Values.securityContext`, referencing `.Release.Name` crashes with `nil pointer evaluating interface {}` because `.` now points to the `securityContext` map. Use the global **`$`** root anchor: `{{ $.Release.Name }}`. |
 
 ---
 
-
 ## 5. 60-Second Memory Anchor
-
 
 > **"Always use `nindent`: Prevents first-line YAML indentation corruption. Root Context Anchor `$`: Access `.Release` or `.Values` from inside nested loops."**
 

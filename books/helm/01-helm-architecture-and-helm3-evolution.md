@@ -23,11 +23,9 @@ Helm 3 redesigned the entire toolchain:
 2. **Release State Stored in Secrets**: Release metadata is stored directly in standard Kubernetes **Secrets** within the release's target namespace (`sh.helm.release.v1.<release-name>.v1`).
 3. **3-Way Strategic Merge Patch**: Replaces Helm 2's two-way diff with a three-way diff (Old Manifest vs Live Cluster State vs New Manifest), preventing Helm from overwriting live cluster changes made by controllers or GitOps tools.
 
-
-
 ---
 
-## 2. Under the Hood: Es Helm 3 Architecture Eliminate
+## 2. Under the Hood: Client-Only Architecture, RBAC Delegation, and State Persistence
 
 ### Helm 3 Rendering & Execution Pipeline
 When an engineer runs `helm install my-app ./my-chart`:
@@ -66,20 +64,23 @@ graph LR
     APIServer <--> ETCD
 ```
 
-### 3-Way Strategic Merge Patch Mechanics
-In Helm 3, executing `helm upgrade` computes a three-way diff:
-- **State A (Original Chart Manifest)**: What was in the chart during the previous release.
-- **State B (Live Cluster State)**: The current live object in etcd (which may include live changes, such as an HPA scaling replicas or an admission webhook injecting sidecars).
-- **State C (New Chart Manifest)**: What is declared in the new chart.
-- **Outcome**: Helm applies the new changes from $C$ while **preserving non-conflicting live modifications** from $B$.
+### Architectural Comparison: Helm 2 vs Helm 3
+
+| Architectural Dimension | Helm 2 (Legacy) | Helm 3 (Modern Cloud-Native) |
+| :--- | :--- | :--- |
+| **Server-Side Component** | Tiller pod running in `kube-system` | None (Zero server-side daemon, 100% client-only) |
+| **Security & RBAC Enforcement** | Centralized via Tiller service account (`cluster-admin`) | Direct user RBAC via local `kubeconfig` context |
+| **Release State Storage** | ConfigMaps/Secrets in `kube-system` | Encrypted Secrets inside the release's target namespace |
+| **Release Scoping** | Globally unique release names across the entire cluster | Namespaced release names (`prod/redis` vs `dev/redis`) |
+| **Upgrade Reconciliation** | 2-Way Diff (Old Manifest vs New Manifest) | 3-Way Strategic Merge Patch (Old vs Live vs New) |
+| **Chart Dependency Schema** | `requirements.yaml` and `requirements.lock` | Native `dependencies` block in `Chart.yaml` + `Chart.lock` |
+| **Package Distribution** | HTTP Chart Repositories (`index.yaml`) | Native OCI Registries (`ghcr.io`, ECR, Harbor) |
 
 ---
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Production Configuration and Implementation
-### C. Basic Helm 3 Release Lifecycle Commands
+### A. Declarative Release Lifecycle Commands
 ```bash
 # 1. Add an official Helm repository
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -102,10 +103,9 @@ kubectl get secret -n database -l owner=helm
 # sh.helm.release.v1.production-db.v1 helm.sh/release.v1 1      5m
 ```
 
-### 2. Decoding a Helm Release Secret
+### B. Inspecting and Decoding In-Cluster Release Secrets
 The release state is stored as a gzipped, base64-encoded JSON payload inside the Kubernetes secret:
 
-### B. Advanced Production Pattern
 ```bash
 # Extract and decode the raw release state from etcd
 kubectl get secret sh.helm.release.v1.production-db.v1 -n database -o jsonpath='{.data.release}' | \
@@ -116,17 +116,14 @@ kubectl get secret sh.helm.release.v1.production-db.v1 -n database -o jsonpath='
 
 ## 4. Common Pitfalls & Interview Traps
 
-
 | Trap / Misconception | Reality |
 | :--- | :--- |
 | **"Manual Manifest Edits Overwritten on Helm Upgrade"** | Using `kubectl edit deployment my-app` to change environment variables directly on a live cluster managed by Helm. The next time CI/CD runs `helm upgrade`, Helm's three-way merge detects that the environment variable was removed in the new chart, reverting your manual hotfix. Never edit live cluster objects manually. All changes must be committed to `values.yaml` in Git. |
-| **"Release Name Collisions Across Namespaces"** | Assuming release names are globally unique cluster-wide. **Why It Works (and Confuses)**: In Helm 3, release names are **scoped to individual namespaces**. You can have a release named `redis` in namespace `dev` and another release named `redis` in namespace `prod` without collision. |
+| **"Release Name Collisions Across Namespaces"** | Assuming release names are globally unique cluster-wide. In Helm 3, release names are **scoped to individual namespaces**. You can have a release named `redis` in namespace `dev` and another release named `redis` in namespace `prod` without collision. |
 
 ---
 
-
 ## 5. 60-Second Memory Anchor
-
 
 > **"Tiller is Dead: Helm 3 uses standard user `kubeconfig` credentials. Release State in Secrets: `sh.helm.release.v1.<name>.v<revision>`."**
 

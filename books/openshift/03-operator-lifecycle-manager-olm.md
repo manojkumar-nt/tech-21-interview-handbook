@@ -4,7 +4,7 @@
 
 # 3. How Does the Operator Lifecycle Manager (OLM) Automate Platform and Application Upgrades? 
 
-In OpenShift, nearly all cluster services—from logging, monitoring, and service mesh to databases and AI pipelines—are delivered and managed as Kubernetes Operators. The **Operator Lifecycle Manager (OLM)** is the management engine that automates the installation, dependency resolution, RBAC provisioning, and automated continuous upgrades of Operators across the cluster.
+In OpenShift, nearly all platform services—from logging, monitoring, and service mesh to databases, storage, and AI pipelines—are delivered and managed as Kubernetes Operators. The **Operator Lifecycle Manager (OLM)** is the management engine that automates the installation, dependency resolution, RBAC provisioning, and continuous automated upgrades of Operators across the cluster.
 
 ---
 
@@ -12,33 +12,20 @@ In OpenShift, nearly all cluster services—from logging, monitoring, and servic
 
 Think of OLM as the **enterprise app store and package manager (`yum`/`apt`) for Kubernetes Operators**.
 
-Instead of manually applying raw CRD definitions, ClusterRoles, and Deployment manifests for every database or observability tool, OLM provides:
-- **Declarative Subscription**: You declare *what* operator and channel you want (e.g., "PostgreSQL Operator on stable-v5 channel").
-- **Automated Upgrades**: OLM detects new operator versions in catalog registries and rolls them out without human intervention.
-- **Dependency Resolution**: If Operator A requires a specific CRD API version from Operator B, OLM discovers, installs, and validates both.
-
-```
- [ Operator Hub / CatalogSource ]
-                |
-                v (Discovers Available Versions & Channels)
-       [ Subscription CRD ]
-                |
-                v (Generates Execution Plan)
-       [ InstallPlan CRD ]
-                |
-                v (Deploys CRDs & Operator Controller)
- [ ClusterServiceVersion (CSV) ]
-```
+Instead of platform engineers manually applying raw CRD manifests, RBAC ClusterRoles, and Deployment definitions for every observability tool or database, OLM provides:
+- **Declarative Subscriptions**: You declare *what* operator and channel you want (e.g., "PostgreSQL Operator on stable-v5 channel").
+- **Dependency Resolution Engine**: If Operator A requires a specific CRD API version provided by Operator B, OLM discovers, installs, and validates both in the correct order.
+- **Controlled Upgrade Channels**: Operators define update streams (e.g., `fast`, `stable`, `eus`), allowing clusters to roll forward automatically or pause for manual approval.
 
 ---
 
-## 2. Under the Hood: Es The Operator Lifecycle Manager
+## 2. Under the Hood: OLM Architecture, Dependency Resolution & CRD Lifecycles
 
 ### OLM Core Architecture Components
 
 ```mermaid
 graph LR
-    subgraph OLMControl["OLM Management Loop"]
+    subgraph OLMControl ["OLM Management Loop"]
         Catalog["CatalogSource: Red Hat / Community / Custom Catalog"]
         Sub["Subscription: Package, Channel, Approval Strategy"]
         IP["InstallPlan: Resolved Resources & RBAC Plan"]
@@ -46,7 +33,7 @@ graph LR
         OG["OperatorGroup: Target Namespace Scope"]
     end
 
-    subgraph Cluster["Cluster Runtime"]
+    subgraph Cluster ["Cluster Runtime"]
         CRDDef["CRD API Registration"]
         OpDeploy["Operator Pod Deployment"]
         AppCR["Managed Application Custom Resource (CR)"]
@@ -60,6 +47,15 @@ graph LR
     CSV --> OpDeploy
     OpDeploy -->|"Reconciles"| AppCR
 ```
+
+### Architectural Comparison: OLM vs. Traditional Manifest / Helm Deployment
+
+| Management Dimension | OLM Declarative Lifecycle | Traditional Helm / Manual YAML |
+| :--- | :--- | :--- |
+| **Dependency Resolution** | Automated graph resolution; verifies required CRD versions across CSVs | Manual; fails at runtime if dependent CRD or operator is missing |
+| **Upgrade Continuous Delivery** | Automated or Manual approval across channels (`stable`, `fast`, `eus`) | Requires manual `helm upgrade` or CI pipeline rerun |
+| **RBAC Provisioning** | Automatically scopes ClusterRoles and ServiceAccounts per OperatorGroup | Manually authored and granted by cluster admin |
+| **Drift Detection & Reconciliation** | OLM actively reconciles CSV deployment state against desired spec | Typically unchecked unless integrated with external GitOps |
 
 ### Key OLM Custom Resource Definitions (CRDs)
 
@@ -75,11 +71,10 @@ graph LR
 
 ## 3. Clean Code in Action
 
-### A. Production Configuration and Implementation
-### C. Production Configuration and Implementation
-### C. Defining an `OperatorGroup`
+### A. Scoped OperatorGroup and Declarative Subscription
 
 ```yaml
+# Step 1: Define an OperatorGroup scoping the operator to a target namespace
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -88,12 +83,8 @@ metadata:
 spec:
   targetNamespaces:
     - openshift-operators-custom
-```
-
-### 2. Declaring a `Subscription`
-
-### B. Advanced Production Pattern
-```yaml
+---
+# Step 2: Declare the Subscription with manual approval for production safety
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -104,23 +95,27 @@ spec:
   name: prometheus
   source: community-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Automatic
+  installPlanApproval: Manual
 ```
 
-### 3. Querying Operator Lifecycle with `oc`
+### B. Manual InstallPlan Approval Workflow and Operator Verification
 
 ```bash
 # List available Operator catalogs
 oc get catalogsources -n openshift-marketplace
 
-# List active subscriptions
+# List active subscriptions and inspect target channels
 oc get subscriptions -n openshift-operators-custom
 
-# Inspect ClusterServiceVersion (CSV) status
-oc get csv -n openshift-operators-custom
-
-# Check InstallPlan status
+# Identify pending InstallPlans requiring administrator sign-off
 oc get installplan -n openshift-operators-custom
+
+# Approve the pending InstallPlan to execute the rollout
+oc patch installplan <installplan-name> -n openshift-operators-custom \
+  --type merge --patch '{"spec":{"approved":true}}'
+
+# Verify ClusterServiceVersion (CSV) reaches Succeeded phase
+oc get csv -n openshift-operators-custom
 ```
 
 ---
@@ -134,11 +129,9 @@ oc get installplan -n openshift-operators-custom
 
 ---
 
-
 ## 5. 60-Second Memory Anchor
 
-
-> **"```."**
+> **"OLM is the automated package manager of Kubernetes: it turns static CRD deployments into continuously monitored, dependency-resolved, and safely upgradeable platform services."**
 
 ---
 
