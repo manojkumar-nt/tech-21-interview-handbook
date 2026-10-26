@@ -67,20 +67,25 @@ graph LR
 
 ```nginx
 # nginx.conf
-# Production L7 reverse proxy configuration with TLS termination, rate limiting, and upstreams
+# Production L7 reverse proxy configuration with TLS termination, rate
+# limiting, and upstreams
 events {
     worker_connections 4096;
 }
 
 http {
-    # Define rate limiting zone: 10MB memory, 100 requests per second per IP
+    # Define rate limiting zone: 10MB memory, 100 requests per second
+    # per IP
     limit_req_zone $binary_remote_addr zone=api_limit:10m rate=100r/s;
 
     upstream order_microservice_cluster {
         # Weighted load balancing with passive health monitoring
-        server order-svc-01.internal:8080 weight=3 max_fails=3 fail_timeout=10s;
-        server order-svc-02.internal:8080 weight=2 max_fails=3 fail_timeout=10s;
-        server order-svc-03.internal:8080 weight=1 max_fails=3 fail_timeout=10s;
+        server order-svc-01.internal:8080
+            weight=3 max_fails=3 fail_timeout=10s;
+        server order-svc-02.internal:8080
+            weight=2 max_fails=3 fail_timeout=10s;
+        server order-svc-03.internal:8080
+            weight=1 max_fails=3 fail_timeout=10s;
         keepalive 64; # Connection pooling to backend upstreams
     }
 
@@ -102,7 +107,8 @@ http {
             proxy_set_header Connection "";
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-For
+                $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
 
             # Failover thresholds
@@ -117,7 +123,8 @@ http {
 
 ```go
 // load_balancer.go
-// Production implementation of NGINX-style Smooth Weighted Round-Robin balancing
+// Production implementation of NGINX-style Smooth Weighted
+// Round-Robin balancing
 package main
 
 import (
@@ -137,11 +144,14 @@ type SmoothWeightedBalancer struct {
 	servers []*ServerNode
 }
 
-func NewSmoothWeightedBalancer(servers []*ServerNode) *SmoothWeightedBalancer {
+func NewSmoothWeightedBalancer(
+	servers []*ServerNode,
+) *SmoothWeightedBalancer {
 	return &SmoothWeightedBalancer{servers: servers}
 }
 
-// Next selects the next server ensuring balanced distribution without burst clumps
+// Next selects the next server ensuring balanced distribution without
+// burst clumps
 func (b *SmoothWeightedBalancer) Next() (*ServerNode, error) {
 	b.mu.Lock()
 	defer b.mu.Unlock()
@@ -162,7 +172,8 @@ func (b *SmoothWeightedBalancer) Next() (*ServerNode, error) {
 		}
 	}
 
-	// Deduct totalWeight from the winning node to smooth out future selections
+	// Deduct totalWeight from the winning node to smooth out future
+	// selections
 	bestNode.CurrentWeight -= totalWeight
 	return bestNode, nil
 }

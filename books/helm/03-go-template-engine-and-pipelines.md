@@ -82,7 +82,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: >-
+            {{ .Values.image.repository }}:{{ .Values.image.tag |
+              default .Chart.AppVersion }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -105,12 +107,14 @@ spec:
     spec:
       containers:
         - name: worker
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: >-
+            {{ .Values.image.repository }}:{{ .Values.image.tag }}
           {{- with .Values.podSecurity }}
           securityContext:
             runAsUser: {{ .runAsUser }}
             runAsNonRoot: {{ .runAsNonRoot }}
-            # Notice '$' is required to access .Release from inside 'with':
+            # Notice '$' is required to access .Release from inside
+            # 'with':
             fsGroup: {{ $.Values.global.fsGroup | default 10001 }}
           {{- end }}
           env:

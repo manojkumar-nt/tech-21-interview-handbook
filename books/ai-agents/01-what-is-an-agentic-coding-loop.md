@@ -11,7 +11,7 @@ Traditional code generators operate as stateless, single-turn functions: an engi
 An **Agentic Coding Loop** fundamentally shifts this paradigm by converting the model into an iterative reasoning engine embedded inside an active feedback cycle known as **ReAct (Reasoning + Acting)**. Instead of immediately returning final text, the model emits structured actions (tool calls—such as reading a file, executing a bash command, or running a test suite). The runtime environment intercepts these calls, executes them against the actual workspace, and returns the raw output as an **observation** back into the model's conversation history.
 
 ```text
-Prompt -> [Thought -> Action (Tool Call) -> Observation (Tool Result)]* -> Solution
+Prompt -> [Thought -> Action -> Observation]* -> Solution
 ```
 
 This closed-loop system gives the agent sensory awareness of its environment. When a build fails or a test throws an assertion error, the agent observes the stack trace directly and autonomously plans corrective action.
@@ -92,7 +92,8 @@ export async function runAgentLoop(
     { role: "user", content: userTask }
   ];
 
-  const formattedTools = Array.from(tools.values()).map(t => t.schema);
+  const formattedTools = Array.from(tools.values())
+    .map(t => t.schema);
 
   for (let step = 0; step < maxSteps; step++) {
     const response = await client.chat.completions.create({
@@ -106,7 +107,8 @@ export async function runAgentLoop(
     const message = choice.message;
     messages.push(message);
 
-    // If the model did not request any tools, it has reached its conclusion
+    // If the model did not request any tools, it has reached its
+    // conclusion
     if (!message.tool_calls || message.tool_calls.length === 0) {
       return message.content ?? "Task completed without message.";
     }
@@ -123,12 +125,14 @@ export async function runAgentLoop(
           const parsedArgs = JSON.parse(toolCall.function.arguments);
           output = await tool.execute(parsedArgs);
         } catch (err: unknown) {
-          const errMsg = err instanceof Error ? err.message : String(err);
+          const errMsg = err instanceof Error
+            ? err.message : String(err);
           output = `Tool execution failed: ${errMsg}`;
         }
       }
 
-      // Inject the observation back into the conversational transcript
+      // Inject the observation back into the conversational
+      // transcript
       messages.push({
         role: "tool",
         tool_call_id: toolCall.id,
@@ -137,7 +141,9 @@ export async function runAgentLoop(
     }
   }
 
-  throw new Error(`Agent exceeded maximum execution step limit of ${maxSteps}`);
+  throw new Error(
+    `Agent exceeded step limit of ${maxSteps}`
+  );
 }
 ```
 
@@ -165,26 +171,33 @@ export async function executeToolWithBoundary<TArgs>(
     const raw = JSON.parse(rawArgumentsJson);
     validatedArgs = tool.schema.parse(raw);
   } catch (err) {
-    return `Validation Error for tool ${tool.name}: ${err instanceof Error ? err.message : String(err)}`;
+    const msg = err instanceof Error ? err.message : String(err);
+    return `Validation Error for tool ${tool.name}: ${msg}`;
   }
 
   // 2. Timeout-bounded execution
   const executionPromise = tool.handler(validatedArgs);
   const timeoutPromise = new Promise<never>((_, reject) => {
-    setTimeout(() => reject(new Error(`Tool timeout exceeded (${tool.timeoutMs}ms)`)), tool.timeoutMs);
+    const err = new Error(`Timeout exceeded (${tool.timeoutMs}ms)`);
+    setTimeout(() => reject(err), tool.timeoutMs);
   });
 
   try {
-    const result = await Promise.race([executionPromise, timeoutPromise]);
+    const result = await Promise.race([
+      executionPromise, timeoutPromise
+    ]);
     
     // 3. Output truncation to protect the LLM context window
     if (result.length > tool.maxOutputChars) {
       const truncated = result.slice(0, tool.maxOutputChars);
-      return `${truncated}\n\n[WARNING: Output truncated from ${result.length} to ${tool.maxOutputChars} characters]`;
+      const warn = `\n\n[TRUNCATED: ${result.length} ` +
+        `to ${tool.maxOutputChars} chars]`;
+      return `${truncated}${warn}`;
     }
     return result;
   } catch (err) {
-    return `Runtime Failure in ${tool.name}: ${err instanceof Error ? err.message : String(err)}`;
+    const msg = err instanceof Error ? err.message : String(err);
+    return `Runtime Failure in ${tool.name}: ${msg}`;
   }
 }
 ```

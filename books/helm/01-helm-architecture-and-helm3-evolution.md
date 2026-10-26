@@ -96,7 +96,8 @@ helm install production-db bitnami/postgresql \
 # 3. View active releases in the cluster
 helm list -n database
 
-# 4. Inspect the underlying Kubernetes Secret holding the release state
+# 4. Inspect the underlying Kubernetes Secret holding the release
+# state
 kubectl get secret -n database -l owner=helm
 # Output:
 # NAME                                TYPE                DATA   AGE
@@ -108,7 +109,9 @@ The release state is stored as a gzipped, base64-encoded JSON payload inside the
 
 ```bash
 # Extract and decode the raw release state from etcd
-kubectl get secret sh.helm.release.v1.production-db.v1 -n database -o jsonpath='{.data.release}' | \
+SECRET="sh.helm.release.v1.production-db.v1"
+kubectl get secret "$SECRET" -n database \
+  -o jsonpath='{.data.release}' | \
   base64 -d | base64 -d | gzip -d | jq .info
 ```
 

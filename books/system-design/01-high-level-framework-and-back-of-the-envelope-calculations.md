@@ -88,7 +88,8 @@ def calculate_system_capacity(
     write_payload_bytes: int,
     peak_multiplier: float = 3.0,
 ) -> CapacityMetrics:
-    """Calculates QPS, 5-year storage, and network egress using standard bounds."""
+    """Calculates QPS, 5-year storage, and network egress using
+    standard bounds."""
     SECONDS_PER_DAY = 86_400
 
     total_writes_day = dau * writes_per_user_day
@@ -118,7 +119,8 @@ def calculate_system_capacity(
         network_egress_mbps=round(network_egress_mbps, 2),
     )
 
-# Sizing a Twitter/X scale service: 200M DAU, 2 tweets/day, 50 feed reads/day
+# Sizing a Twitter/X scale service: 200M DAU, 2 tweets/day, 50 feed
+# reads/day
 plan = calculate_system_capacity(
     dau=200_000_000,
     reads_per_user_day=50,
@@ -135,7 +137,8 @@ print(f"Peak Egress:    {plan.network_egress_mbps:,.1f} Mbps")
 
 ```typescript
 // hardwareSizer.ts
-// Computes cluster instance sizing based on memory cache and write IOPS limits
+// Computes cluster instance sizing based on memory cache and write
+// IOPS limits
 interface ClusterProfile {
   cacheNodesRequired: number;
   dbShardsRequired: number;
@@ -152,14 +155,21 @@ export function computeClusterTopology(
 ): ClusterProfile {
   // 80/20 Rule: Cache 20% of the most active working set in RAM
   const cacheWorkingSetRamGb = dailyActiveWorkingSetGb * 0.20;
-  const cacheNodesRequired = Math.ceil(cacheWorkingSetRamGb / (ramPerCacheNodeGb * 0.75)); // 75% max memory headroom
+  // 75% max memory headroom
+  const cacheNodesRequired = Math.ceil(
+    cacheWorkingSetRamGb / (ramPerCacheNodeGb * 0.75)
+  );
 
   // DB write throughput determines horizontal sharding count
-  const dbShardsRequired = Math.max(1, Math.ceil(peakWriteQps / maxIopsPerShard));
+  const dbShardsRequired = Math.max(
+    1, Math.ceil(peakWriteQps / maxIopsPerShard)
+  );
 
   // Remaining read load after 90% cache-hit ratio
   const unhitReadQps = peakReadQps * 0.10;
-  const readReplicasRequired = Math.max(1, Math.ceil(unhitReadQps / maxQpsPerReplica));
+  const readReplicasRequired = Math.max(
+    1, Math.ceil(unhitReadQps / maxQpsPerReplica)
+  );
 
   return {
     cacheNodesRequired,

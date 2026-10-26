@@ -54,12 +54,18 @@ interface ContainerProps {
   children: ReactNode;
 }
 
-export function SectionCard({ title, badgeCount = 0, children }: ContainerProps) {
+export function SectionCard({
+  title,
+  badgeCount = 0,
+  children
+}: ContainerProps) {
   return (
     <section className="card-container">
       <header className="card-header">
         <h2>{title}</h2>
-        {badgeCount > 0 && <span className="badge">{badgeCount}</span>}
+        {badgeCount > 0 && (
+          <span className="badge">{badgeCount}</span>
+        )}
       </header>
       <div className="card-body">{children}</div>
     </section>

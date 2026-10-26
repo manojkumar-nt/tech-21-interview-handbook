@@ -76,7 +76,9 @@ export class CartStore {
 
   // Lazy, memoized computed signals
   readonly rawTotal = computed(() =>
-    this.items().reduce((acc, item) => acc + item.price * item.quantity, 0)
+    this.items().reduce(
+      (acc, item) => acc + item.price * item.quantity, 0
+    )
   );
 
   readonly finalTotal = computed(() => {
@@ -90,7 +92,9 @@ export class CartStore {
     effect((onCleanup) => {
       const total = this.finalTotal();
       const timerId = setTimeout(() => {
-        console.log(`[Analytics] Current cart total updated to $${total.toFixed(2)}`);
+        console.log(
+          `[Analytics] Cart total updated to ${total.toFixed(2)}`
+        );
       }, 500);
 
       onCleanup(() => clearTimeout(timerId));
@@ -104,7 +108,9 @@ export class CartStore {
   updateQuantity(id: string, delta: number): void {
     this.items.update((current) =>
       current.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+          : item
       )
     );
   }
@@ -134,7 +140,8 @@ import {
     <div #tileContainer class="tile" [class.on-sale]="isOnSale()">
       <h4>{{ title() }}</h4>
       <p class="price">Price: {{ formattedPrice() }}</p>
-      <button type="button" (click)="addToCart.emit(id())">Add to Cart</button>
+      <button type="button"
+              (click)="addToCart.emit(id())">Add to Cart</button>
     </div>
   `,
 })
@@ -149,7 +156,8 @@ export class ProductTileComponent {
   readonly addToCart = output<string>();
 
   // Signal Query
-  readonly container = viewChild.required<ElementRef<HTMLDivElement>>('tileContainer');
+  readonly container =
+    viewChild.required<ElementRef<HTMLDivElement>>('tileContainer');
 
   // Derived signal computed directly from inputs
   readonly isOnSale = computed(() => this.discount() > 0);

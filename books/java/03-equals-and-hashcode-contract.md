@@ -62,7 +62,8 @@ public final class Employee {
 
     public Employee(long id, String email) {
         this.id = id;
-        this.email = Objects.requireNonNull(email, "email must not be null");
+        this.email = Objects.requireNonNull(
+            email, "email must not be null");
     }
 
     public long getId() { return id; }
@@ -73,12 +74,14 @@ public final class Employee {
         // 1. Reflexivity check (fast-path optimization)
         if (this == o) return true;
 
-        // 2. Strict type check (prevents inheritance symmetry violations)
+        // 2. Strict type check (prevents inheritance symmetry
+        // violations)
         if (o == null || getClass() != o.getClass()) return false;
 
         // 3. Cast and compare significant fields
         Employee employee = (Employee) o;
-        return id == employee.id && Objects.equals(email, employee.email);
+        return id == employee.id &&
+               Objects.equals(email, employee.email);
     }
 
     @Override
@@ -96,7 +99,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EmployeeLookupDemo {
-    // Java 16+ records automatically generate compliant, immutable equals() and hashCode()
+    // Java 16+ records automatically generate compliant, immutable
+    // equals() and hashCode()
     public record DepartmentKey(String deptCode, int regionId) {}
 
     public static void main(String[] args) {
@@ -105,12 +109,15 @@ public class EmployeeLookupDemo {
         DepartmentKey engineering = new DepartmentKey("ENG", 101);
         departmentLeads.put(engineering, "Alice Chen");
 
-        // Lookup with an identical logical instance created separately on heap
+        // Lookup with an identical logical instance created
+        // separately on heap
         DepartmentKey queryKey = new DepartmentKey("ENG", 101);
         String lead = departmentLeads.get(queryKey);
 
-        System.out.println("Lead found: " + lead); // Prints "Alice Chen"
-        assert "Alice Chen".equals(lead) : "Contract satisfied: separate instance resolves entry";
+        // Prints "Alice Chen"
+        System.out.println("Lead found: " + lead);
+        assert "Alice Chen".equals(lead) :
+            "Contract satisfied: separate instance resolves entry";
     }
 }
 ```

@@ -59,23 +59,32 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func NewResilientProducer(brokers []string, topic string) *kafka.Writer {
+func NewResilientProducer(
+	brokers []string, topic string,
+) *kafka.Writer {
 	return &kafka.Writer{
 		Addr:         kafka.TCP(brokers...),
 		Topic:        topic,
-		Balancer:     &kafka.Murmur2Balancer{}, // Consistent hash distribution
+		// Consistent hash distribution
+		Balancer:     &kafka.Murmur2Balancer{},
 		MaxAttempts:  5,
 		BatchSize:    500,                      // Batch micro-aggregation
 		BatchTimeout: 10 * time.Millisecond,
 		Compression:  kafka.Zstd,               // High-compression, low CPU
-		RequiredAcks: kafka.RequireAll,         // acks=all (strict durability)
-		Async:        false,                    // Synchronous write verification
+		// acks=all (strict durability)
+		RequiredAcks: kafka.RequireAll,
+		// Synchronous write verification
+		Async:        false,
 	}
 }
 
-func PublishOrderEvent(ctx context.Context, writer *kafka.Writer, orderID, payload string) error {
+func PublishOrderEvent(
+	ctx context.Context, writer *kafka.Writer,
+	orderID, payload string,
+) error {
 	msg := kafka.Message{
-		Key:   []byte(orderID), // Guarantees strict per-order partition ordering
+		// Guarantees strict per-order partition ordering
+		Key:   []byte(orderID),
 		Value: []byte(payload),
 		Time:  time.Now(),
 		Headers: []kafka.Header{
@@ -99,7 +108,10 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func RunConsumerWithDLT(ctx context.Context, reader *kafka.Reader, dltWriter *kafka.Writer) {
+func RunConsumerWithDLT(
+	ctx context.Context,
+	reader *kafka.Reader, dltWriter *kafka.Writer,
+) {
 	for {
 		msg, err := reader.FetchMessage(ctx)
 		if err != nil {
@@ -109,7 +121,9 @@ func RunConsumerWithDLT(ctx context.Context, reader *kafka.Reader, dltWriter *ka
 
 		// Process payload with error isolation
 		if err := processOrder(msg.Value); err != nil {
-			log.Printf("Processing failed for order %s. Routing to DLT: %v", string(msg.Key), err)
+			log.Printf(
+				"Order %s failed. To DLT: %v", string(msg.Key), err
+			)
 			dltMsg := kafka.Message{
 				Key:   msg.Key,
 				Value: msg.Value,
@@ -120,7 +134,8 @@ func RunConsumerWithDLT(ctx context.Context, reader *kafka.Reader, dltWriter *ka
 			_ = dltWriter.WriteMessages(ctx, dltMsg)
 		}
 
-		// Commit offset only after successful processing or successful DLT routing
+		// Commit offset only after successful processing or successful DLT
+		// routing
 		if err := reader.CommitMessages(ctx, msg); err != nil {
 			log.Printf("Failed to commit offset: %v", err)
 		}

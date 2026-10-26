@@ -99,7 +99,8 @@ public static int compute(int, int);
      0: iload_0          // Push parameter 0 (a) onto operand stack
      1: iload_1          // Push parameter 1 (b) onto operand stack
      2: iadd             // Pop a and b, add them, push result
-     3: istore_2         // Pop result and store into local variable 2 (sum)
+     // Pop result and store into local variable 2 (sum)
+     3: istore_2
      4: iload_2          // Push sum onto operand stack
      5: iconst_2         // Push integer constant 2 onto operand stack
      6: imul             // Pop sum and 2, multiply them, push result

@@ -98,7 +98,8 @@ export class ContextBudgetManager {
       const compressibleMessages: Message[] = [];
       const recentMessages: Message[] = [];
 
-      // Retain the last 4 turns untouched to preserve immediate conversational context
+      // Retain the last 4 turns untouched to preserve immediate
+      // conversational context
       const cutoff = Math.max(0, messages.length - 4);
       for (let i = 0; i < messages.length; i++) {
         if (messages[i].pinned || messages[i].role === "system") {
@@ -114,7 +115,8 @@ export class ContextBudgetManager {
         return messages; // Cannot compact further
       }
 
-      // Generate a structured summary of the middle conversational turns
+      // Generate a structured summary of the middle conversational
+      // turns
       const rawTranscript = compressibleMessages
         .map(m => `${m.role.toUpperCase()}: ${m.content}`)
         .join("\n\n");
@@ -135,14 +137,18 @@ export class ContextBudgetManager {
 Preventing context poisoning begins at the observation boundary. This scrubber intercepts raw shell and compiler logs, eliminating repetitive noise while retaining exact file paths and error lines:
 
 ```typescript
-export function sanitizeObservationForContext(rawOutput: string, maxLines = 40): string {
+export function sanitizeObservationForContext(
+  rawOutput: string, maxLines = 40
+): string {
   const lines = rawOutput.split("\n");
   if (lines.length <= maxLines) {
     return rawOutput;
   }
 
-  // Filter out redundant success lines, keeping errors and stack traces
-  const errorIndicators = /(error|exception|fail|warning|at\s+|line\s+\d+)/i;
+  // Filter out redundant success lines, keeping errors and stack
+  // traces
+  const errorIndicators =
+    /(error|exception|fail|warning|at\s+|line\s+\d+)/i;
   const criticalLines: string[] = [];
   const standardLines: string[] = [];
 
@@ -161,7 +167,7 @@ export function sanitizeObservationForContext(rawOutput: string, maxLines = 40):
 
   return [
     ...head,
-    `\n... [TRUNCATED ${lines.length - 30} lines of build logs] ...\n`,
+    `\n... [TRUNCATED ${lines.length - 30} lines] ...\n`,
     "--- Critical Error Snippets Detected ---",
     ...highlightedErrors,
     "--- End of Snippets ---\n",

@@ -57,7 +57,8 @@ const fiberNode = {
     next: {
       memoizedState: 30,        // Hook 2: useState(30)
       next: {
-        memoizedState: { tag: 8, create: () => {} }, // Hook 3: useEffect
+        // Hook 3: useEffect
+        memoizedState: { tag: 8, create: () => {} },
         next: null
       }
     }

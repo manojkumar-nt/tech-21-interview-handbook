@@ -59,7 +59,8 @@ const blank = " ";
 const emptyArray = [];
 
 // 1. Loose Equality (==) - Implicit Coercion
-console.log(zero == blank);       // true  (blank converts to Number(" ") -> 0)
+// true (blank converts to Number(" ") -> 0)
+console.log(zero == blank);
 console.log(zero == false);       // true  (false converts to 0)
 console.log(null == undefined);   // true  (special ECMA rule)
 
@@ -79,7 +80,8 @@ console.log(Object.is(zero, negZero));  // false
 ### B. Reliable Null/Undefined Checking Patterns
 
 ```javascript
-// The one valid use case for == : checking null or undefined in one check
+// The one valid use case for == : checking null or undefined in one
+// check
 function process(val) {
   if (val == null) {
     // Catches BOTH null and undefined

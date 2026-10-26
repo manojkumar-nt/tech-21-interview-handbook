@@ -74,7 +74,8 @@ graph LR
 ### A. Scoped OperatorGroup and Declarative Subscription
 
 ```yaml
-# Step 1: Define an OperatorGroup scoping the operator to a target namespace
+# Step 1: Define an OperatorGroup scoping the operator to a target
+# namespace
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -84,7 +85,8 @@ spec:
   targetNamespaces:
     - openshift-operators-custom
 ---
-# Step 2: Declare the Subscription with manual approval for production safety
+# Step 2: Declare the Subscription with manual approval for production
+# safety
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -111,7 +113,8 @@ oc get subscriptions -n openshift-operators-custom
 oc get installplan -n openshift-operators-custom
 
 # Approve the pending InstallPlan to execute the rollout
-oc patch installplan <installplan-name> -n openshift-operators-custom \
+oc patch installplan <installplan-name> \
+  -n openshift-operators-custom \
   --type merge --patch '{"spec":{"approved":true}}'
 
 # Verify ClusterServiceVersion (CSV) reaches Succeeded phase

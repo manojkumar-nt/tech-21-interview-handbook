@@ -70,14 +70,17 @@ public class AutoboxingTest {
         // Values within [-128, 127] hit the cache
         Integer a = 100;
         Integer b = 100;
-        System.out.println(a == b);      // true (same cached instance)
+        // true (same cached instance)
+        System.out.println(a == b);
         System.out.println(a.equals(b)); // true
 
         // Values outside [-128, 127] create distinct heap objects!
         Integer x = 200;
         Integer y = 200;
-        System.out.println(x == y);      // FALSE! (Comparing distinct object references)
-        System.out.println(x.equals(y)); // TRUE (Comparing logical values)
+        // FALSE! (Comparing distinct object references)
+        System.out.println(x == y);
+        // TRUE (Comparing logical values)
+        System.out.println(x.equals(y));
     }
 }
 ```
@@ -86,10 +89,13 @@ public class AutoboxingTest {
 
 ```java
 // SEVERE PERFORMANCE ANTI-PATTERN:
-// Autoboxing occurs 1,000,000 times, creating 1M temporary heap objects!
+// Autoboxing occurs 1,000,000 times, creating 1M temporary heap
+// objects!
 Long sum = 0L; 
 for (long i = 0; i < 1_000_000L; i++) {
-    sum += i; // Unboxes 'sum', adds 'i', then autoboxes back to a new 'Long' object
+    // Unboxes 'sum', adds 'i', then autoboxes back to a new 'Long'
+    // object
+    sum += i;
 }
 
 // OPTIMIZED: Keep primitive throughout computation

@@ -52,7 +52,8 @@ const configDefault = {
   retries: 3,
   debug: true
 };
-// Inferred type: { endpoint: string; retries: number; debug: boolean; }
+// Inferred type: { endpoint: string; retries: number; debug: boolean;
+// }
 
 // 2. With 'as const' (Deep immutable literal types):
 const configConst = {
@@ -60,7 +61,8 @@ const configConst = {
   retries: 3,
   debug: true
 } as const;
-// Inferred: { readonly endpoint: "https://api.nimman.com"; readonly retries: 3; readonly debug: true; }
+// Inferred: { readonly endpoint: "https://api.nimman.com"; readonly
+// retries: 3; readonly debug: true; }
 ```
 
 ### B. Narrowing APIs via Union of Object Values
@@ -75,8 +77,9 @@ export const HTTP_STATUS = {
   NOT_FOUND: 404,
 } as const;
 
-// Derive literal union type from dictionary values: 200 | 201 | 400 | 401 | 404
-export type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS];
+// Derive literal union type from dictionary values: 200 | 201 | 400 |
+export type HttpStatus =
+  (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS];
 
 function handleResponse(status: HttpStatus) {
   if (status === HTTP_STATUS.OK) {

@@ -71,7 +71,9 @@ Pass your agent a one-shot bootstrap prompt (see **Appendix A, Template 6**). Be
 Autonomous terminal agents provide native initialization commands:
 ```bash
 # In Claude Code CLI:
-claude init   # (or /init in active session to auto-detect and generate CLAUDE.md / AGENTS.md)
+# (or /init in active session to auto-detect and generate CLAUDE.md /
+# AGENTS.md)
+claude init
 ```
 To maintain a single source of truth across Cursor, Windsurf, and Claude Code without duplicating files, create symbolic links in the repository root:
 ```bash
@@ -95,10 +97,12 @@ The following markdown template is compact, comprehensive, and universally respe
 # Repository Development Guidelines
 
 ## 1. Tech Stack & Environment
-- **Runtime**: Node.js v20+ LTS (ES Modules only; never use `require()`).
+- **Runtime**: Node.js v20+ LTS (ES Modules only; never use
+  `require()`).
 - **Language**: TypeScript 5.4+ with strict mode enabled.
 - **Frameworks**: Express 4.x for API, React 18 for frontend.
-- **Styling**: Vanilla CSS Modules (do NOT install Tailwind or third-party CSS frameworks).
+- **Styling**: Vanilla CSS Modules (do NOT install Tailwind or
+  third-party CSS frameworks).
 - **Testing**: Vitest for unit tests; Playwright for E2E.
 
 ## 2. Deterministic Commands
@@ -106,16 +110,20 @@ The following markdown template is compact, comprehensive, and universally respe
 - **Run Single Test**: `npm run test -- <path-to-test-file>`
 - **Typecheck**: `npm run typecheck`
 - **Lint**: `npm run lint`
-- **Full Verification**: `npm run verify` (runs typecheck + lint + test)
+- **Full Verification**: `npm run verify` (runs typecheck + lint +
+  test)
 
 ## 3. Coding Standards & Invariants
-- Colocate unit test files alongside implementation (`foo.ts` -> `foo.spec.ts`).
-- Never use `any` or `@ts-ignore`. If types are complex, declare an explicit interface.
+- Colocate unit test files alongside implementation (`foo.ts` ->
+  `foo.spec.ts`).
+- Never use `any` or `@ts-ignore`. If types are complex, declare an
+  explicit interface.
 - Keep domain logic decoupled from framework controllers.
 - Always validate external input using Zod schemas before processing.
 
 ## 4. Git & Workflow Rules
-- Write commit messages following Conventional Commits (`feat:`, `fix:`, `test:`, `refactor:`).
+- Write commit messages following Conventional Commits (`feat:`,
+  `fix:`, `test:`, `refactor:`).
 - Never edit package dependencies without explicit developer approval.
 ```
 
@@ -124,9 +132,12 @@ For monorepos with separate frontend and backend boundaries, append scoped rules
 ```markdown
 # Scoped Frontend Rules (Applies to src/frontend/**/*)
 - Use functional components with explicit TypeScript prop interfaces.
-- Prefer React standard hooks (`useState`, `useEffect`, `useCallback`) over external state libraries.
-- All interactive buttons and inputs must include accessible `aria-label` attributes.
-- Use CSS variables defined in `src/frontend/styles/tokens.css` for colors and spacing.
+- Prefer React standard hooks (`useState`, `useEffect`, `useCallback`)
+  over external state libraries.
+- All interactive buttons and inputs must include accessible
+  `aria-label` attributes.
+- Use CSS variables defined in `src/frontend/styles/tokens.css` for
+  colors and spacing.
 ```
 
 ---

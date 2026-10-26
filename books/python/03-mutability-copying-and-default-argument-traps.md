@@ -48,15 +48,20 @@ In Python, **default arguments are evaluated ONCE when the function definition i
 from typing import Optional, List
 
 # SEVERE PRODUCTION BUG:
-def append_to_bad(element: int, target_list: list[int] = []) -> list[int]:
+def append_to_bad(
+    element: int, target_list: list[int] = []
+) -> list[int]:
     target_list.append(element)
     return target_list
 
 print(append_to_bad(1))  # [1]
-print(append_to_bad(2))  # [1, 2] ! (Shares the SAME list across invocations!)
+# [1, 2] ! (Shares the SAME list across invocations!)
+print(append_to_bad(2))
 
 # CORRECT & IDIOMATIC PYTHON 3.12+ PATTERN:
-def append_to_safe(element: int, target_list: Optional[list[int]] = None) -> list[int]:
+def append_to_safe(
+    element: int, target_list: Optional[list[int]] = None
+) -> list[int]:
     if target_list is None:
         target_list = []  # Fresh list allocated per function call
     target_list.append(element)
@@ -76,14 +81,18 @@ original: list[object] = [[1, 2], 3]
 # 1. Shallow copy:
 shallow_clone = copy.copy(original)
 shallow_clone[0].append(99)  # Mutates the shared inner list!
-print("Original after shallow mutation:", original)        # [[1, 2, 99], 3]
-print("Shallow clone:", shallow_clone)                     # [[1, 2, 99], 3]
+# [[1, 2, 99], 3]
+print("Original after shallow mutation:", original)
+# [[1, 2, 99], 3]
+print("Shallow clone:", shallow_clone)
 
 # 2. Deep copy:
 isolated: list[object] = copy.deepcopy(original)
 isolated[0].append(1000)     # Mutates strictly its own nested list
-print("Original untouched:", original)                     # [[1, 2, 99], 3]
-print("Deep clone isolated:", isolated)                    # [[1, 2, 99, 1000], 3]
+# [[1, 2, 99], 3]
+print("Original untouched:", original)
+# [[1, 2, 99, 1000], 3]
+print("Deep clone isolated:", isolated)
 ```
 
 ---

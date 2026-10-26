@@ -70,7 +70,8 @@ function executeWithLog(fn, value) {
 }
 console.log(executeWithLog(greet, 'Manoj')); // "Hello, Manoj!"
 
-// 3. Attaching properties to functions (functions are callable objects)
+// 3. Attaching properties to functions (functions are callable
+// objects)
 function counter() {
   counter.invocations = (counter.invocations || 0) + 1;
 }

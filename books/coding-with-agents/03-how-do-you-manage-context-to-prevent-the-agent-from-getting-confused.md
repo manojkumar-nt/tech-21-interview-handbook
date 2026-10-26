@@ -63,7 +63,8 @@ When a task is complete or when a chat begins to degrade after 5–6 turns, do n
 ### PROMPT: Generate Handoff Summary for Fresh Chat
 
 We have completed the refactor of `src/auth/jwt.service.ts`.
-Before I start a new session, provide a concise 5-line technical handoff summary:
+Before I start a new session, provide a concise 5-line technical
+handoff summary:
 1. What changes were successfully made and tested?
 2. What is the active state of git working tree?
 3. What is the immediate next step to implement?
@@ -75,10 +76,13 @@ The agent will output a clean 5-line summary. You open a new chat (`Cmd+L` or `/
 Before typing a prompt into your agent, perform this 10-second checklist:
 
 ```text
-[ ] TAB HYGIENE: Close all open tabs except the 2–3 files directly relevant to this task.
-[ ] CHAT AGE: If the current chat has more than 6 turns, open a fresh chat.
+[ ] TAB HYGIENE: Close all open tabs except the 2–3 files directly
+    relevant to this task.
+[ ] CHAT AGE: If the current chat has more than 6 turns, open a fresh
+    chat.
 [ ] SPECIFICITY: Did I mention the exact file path and function name?
-[ ] NOISY LOGS: Did I paste only the relevant stack trace snippet rather than 500 lines of build logs?
+[ ] NOISY LOGS: Did I paste only the relevant stack trace snippet
+    rather than 500 lines of build logs?
 ```
 
 ---

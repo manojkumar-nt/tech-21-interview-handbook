@@ -72,7 +72,11 @@ interface FileSkeleton {
 export function extractExportedSymbols(content: string): string[] {
   const symbols: string[] = [];
   // Lightweight regex matching top-level exports and declarations
-  const exportRegex = /^export\s+(?:async\s+)?(?:class|function|interface|type|const|enum)\s+([a-zA-Z0-9_$]+)/gm;
+  const pattern =
+    "^export\\s+(?:async\\s+)?" +
+    "(?:class|function|interface|type|const|enum)\\s+" +
+    "([a-zA-Z0-9_$]+)";
+  const exportRegex = new RegExp(pattern, "gm");
   let match: RegExpExecArray | null;
 
   while ((match = exportRegex.exec(content)) !== null) {
@@ -81,14 +85,19 @@ export function extractExportedSymbols(content: string): string[] {
   return symbols;
 }
 
-export function generateRepoMap(dir: string, baseDir = dir): FileSkeleton[] {
+export function generateRepoMap(
+  dir: string, baseDir = dir
+): FileSkeleton[] {
   const results: FileSkeleton[] = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!["node_modules", ".git", "dist", ".build_src"].includes(entry.name)) {
+      const ignoreDirs = [
+        "node_modules", ".git", "dist", ".build_src"
+      ];
+      if (!ignoreDirs.includes(entry.name)) {
         results.push(...generateRepoMap(fullPath, baseDir));
       }
     } else if (/\.(ts|js|py|go|rs)$/.test(entry.name)) {
@@ -104,7 +113,9 @@ export function generateRepoMap(dir: string, baseDir = dir): FileSkeleton[] {
 }
 
 // Format the skeleton into a compact prompt string
-export function formatRepoMapPrompt(skeletons: FileSkeleton[]): string {
+export function formatRepoMapPrompt(
+  skeletons: FileSkeleton[]
+): string {
   return skeletons
     .map(s => `${s.filePath}: [${s.symbols.join(", ")}]`)
     .join("\n");
@@ -123,10 +134,15 @@ export interface SearchHit {
   snippet: string;
 }
 
-export function hybridCodeSearch(repoRoot: string, query: string, maxHits = 10): SearchHit[] {
+export function hybridCodeSearch(
+  repoRoot: string, query: string, maxHits = 10
+): SearchHit[] {
   // Step 1: Execute fast ripgrep for exact symbol matches
   try {
-    const stdout = execFileSync("rg", ["--json", "-m", "5", "--fixed-strings", query, repoRoot], {
+    const args = [
+      "--json", "-m", "5", "--fixed-strings", query, repoRoot
+    ];
+    const stdout = execFileSync("rg", args, {
       encoding: "utf-8",
       maxBuffer: 4 * 1024 * 1024
     });

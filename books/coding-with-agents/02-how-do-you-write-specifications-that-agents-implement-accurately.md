@@ -65,22 +65,31 @@ Use this battle-tested prompt template whenever asking an agent to build a new f
 ### TASK: Implement User Password Reset Token Flow
 
 1. GOAL:
-Add a `requestPasswordReset(email: string): Promise<string>` method to `src/modules/auth/auth.service.ts`.
+Add a `requestPasswordReset(email: string): Promise<string>` method to
+`src/modules/auth/auth.service.ts`.
 
 2. INTERFACE & BEHAVIOR:
-- Query the `users` table via `db.user.findUnique({ where: { email } })`.
-- If user does not exist, return a generic success string (do not leak email existence).
-- Generate a cryptographically secure 32-byte hex token using Node's `crypto.randomBytes(32).toString('hex')`.
-- Hash the token using `crypto.createHash('sha256')` before storing it in `password_reset_tokens` table with a 15-minute expiration timestamp.
+- Query the `users` table via `db.user.findUnique({ where: { email }
+  })`.
+- If user does not exist, return a generic success string (do not leak
+  email existence).
+- Generate a cryptographically secure 32-byte hex token using Node's
+  `crypto.randomBytes(32).toString('hex')`.
+- Hash the token using `crypto.createHash('sha256')` before storing it
+  in `password_reset_tokens` table with a 15-minute expiration
+  timestamp.
 - Return the unhashed raw token string for email delivery.
 
 3. CONSTRAINTS & INVARIANTS:
-- Do NOT install any third-party auth libraries; use built-in `node:crypto`.
+- Do NOT install any third-party auth libraries; use built-in
+  `node:crypto`.
 - Use existing database client imported from `@/database/client`.
-- Follow our standard Result pattern: return `{ success: true, token?: string }`.
+- Follow our standard Result pattern: return `{ success: true, token?:
+  string }`.
 
 4. VERIFICATION:
-- Run `npm run test -- src/modules/auth/auth.service.spec.ts` to verify existing tests still pass.
+- Run `npm run test -- src/modules/auth/auth.service.spec.ts` to
+  verify existing tests still pass.
 - Add a new unit test verifying that expired tokens are rejected.
 ```
 
@@ -97,7 +106,8 @@ For features touching multiple files, create a temporary `spec.md` in your proje
 
 ## Sequence of Operations:
 1. Define `WebhookPayload` interface in `webhook.types.ts`.
-2. Implement exponential backoff retry loop (max 3 attempts: 1s, 2s, 4s).
+2. Implement exponential backoff retry loop (max 3 attempts: 1s, 2s,
+   4s).
 3. Sign payload using HMAC-SHA256 with `X-Signature-256` header.
 4. Execute unit tests: `npm run test:unit`.
 ```

@@ -87,7 +87,7 @@ spec:
           mode: 420
           overwrite: true
           contents:
-            source: data:text/plain;charset=utf-8;base64,bmV0LmNvcmUuc29tYXhjb25uID0gNjU1MzUKbmV0LmlwdjQudGNwX21heF9zeW5fYmFja2xvZyA9IDY1NTM1Cg==
+            source: data:,net.core.somaxconn%3D65535
   kernelArguments:
     - audit=0
     - nosmt=force
@@ -102,7 +102,8 @@ oc get machineconfigpool
 # Inspect current target and rendered configurations for workers
 oc get mcp worker -o jsonpath='{.status.configuration.name}'
 
-# Watch rolling upgrades and node draining during OS configuration changes
+# Watch rolling upgrades and node draining during OS configuration
+# changes
 oc get nodes -w
 ```
 

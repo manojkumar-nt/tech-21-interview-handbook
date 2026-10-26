@@ -69,7 +69,8 @@ In a **Stateless Architecture**, every compute instance is disposable and identi
 
 ```go
 // session_middleware.go
-// Production HTTP middleware enforcing stateless request handling via Redis session tokens
+// Production HTTP middleware enforcing stateless request handling via
+// Redis session tokens
 package main
 
 import (
@@ -87,39 +88,56 @@ type SessionManager struct {
 	ttl    time.Duration
 }
 
-func NewSessionManager(client *redis.Client, ttl time.Duration) *SessionManager {
+func NewSessionManager(
+	client *redis.Client, ttl time.Duration,
+) *SessionManager {
 	return &SessionManager{client: client, ttl: ttl}
 }
 
-// GenerateSession creates an externalized session token stored centrally in Redis
-func (sm *SessionManager) GenerateSession(ctx context.Context, userID string) (string, error) {
+// GenerateSession creates an externalized session token stored
+// centrally in Redis
+func (sm *SessionManager) GenerateSession(
+	ctx context.Context, userID string,
+) (string, error) {
 	bytes := make([]byte, 32)
 	if _, err := rand.Read(bytes); err != nil {
 		return "", err
 	}
 	token := hex.EncodeToString(bytes)
 
-	// Persist session in Redis; independent of the host that processed this request
+	// Persist session in Redis; independent of the host that processed
+	// this request
 	err := sm.client.Set(ctx, "session:"+token, userID, sm.ttl).Err()
 	return token, err
 }
 
 // Middleware validates session on ANY stateless server node
 func (sm *SessionManager) Middleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
 		cookie, err := r.Cookie("session_token")
 		if err != nil {
-			http.Error(w, "Unauthorized: missing session", http.StatusUnauthorized)
+			http.Error(
+				w, "Unauthorized: missing session",
+				http.StatusUnauthorized,
+			)
 			return
 		}
 
 		// Lookup state from shared cache cluster
-		userID, err := sm.client.Get(r.Context(), "session:"+cookie.Value).Result()
+		key := "session:" + cookie.Value
+		userID, err := sm.client.Get(r.Context(), key).Result()
 		if err == redis.Nil {
-			http.Error(w, "Unauthorized: expired session", http.StatusUnauthorized)
+			http.Error(
+				w, "Unauthorized: expired session",
+				http.StatusUnauthorized,
+			)
 			return
 		} else if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			http.Error(
+				w, "Internal Server Error",
+				http.StatusInternalServerError,
+			)
 			return
 		}
 
@@ -134,7 +152,8 @@ func (sm *SessionManager) Middleware(next http.Handler) http.Handler {
 
 ```yaml
 # hpa-stateless-service.yaml
-# Production autoscaling configuration based on CPU and request latency metrics
+# Production autoscaling configuration based on CPU and request
+# latency metrics
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -169,7 +188,8 @@ spec:
           value: 100
           periodSeconds: 15
     scaleDown:
-      stabilizationWindowSeconds: 300 # Prevent flapping during transient dips
+      # Prevent flapping during transient dips
+      stabilizationWindowSeconds: 300
       policies:
         - type: Percent
           value: 10

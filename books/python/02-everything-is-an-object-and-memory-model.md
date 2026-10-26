@@ -55,13 +55,15 @@ import sys
 a: int = 100
 b: int = 100
 print(a == b)  # True (Logical equality: values are equivalent)
-print(a is b)  # True (Identity equality: same pre-allocated singleton address!)
+# True (Identity equality: same pre-allocated singleton address!)
+print(a is b)
 
 # 2. Outside the Small Int Cache:
 x: int = 1000
 y: int = 1000
 print(x == y)  # True (Values match)
-print(x is y)  # False (Distinct heap allocations with distinct memory addresses)
+# False (Distinct heap allocations with distinct memory addresses)
+print(x is y)
 
 print(f"Memory address x: {hex(id(x))}, y: {hex(id(y))}")
 ```
@@ -72,15 +74,23 @@ import sys
 
 def inspect_pyobject_overhead(val: object) -> None:
     size = sys.getsizeof(val)
-    ref_count = sys.getrefcount(val) - 1  # Subtract transient arg reference
-    print(f"Object: {val!r:<10} | Type: {type(val).__name__:<8} | Size: {size:>3} bytes | Refs: {ref_count}")
+    # Subtract transient arg reference
+    ref_count = sys.getrefcount(val) - 1
+    print(
+        f"Object: {val!r:<10} | Type: {type(val).__name__:<8} | "
+        f"Size: {size:>3} bytes | Refs: {ref_count}"
+    )
 
 # Inspect primitive heap allocations vs containers
-inspect_pyobject_overhead(0)          # 28 bytes (PyLongObject header + 0 digits)
+# 28 bytes (PyLongObject header + 0 digits)
+inspect_pyobject_overhead(0)
 inspect_pyobject_overhead(100)        # 28 bytes (cached singleton)
-inspect_pyobject_overhead(2**64)      # 36 bytes (dynamic digit growth)
-inspect_pyobject_overhead("")         # 49 bytes (empty ASCII string header)
-inspect_pyobject_overhead([])         # 56 bytes (empty PyListObject dynamic array)
+# 36 bytes (dynamic digit growth)
+inspect_pyobject_overhead(2**64)
+# 49 bytes (empty ASCII string header)
+inspect_pyobject_overhead("")
+# 56 bytes (empty PyListObject dynamic array)
+inspect_pyobject_overhead([])
 ```
 
 ---

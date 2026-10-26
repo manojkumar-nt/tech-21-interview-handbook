@@ -80,12 +80,16 @@ function greet(user) {
 TypeScript 5.5 introduced `isolatedDeclarations`, requiring explicit return types on exports so tools like `swc` and `esbuild` can emit `.d.ts` files without a full type-checker run:
 
 ```typescript
-// tsconfig.json: { "compilerOptions": { "isolatedDeclarations": true } }
+// tsconfig.json: { "compilerOptions": { "isolatedDeclarations": true
+// } }
 
-// ❌ Error under isolatedDeclarations: inferred return type requires full checker
-// export function fetchUserProfile(id: string) { return { id, active: true }; }
+// ❌ Error under isolatedDeclarations: inferred return type requires
+// full checker
+// export function fetchUserProfile(id: string) { return { id, active:
+// true }; }
 
-// ✅ Clean & Fast: Explicit typing enables instant parallel d.ts emission
+// ✅ Clean & Fast: Explicit typing enables instant parallel d.ts
+// emission
 export interface UserProfile {
   id: string;
   active: boolean;

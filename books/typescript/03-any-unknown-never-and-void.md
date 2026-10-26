@@ -56,14 +56,16 @@ graph LR
 ### A. Safe API Parsing using `unknown` + Type Narrowing
 
 ```typescript
-// UNSAFE: Using 'any' allows calling nonexistent methods without compiler warnings
+// UNSAFE: Using 'any' allows calling nonexistent methods without
+// compiler warnings
 function parseUnsafe(json: string): any {
   return JSON.parse(json);
 }
 const data = parseUnsafe('{"name": "Manoj"}');
 // data.nonExistentMethod(); // Compiles fine, crashes at RUNTIME!
 
-// TYPE-SAFE: Using 'unknown' forces callers to validate data shape first
+// TYPE-SAFE: Using 'unknown' forces callers to validate data shape
+// first
 function parseSafe(json: string): unknown {
   return JSON.parse(json);
 }
@@ -88,7 +90,8 @@ function handleStatus(s: Status): string {
     case "approved": return "Success";
     case "rejected": return "Declined";
     default: {
-      // If a new status is added to 'Status' type, this line fails at COMPILE-TIME!
+      // If a new status is added to 'Status' type, this line fails at
+      // COMPILE-TIME!
       const exhaustiveCheck: never = s;
       throw new Error(`Unhandled status: ${exhaustiveCheck}`);
     }

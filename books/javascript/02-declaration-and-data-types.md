@@ -59,11 +59,13 @@ if (isUserLoggedIn) {
   // VALID: Mutating properties of the object is allowed
   config.theme = 'light';
   
-  // INVALID: TypeError (reassigning the identifier binding is forbidden)
+  // INVALID: TypeError (reassigning the identifier binding is
+  // forbidden)
   // config = { theme: 'system' };
 }
 
-// console.log(blockScoped);    // ReferenceError: blockScoped is not defined
+// console.log(blockScoped); // ReferenceError: blockScoped is not
+// defined
 console.log(functionScoped);     // "Leaked outside this block"
 ```
 
@@ -86,10 +88,12 @@ const greeting = "Hello, World!";
 const isActive = true;
 
 // 5. Undefined (default value of declared but unassigned variables)
-let unassigned;                  // value: undefined, typeof: "undefined"
+// value: undefined, typeof: "undefined"
+let unassigned;
 
 // 6. Null (intentional absence of any object value)
-const emptySlot = null;          // value: null, typeof: "object" (legacy bug)
+// value: null, typeof: "object" (legacy bug)
+const emptySlot = null;
 
 // 7. Symbol (unique and immutable primitive identifier, ES6)
 const idSym = Symbol('userId');
@@ -97,7 +101,8 @@ const idSym = Symbol('userId');
 // 8. Object (Reference type)
 const user = { name: 'Manoj', role: 'Engineer' };
 const numbers = [1, 2, 3];       // typeof numbers === 'object'
-const handler = () => {};        // typeof handler === 'function' (special object)
+// typeof handler === 'function' (special object)
+const handler = () => {};
 ```
 
 ---

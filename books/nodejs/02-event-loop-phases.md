@@ -107,7 +107,7 @@ fs.readFile(new URL(import.meta.url), () => {
   }, 0);
 
   setImmediate(() => {
-    console.log('Immediate callback (Current tick Check phase - ALWAYS FIRST!)');
+    console.log('Immediate callback (Check phase - ALWAYS FIRST!)');
   });
 });
 ```

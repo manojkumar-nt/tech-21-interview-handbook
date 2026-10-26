@@ -107,7 +107,8 @@ kubectl get --raw='/readyz?verbose'
 
 # View active leader for scheduler and controller-manager
 kubectl get leases -n kube-system
-# Output shows which master node holds the distributed coordination lease:
+# Output shows which master node holds the distributed coordination
+# lease:
 # NAME                      HOLDER                  AGE
 # kube-controller-manager   master-node-01.internal 45d
 # kube-scheduler            master-node-01.internal 45d
@@ -120,12 +121,14 @@ Enable API Server Audit Logging in `/etc/kubernetes/manifests/kube-apiserver.yam
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-  # Log pod changes and secret accesses at RequestResponse level for security forensics
+  # Log pod changes and secret accesses at RequestResponse level for
+  # security forensics
   - level: RequestResponse
     resources:
       - group: ""
         resources: ["pods", "secrets"]
-  # Log metadata only for high-volume watch and list calls to avoid disk saturation
+  # Log metadata only for high-volume watch and list calls to avoid
+  # disk saturation
   - level: Metadata
     verbs: ["watch", "list"]
 ```

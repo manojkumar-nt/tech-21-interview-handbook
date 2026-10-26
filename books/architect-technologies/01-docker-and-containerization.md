@@ -68,9 +68,11 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o server ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux \
+    go build -ldflags="-w -s" -o server ./cmd/main.go
 
-# Stage 2: Minimal Distroless Runtime Image (Zero attack surface, 15MB total size!)
+# Stage 2: Minimal Distroless Runtime Image (Zero attack surface, 15MB
+# total size!)
 FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /
 COPY --from=builder /app/server /server

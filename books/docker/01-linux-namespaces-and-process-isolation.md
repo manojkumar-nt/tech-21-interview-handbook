@@ -130,18 +130,23 @@ sudo nsenter --target $CONTAINER_PID --net --pid /bin/sh
 static char child_stack[STACK_SIZE];
 
 int child_exec(void *arg) {
-    printf("[Child] Inside isolated namespaces. My PID: %d\n", getpid());
+    printf("[Child] Inside isolated namespaces. My PID: %d\n",
+           getpid());
     sethostname("mini-container", 14);
     system("ps aux");
     return 0;
 }
 
 int main() {
-    printf("[Host] Parent PID: %d. Spawning containerized child...\n", getpid());
+    printf("[Host] Parent PID: %d. Spawning child...\n",
+           getpid());
     
-    // Clone with isolated PID, UTS (hostname), Mount, and Network namespaces
-    int clone_flags = CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWNS | CLONE_NEWNET | SIGCHLD;
-    pid_t child_pid = clone(child_exec, child_stack + STACK_SIZE, clone_flags, NULL);
+    // Clone with isolated PID, UTS (hostname), Mount, and Network
+    // namespaces
+    int clone_flags = CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWNS |
+                      CLONE_NEWNET | SIGCHLD;
+    pid_t child_pid = clone(child_exec, child_stack + STACK_SIZE,
+                            clone_flags, NULL);
     
     if (child_pid == -1) {
         perror("clone failed");

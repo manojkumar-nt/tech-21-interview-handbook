@@ -53,7 +53,9 @@ Using `@if`, `@else if`, `@else`, `@for`, and `@switch` with zero external modul
 
 ```typescript
 // project-board.component.ts
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, signal, ChangeDetectionStrategy
+} from '@angular/core';
 
 export interface TaskItem {
   id: string;
@@ -97,7 +99,7 @@ export interface TaskItem {
 })
 export class ProjectBoardComponent {
   readonly tasks = signal<TaskItem[]>([
-    { id: 't1', title: 'Implement Signals Store', status: 'in-progress' },
+    { id: 't1', title: 'Implement Store', status: 'in-progress' },
     { id: 't2', title: 'Migrate to Control Flow', status: 'done' },
   ]);
 }
@@ -129,18 +131,21 @@ import {
   `,
 })
 export class ChartWrapperComponent {
-  private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('chartCanvas');
+  private readonly canvas =
+    viewChild.required<ElementRef<HTMLCanvasElement>>('chartCanvas');
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
-    // afterNextRender runs only in the browser, exactly once after the initial DOM paint
+    // afterNextRender runs only in the browser, exactly once after
+    // the initial DOM paint
     afterNextRender(() => {
       const nativeCanvas = this.canvas().nativeElement;
       const ctx = nativeCanvas.getContext('2d');
       if (!ctx) return;
 
       // Safe DOM dimension access without SSR crashes
-      nativeCanvas.width = nativeCanvas.parentElement?.clientWidth ?? 400;
+      const parentW = nativeCanvas.parentElement?.clientWidth;
+      nativeCanvas.width = parentW ?? 400;
       nativeCanvas.height = 200;
       ctx.fillStyle = '#3b82f6';
       ctx.fillRect(10, 10, 100, 100);

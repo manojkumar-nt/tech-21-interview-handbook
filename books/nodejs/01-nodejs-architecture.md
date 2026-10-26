@@ -60,9 +60,13 @@ import { promisify } from 'node:util';
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/health') {
-    // Non-blocking, immediate response without entering worker threads
+    // Non-blocking, immediate response without entering worker
+    // threads
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', uptime: process.uptime() }));
+    res.end(JSON.stringify({
+      status: 'ok',
+      uptime: process.uptime()
+    }));
     return;
   }
 
@@ -72,7 +76,9 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT} in process ${process.pid}`);
+  console.log(
+    `Server listening on port ${PORT} in process ${process.pid}`
+  );
 });
 ```
 
@@ -80,7 +86,9 @@ server.listen(PORT, () => {
 Because the main thread executes all JavaScript, heavy synchronous operations must never block the main loop:
 
 ```javascript
-import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
+import {
+  Worker, isMainThread, parentPort, workerData
+} from 'node:worker_threads';
 
 // Modern pattern: Offload CPU-heavy computation to Worker Threads
 export function runCpuIntensiveTask(payload) {
@@ -92,7 +100,9 @@ export function runCpuIntensiveTask(payload) {
     worker.on('message', resolve);
     worker.on('error', reject);
     worker.on('exit', (code) => {
-      if (code !== 0) reject(new Error(`Worker stopped with exit code ${code}`));
+      if (code !== 0) {
+        reject(new Error(`Worker stopped with exit code ${code}`));
+      }
     });
   });
 }
@@ -104,7 +114,8 @@ if (!isMainThread) {
 }
 
 function heavyCalculation(data) {
-  // Simulating heavy CPU work (e.g., cryptographic hashing / image resizing)
+  // Simulating heavy CPU work (e.g., cryptographic hashing / image
+  // resizing)
   let count = 0;
   for (let i = 0; i < 1e7; i++) count += i;
   return { processed: true, count, input: data };

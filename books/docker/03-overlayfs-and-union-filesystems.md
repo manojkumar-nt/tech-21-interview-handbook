@@ -68,7 +68,7 @@ graph LR
 
 ```
 Lowerdir Layer: [ /app/config.json ]  <-- (Read-Only)
-Upperdir Layer: [ /app/.wh.config.json (Character device 0/0: Whiteout) ]
+Upperdir Layer: [ /app/.wh.config.json (Whiteout device 0/0) ]
 Merged View:    [ config.json is HIDDEN from directory listings ]
 ```
 
@@ -108,7 +108,8 @@ ls /tmp/overlay-demo/merged
 # Output: app.py  config.txt
 
 # 5. Modify config.txt in merged view (Triggers Copy-on-Write!)
-echo "Custom Container Config v2" > /tmp/overlay-demo/merged/config.txt
+echo "Custom Container Config v2" > \
+  /tmp/overlay-demo/merged/config.txt
 
 # 6. Verify upperdir now contains the copied & modified file
 ls /tmp/overlay-demo/upper
@@ -126,7 +127,8 @@ cat /tmp/overlay-demo/lower1/config.txt
 docker run -d --name overlay-test alpine sleep 3600
 
 # Inspect the GraphDriver details
-docker inspect --format '{{json .GraphDriver.Data}}' overlay-test | jq .
+docker inspect --format '{{json .GraphDriver.Data}}' overlay-test \
+  | jq .
 
 # Output:
 # {

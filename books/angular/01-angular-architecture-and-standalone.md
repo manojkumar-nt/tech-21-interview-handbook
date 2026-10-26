@@ -51,11 +51,19 @@ Modern Angular configures the root application via `ApplicationConfig` and funct
 
 ```typescript
 // app.config.ts
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import {
+  ApplicationConfig, provideZoneChangeDetection
+} from '@angular/core';
+import {
+  provideRouter, withComponentInputBinding
+} from '@angular/router';
+import {
+  provideHttpClient, withFetch, withInterceptors
+} from '@angular/common/http';
 import { routes } from './app.routes';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
+import {
+  authInterceptor
+} from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -82,7 +90,9 @@ A clean standalone component declaring its exact template dependencies:
 
 ```typescript
 // user-card.component.ts
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, input, output, ChangeDetectionStrategy
+} from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { AvatarComponent } from '../ui/avatar.component';
 

@@ -66,10 +66,12 @@ graph LR
 ```yaml
 apiVersion: v2
 name: enterprise-order-service
-description: High-throughput order processing service with PostgreSQL & Kafka integration
+description: >-
+  High-throughput order service with PostgreSQL & Kafka integration
 type: application
 
-# 1. Chart SemVer version (Must be incremented on EVERY template/values edit!)
+# 1. Chart SemVer version (Must be incremented on EVERY
+# template/values edit!)
 version: 1.4.2
 
 # 2. Application software version (Injected into container image tag)
@@ -101,9 +103,9 @@ dependencies:
 
 ### B. Dynamic Context-Aware Post-Install Instructions (`templates/NOTES.txt`)
 ```text
-========================================================================
+==================================================================
 🎉 {{ .Chart.Name }} (v{{ .Chart.Version }}) successfully deployed!
-========================================================================
+==================================================================
 
 Release Name: {{ .Release.Name }}
 Namespace:    {{ .Release.Namespace }}
@@ -114,15 +116,20 @@ To access the Order Service API:
   Endpoint: https://{{ (index .Values.ingress.hosts 0).host }}
 {{- else if contains "NodePort" .Values.service.type }}
   Export Node IP and Port:
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "order.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  SVC="{{ include "order.fullname" . }}"
+  export NODE_PORT=$(kubectl get svc "$SVC" \
+    -n {{ .Release.Namespace }} \
+    -o jsonpath="{.spec.ports[0].nodePort}")
+  export NODE_IP=$(kubectl get nodes -n {{ .Release.Namespace }} \
+    -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 {{- else }}
   Forward local port:
-  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ include "order.fullname" . }} 8080:80
+  kubectl port-forward -n {{ .Release.Namespace }} \
+    svc/{{ include "order.fullname" . }} 8080:80
   URL: http://localhost:8080
 {{- end }}
-========================================================================
+==================================================================
 ```
 
 ---

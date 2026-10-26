@@ -113,7 +113,8 @@ kubeReserved:
 ### B. Node Allocatable Capacity & System Reserve Verification
 ```bash
 # View Node Capacity vs Allocatable Resources
-kubectl describe node worker-node-01.internal | grep -A 8 "Allocatable:"
+kubectl describe node worker-node-01.internal \
+  | grep -A 8 "Allocatable:"
 
 # Output:
 # Allocatable:
