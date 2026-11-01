@@ -20,7 +20,7 @@ Most technical books fall into one of two extremes:
 
 ## The 21-Question Curation Framework
 
-This volume distills Python into **21 foundational engineering questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Python into **21 foundational engineering questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -28,7 +28,7 @@ This volume distills Python into **21 foundational engineering questions**, orga
 | **Tier 2** | **Core Abstractions & Object Model** | Q06 – Q10 | Higher-order decorators & closures, GIL concurrency constraints, reference counting & cyclic GC, C3 MRO linearization, dunder data model |
 | **Tier 3** | **Internals & Execution Mechanics** | Q11 – Q15 | Descriptor protocol & attribute lookup, generator frame freezing & iterators, context managers, threading vs multiprocessing vs asyncio, TaskGroups |
 | **Tier 4** | **Production, Typing & Systems** | Q16 – Q21 | Static typing with Mypy & Protocols, Data Classes vs Pydantic, metaclass interception, exception chaining & groups, module import machinery, memory profiling |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Collections Big-$O$ time & memory complexity matrix, and the master special (dunder) methods data model reference |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Collections Big-$O$ time & memory complexity matrix (Appendix A), master special (dunder) methods data model reference (Appendix B), and the master glossary of Python and CPython ecosystem acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -41,6 +41,15 @@ To ensure maximum signal and long-term memory retention, every single chapter ad
 3. **Clean Code in Action**: Modern, idiomatic Python 3.12+ code snippets with type annotations, primary production patterns, and advanced patterns.
 4. **Common Pitfalls & Interview Traps**: Subtle bugs, mutable defaults, reference leaks, and concurrency gotchas presented in a crisp comparative table.
 5. **The 60-Second Memory Anchor**: A punchy mental anchor to lock the concept permanently into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Python Collections & Time Complexity Matrix** — Big-$O$ asymptotic analysis across operations for `list`, `dict`, `set`, and `deque`.
+- **Appendix B: Python Special (Dunder) Methods Reference** — Exhaustive taxonomy of protocol hooks across sequence emulation, arithmetic operators, attribute access, and context managers.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all Python, CPython, GIL, typing, and concurrency acronyms (GIL, AST, MRO, PEP, WSGI, ASGI, PyObject, etc.).
 
 ---
 

@@ -18,7 +18,7 @@ Most container literature suffers from one of two extremes:
 
 ## The 21-Question Curation Framework
 
-This volume distills Docker and container runtimes into **21 foundational questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Docker and container runtimes into **21 foundational questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -26,7 +26,7 @@ This volume distills Docker and container runtimes into **21 foundational questi
 | **Tier 2** | **Core Abstractions & Storage/Networking** | Q06 – Q10 | Multi-stage Dockerfile layer optimization, minimal base image trade-offs (scratch, Alpine, Distroless), PID 1 Unix signal handling and zombie reaping, default bridge (`docker0`) virtual ethernet routing and `iptables` NAT, and advanced networking topologies (Macvlan, IPVlan, Overlay VXLAN). |
 | **Tier 3** | **Storage, Composition & Modern Builders** | Q11 – Q15 | State management across Named Volumes, Bind Mounts, and `tmpfs`, multi-service orchestration with the Compose Specification, concurrent multi-arch builds with BuildKit and buildx, non-root user execution boundaries, and kernel privilege reduction via Linux Capabilities, Seccomp, and AppArmor. |
 | **Tier 4** | **Enterprise Production, Security & Operations** | Q16 – Q21 | Daemonless and rootless container architectures (Rootless Docker, Podman), static vulnerability scanning and SBOM generation with Trivy, cryptographic signing and supply-chain verification via Sigstore Cosign, non-blocking 12-factor logging pipelines, healthchecks and restart policies, and distroless live debugging with `cdebug` and `dive`. |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Complete Docker & Container CLI Cheatsheet (runtime inspection, network plumbing, kernel troubleshooting), and Enterprise Production Dockerfile Reference Patterns across Go, Node.js, Python, Java, and Rust. |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Complete Docker & Container CLI Cheatsheet (runtime inspection, network plumbing, kernel troubleshooting), Enterprise Production Dockerfile Reference Patterns across Go, Node.js, Python, Java, and Rust, and the master glossary of container and Linux virtualization acronyms and abbreviations. |
 
 ---
 
@@ -39,6 +39,15 @@ To guarantee maximum signal and long-term retention, every core chapter (Chapter
 3. **Clean Code in Action**: Production-ready, modern configuration and code patterns featuring idiomatic implementations (`### A.`) and advanced resilient practices (`### B.`).
 4. **Common Pitfalls & Interview Traps**: 2-column Markdown tables analyzing real-world production outages, security vulnerabilities, kernel panics, and interviewer curveballs.
 5. **60-Second Memory Anchor**: A punchy, memorable mental model permanently locking the concept into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Docker & Container CLI Cheatsheet** — High-signal CLI diagnostic commands for namespace inspection, container network plumbing, runtime state inspection, and volume troubleshooting.
+- **Appendix B: Production Dockerfile Reference Patterns** — Hardened multi-stage Dockerfile blueprints across Go, Node.js, Python, Java, and Rust enforcing minimal attack surfaces and least privilege.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all container runtime, Linux kernel, OCI, and security acronyms (OCI, CRI, CoW, PID, SBOM, CVE, etc.).
 
 ---
 

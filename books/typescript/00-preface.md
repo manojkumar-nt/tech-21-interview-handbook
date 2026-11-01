@@ -28,7 +28,7 @@ This edition distills the TypeScript type system and compiler architecture into 
 | **Tier 2** | **Core Abstractions & Operations** | Q06–Q10 | Set-theoretic unions and intersections, discriminated unions, control flow analysis, generic constraints, and indexed access. |
 | **Tier 3** | **Internals & Metaprogramming** | Q11–Q15 | Mapped types and modifiers, distributive conditional types, `infer` unpacking, template literal types, utility types, and `as const` objects. |
 | **Tier 4** | **Production & Modern Standards** | Q16–Q21 | Hard private class fields, function overloads, ambient declarations (`.d.ts`), modern module resolution, Stage 3 decorators, and `strict` flags. |
-| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–B | Universal assignability matrices, subtyping variance, compiler diagnostics, and recursive type transformation cheat sheets. |
+| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–C | Universal assignability matrices, subtyping variance, recursive type transformations, and the master glossary of TypeScript and compiler acronyms and abbreviations. |
 
 ---
 
@@ -46,9 +46,10 @@ Every chapter in this book adheres strictly to a predictable, zero-fluff 5-secti
 
 ## Reference Appendices
 
-Beyond the 21 core chapters, two comprehensive reference appendices provide permanent desktop utilities:
+Beyond the 21 core chapters, three comprehensive reference appendices provide permanent desktop utilities:
 - **Appendix A: Type Hierarchy and Assignability Matrix** — A complete roadmap of TypeScript's type universe, cross-type assignability grid, variance rules across functions and objects, and compiler diagnostic troubleshooting.
 - **Appendix B: Advanced Type Transformations Cheat Sheet** — Production-ready recipes for deep recursive immutability, type-level boolean logic, nested object path navigators, and tuple manipulation utilities.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all compiler pipeline, AST, type-system, and runtime abbreviations (TSC, AST, CFA, CFG, ADT, ESM, etc.).
 
 ---
 

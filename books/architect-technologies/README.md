@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Core Technol
 | **21-vector-databases-and-rag** | 🔒 *Full Edition* | 21. How Do Vector Databases Index High-Dimensional Embeddings for Retrieval-Augmented Generation (RAG)? |
 | **22-appendix-technology-selection-matrix** | 🔒 *Full Edition* | Appendix A: Technology Selection Decision Matrix |
 | **23-appendix-enterprise-architecture-blueprint** | 🔒 *Full Edition* | Appendix B: Modern Enterprise Cloud-Native Architecture Blueprint |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

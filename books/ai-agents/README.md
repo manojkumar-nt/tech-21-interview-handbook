@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Agentic Soft
 | **21-what-are-the-unspoken-pitfalls-in-agentic-software-development** | 🔒 *Full Edition* | 21. What Are the Unspoken Pitfalls and Anti-Patterns in Real-World Agent-Assisted Development? |
 | **22-appendix-coding-agent-reference-sheet** | 🔒 *Full Edition* | Appendix A: The Coding Agent Reference Sheet & Diagnostic Matrix |
 | **23-appendix-production-readiness-checklist** | 🔒 *Full Edition* | Appendix B: Enterprise Agentic Coding Production Readiness & Security Checklist |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

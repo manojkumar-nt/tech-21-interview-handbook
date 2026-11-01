@@ -18,7 +18,7 @@ Most Kubernetes resources fall into two traps:
 
 ## The 21-Question Curation Framework
 
-This volume distills Kubernetes into **21 foundational questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Kubernetes into **21 foundational questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -26,7 +26,7 @@ This volume distills Kubernetes into **21 foundational questions**, organized ac
 | **Tier 2** | **Workload Abstractions & Storage** | Q06 – Q10 | Guaranteed/Burstable/BestEffort QoS classes, Linux cgroup OOM killer scores, Deployment `RollingUpdate` hash invariants, StatefulSet stable ordinals & headless DNS, DaemonSets vs CronJobs, and StorageClass dynamic volume provisioning loops with PV/PVC binding mechanics. |
 | **Tier 3** | **Networking, DNS & Traffic Routing** | Q11 – Q15 | Container Storage Interface (CSI) gRPC plugin architecture, VolumeSnapshots, IP-per-Pod CNI routing (veth pairs, VXLAN, BGP overlays), `kube-proxy` iptables vs IPVS connection tracking, CoreDNS search path amplification (`ndots:5`), and Ingress vs Modern Gateway API role-oriented hierarchies. |
 | **Tier 4** | **Security, Governance & Autoscaling** | Q16 – Q21 | Least-privilege RBAC matrices, projected TokenRequest ServiceAccount tokens, Zero-Trust NetworkPolicy eBPF/conntrack filtering, Pod Security Standards (PSA/PSS), Validating Webhooks, HPA metrics server algorithms, KEDA event-driven autoscalers, Karpenter JIT node provisioning, and Custom Resource Definitions (CRDs) with Kubebuilder Operator controllers. |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Comprehensive Kubernetes Troubleshooting Decision Matrix & Diagnostic Workflow (Appendix A), and Production-Grade Multi-Resource Blueprint Manifest Patterns (Appendix B). |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Comprehensive Kubernetes Troubleshooting Decision Matrix & Diagnostic Workflow (Appendix A), Production-Grade Multi-Resource Blueprint Manifest Patterns (Appendix B), and the master glossary of Kubernetes and cloud-native technical abbreviations (Appendix C). |
 
 ---
 
@@ -39,6 +39,15 @@ To ensure rapid comprehension and permanent retention, every core chapter (Chapt
 3. **Clean Code in Action**: Production-ready, validated Kubernetes manifests and operational commands showcasing standard idiomatic implementations (`### A.`) and advanced enterprise resilience patterns (`### B.`).
 4. **Common Pitfalls & Interview Traps**: Curated 2-column Markdown tables uncovering subtle configuration bugs, race conditions, silent packet drops, and classic interviewer traps.
 5. **60-Second Memory Anchor**: A concentrated, punchy conceptual takeaway that permanently locks the mental model into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Kubernetes Troubleshooting Decision Matrix** — Diagnostic flows and remediation steps for CrashLoopBackOff, OOMKilled, Pending pods, and etcd split-brain.
+- **Appendix B: Production Kubernetes Manifest Reference Patterns** — Hardened multi-resource blueprint manifests with resource limits, security contexts, affinity rules, and PDBs.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all Kubernetes, cloud-native, and networking abbreviations (CRI, CNI, CSI, RBAC, HPA, CRD, etc.).
 
 ---
 

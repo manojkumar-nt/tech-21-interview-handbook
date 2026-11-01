@@ -18,7 +18,7 @@ Most technical books fall into one of two extremes:
 
 ## The 21-Question Curation Framework
 
-This volume distills Java into **21 foundational questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Java into **21 foundational questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -26,7 +26,7 @@ This volume distills Java into **21 foundational questions**, organized across f
 | **Tier 2** | **Core Abstractions & Memory** | Q06 – Q10 | Interfaces vs abstract classes, default methods, JVM memory layout (Stack, Heap, Metaspace), garbage collection mechanics (G1, ZGC), exception hierarchy & try-with-resources, Generics type erasure & PECS wildcards |
 | **Tier 3** | **Internals & Concurrency** | Q11 – Q15 | Collections framework internals (`ArrayList`, `HashMap` treeification), `Comparable` vs `Comparator`, platform threads & `ExecutorService` pooling, intrinsic monitors vs `ReentrantLock`, Java Memory Model (JMM happens-before, `volatile`, CAS atomics) |
 | **Tier 4** | **Modern Standards & High Throughput** | Q16 – Q21 | Lambdas & `invokedynamic`, Stream API lazy evaluation & parallel spliterators, `Optional` monadic design, Records, sealed classes & pattern matching, Project Loom Virtual Threads & carrier scheduling, runtime reflection & dynamic proxies |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | ClassLoader parent-delegation hierarchy & Metaspace isolation reference, and the master concurrent collections & synchronization decision matrices |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | ClassLoader parent-delegation hierarchy & Metaspace isolation reference (Appendix A), master concurrent collections & synchronization decision matrices (Appendix B), and the master glossary of JVM and Java ecosystem acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -39,6 +39,15 @@ To guarantee maximum signal and long-term retention, every core chapter (Chapter
 3. **Clean Code in Action**: Production-ready, modern Java 21+ code patterns featuring primary idioms (`### A.`) and advanced resilient practices (`### B.`).
 4. **Common Pitfalls & Interview Traps**: 2-column Markdown tables analyzing real-world concurrency bugs, memory leaks, performance traps, and interviewer curveballs.
 5. **60-Second Memory Anchor**: A punchy, memorable mental model permanently locking the concept into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: ClassLoader Hierarchy and Delegation Model** — Mechanics of Bootstrap, Platform, and Application ClassLoaders, parent-delegation violation in OSGi/modular containers, and Metaspace leak prevention.
+- **Appendix B: Concurrency and Collections Quick Reference** — Systematic selection guide and performance characteristics across thread-safe collections (`ConcurrentHashMap`, `CopyOnWriteArrayList`, blocking queues) and locking primitives.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all JVM, JIT, GC, JMM, and concurrency acronyms (JVM, JIT, GC, JMM, CAS, Loom, FFM, etc.).
 
 ---
 

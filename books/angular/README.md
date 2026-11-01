@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Angular Core
 | **21-build-optimization-and-production-tuning** | 🔒 *Full Edition* | 21. How Does the Modern Build Pipeline (esbuild/Vite), Bundle Budgets, and Production Tuning Work? |
 | **22-appendix-modern-migration-matrix** | 🔒 *Full Edition* | Appendix A: Modern Angular Migration Matrix |
 | **23-appendix-production-readiness-checklist** | 🔒 *Full Edition* | Appendix B: Enterprise Production Readiness Checklist |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

@@ -20,7 +20,7 @@ Every distributed system decision represents a calculated compromise:
 
 ## The 21-Question Curation Framework
 
-This volume distills the vast landscape of Distributed System Design into **21 foundational architectural questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills the vast landscape of Distributed System Design into **21 foundational architectural questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -28,7 +28,7 @@ This volume distills the vast landscape of Distributed System Design into **21 f
 | **Tier 2** | **Data Tier Architecture & Storage** | Q06 – Q09 | Storage engines (B-Tree vs LSM), CAP/PACELC trade-offs, database replication & sharding, ACID isolation vs BASE eventual consistency |
 | **Tier 3** | **Asynchronous Systems & Coordination** | Q10 – Q13 | Message queues vs commit logs, event sourcing & CQRS, distributed transactions (2PC vs Sagas), distributed locks & Raft consensus |
 | **Tier 4** | **Perimeter, Resiliency & Production Scale** | Q14 – Q21 | API rate limiting, API gateways & BFF, Snowflake ID generation, inverted index search, CDNs & Edge compute, circuit breakers & bulkheads, full-stack observability, and end-to-end URL shortener design |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | System design latency and capacity numbers cheat sheet, and the master architecture patterns decision matrix |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | System design latency and capacity numbers cheat sheet (Appendix A), master architecture patterns decision matrix (Appendix B), and the master glossary of distributed systems acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -41,6 +41,15 @@ To ensure maximum signal and long-term memory retention, every chapter follows o
 3. **Clean Code in Action**: Production-ready, modern code snippets in Go, Python, TypeScript, and declarative configurations demonstrating both primary patterns and advanced resilient implementations.
 4. **Common Pitfalls & Interview Traps**: Crisp 2-column tables analyzing real-world failure modes, concurrency race conditions, and interviewer curveballs with exact mitigations.
 5. **The 60-Second Memory Anchor**: A punchy, memorable takeaway locking the architectural insight into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: System Design Numbers Every Engineer Must Know** — Hardware latency numbers (L1/L2 cache, RAM, NVMe SSD, network cross-datacenter), data scale rules of thumb, and back-of-the-envelope calculation cheat sheets.
+- **Appendix B: Architecture Patterns & Trade-offs Matrix** — Comprehensive comparison grid evaluating communication styles, replication topologies, consensus algorithms, and caching patterns.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all distributed systems, storage, and networking acronyms (CAP, ACID, BASE, CQRS, SLA/SLO/SLI, MTTR, CDN, etc.).
 
 ---
 

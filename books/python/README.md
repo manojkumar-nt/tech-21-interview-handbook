@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Python Maste
 | **21-profiling-and-performance-optimization** | 🔒 *Full Edition* | 21. How Do You Profile and Optimize Python Performance Using `cProfile`, `tracemalloc`, and `__slots__`? |
 | **22-appendix-built-in-collections-complexity** | 🔒 *Full Edition* | Appendix A: Python Collections & Time Complexity Matrix |
 | **23-appendix-dunder-methods-reference** | 🔒 *Full Edition* | Appendix B: Python Special (Dunder) Methods Reference |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

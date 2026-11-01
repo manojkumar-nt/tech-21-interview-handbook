@@ -28,7 +28,7 @@ Every distributed system decision represents a calculated compromise:
 
 ## The 21-Question Curation Framework
 
-This volume distills the vast landscape of modern architectural infrastructure into **21 foundational technology questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills the vast landscape of modern architectural infrastructure into **21 foundational technology questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -36,7 +36,7 @@ This volume distills the vast landscape of modern architectural infrastructure i
 | **Tier 2** | **Distributed Storage & Microservice Communication** | Q06 – Q10 | Cassandra/ScyllaDB masterless rings & LSM-trees, Elasticsearch/OpenSearch inverted indexes & Lucene shards, GraphQL & Apollo Federation, gRPC & Protobuf HTTP/2 multiplexing, Envoy service mesh dynamic xDS & mTLS |
 | **Tier 3** | **Cloud Infrastructure, Observability & Big Data** | Q11 – Q15 | Terraform/OpenTofu declarative state & DAGs, Prometheus time-series TSDB & PromQL, OpenTelemetry W3C distributed trace propagation, Apache Spark memory DAGs & Catalyst optimization, Snowflake decoupled lakehouses & micro-partitioning |
 | **Tier 4** | **Enterprise Reliability, Security & AI Systems** | Q16 – Q21 | RabbitMQ AMQP routing & quorum queues, HashiCorp Vault dynamic leases & transit encryption, Keycloak OAuth 2.0 PKCE & federated OIDC, Temporal durable workflow replay & sagas, Apache Flink stateful streaming & Chandy-Lamport snapshots, Vector databases & HNSW indexing for RAG |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Comprehensive Technology Selection Decision Matrix, and the Modern Enterprise Cloud-Native Architecture Blueprint |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Comprehensive Technology Selection Decision Matrix (Appendix A), Modern Enterprise Cloud-Native Architecture Blueprint (Appendix B), and the master glossary of enterprise architectural acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -49,6 +49,15 @@ To ensure maximum signal and long-term memory retention, every chapter follows o
 3. **Clean Code in Action**: Production-ready, modern code snippets and declarative infrastructure configurations demonstrating both primary patterns and advanced resilient implementations.
 4. **Common Pitfalls & Interview Traps**: Crisp 2-column tables analyzing real-world failure modes, concurrency race conditions, and interviewer curveballs with exact operational mitigations.
 5. **The 60-Second Memory Anchor**: A punchy, memorable takeaway locking the architectural insight permanently into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Technology Selection Decision Matrix** — Multi-dimensional decision matrices evaluating database engines, message brokers, service meshes, and orchestrators against latency, throughput, and consistency trade-offs.
+- **Appendix B: Modern Enterprise Cloud-Native Architecture Blueprint** — Production reference blueprint integrating zero-trust networking, event-driven backbones, resilient data layers, and multi-region failover.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all distributed systems, cloud infrastructure, networking, and enterprise architectural acronyms (MVCC, LSM, gRPC, mTLS, TSDB, DAG, HNSW, etc.).
 
 ---
 

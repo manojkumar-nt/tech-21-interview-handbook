@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Kubernetes**
 | **21-crds-and-the-operator-pattern** | 🔒 *Full Edition* | 21. How Do Custom Resource Definitions (CRDs) and Controller Loops Implement the Operator Pattern? |
 | **22-appendix-kubernetes-troubleshooting-flowchart** | 🔒 *Full Edition* | Appendix A: Kubernetes Troubleshooting Decision Matrix |
 | **23-appendix-production-kubernetes-manifests** | 🔒 *Full Edition* | Appendix B: Production Kubernetes Manifest Reference Patterns |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: TypeScript D
 | **21-tsconfig-best-practices-and-strict-mode** | 🔒 *Full Edition* | 21. What Flags Constitute `strict` Mode in `tsconfig.json`, and Why Are They Essential? |
 | **22-appendix-type-system-cheat-sheet** | 🔒 *Full Edition* | Appendix A: Type Hierarchy and Assignability Matrix |
 | **23-appendix-utility-types-reference** | 🔒 *Full Edition* | Appendix B: Advanced Type Transformations Cheat Sheet |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

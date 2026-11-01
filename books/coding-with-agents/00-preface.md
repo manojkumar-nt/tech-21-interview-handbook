@@ -22,7 +22,7 @@ However, the vast majority of software developers use these powerful tools ineff
 
 ## The 21-Question Curation Framework
 
-This volume organizes the developer's journey into **21 practical questions** across four progressive tiers, followed by two deep-dive field reference appendices:
+This volume organizes the developer's journey into **21 practical questions** across four progressive tiers, followed by three deep-dive field reference appendices:
 
 | Tier | Focus Area | Chapters | Core Developer Competencies |
 | :--- | :--- | :--- | :--- |
@@ -30,7 +30,7 @@ This volume organizes the developer's journey into **21 practical questions** ac
 | **Tier 2** | **Core Engineering Workflows** | Q06 – Q10 | Getting agents to write thorough unit/integration tests, diagnosing and fixing complex production bugs, safely refactoring legacy spaghetti code, scaffolding new features/APIs without bloat, and navigating unfamiliar repositories. |
 | **Tier 3** | **Advanced Collaboration & Quality Control** | Q11 – Q15 | Reviewing AI-generated diffs and PRs, preventing hallucinated libraries and APIs, steering agents stuck in error loops (the 3-turn rule), safe terminal and Git execution, and generating accurate documentation and OpenAPI specs. |
 | **Tier 4** | **Professional Mastery & Team Scale** | Q16 – Q21 | Creating reusable slash commands and custom prompt templates, handling database migrations and schema changes safely, balancing speed with clean architecture, automating dependency upgrades, building personal workflows, and avoiding vibe coding anti-patterns. |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | The Pragmatic Developer Prompt Templates Cheatsheet, and the Daily AI Coding Checklist & Anti-Pattern Field Guide. |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | The Pragmatic Developer Prompt Templates Cheatsheet (Appendix A), Daily AI Coding Checklist & Anti-Pattern Field Guide (Appendix B), and the master glossary of AI pair-programming and developer tooling acronyms (Appendix C). |
 
 ---
 
@@ -43,6 +43,15 @@ Every core chapter follows our signature 5-part anatomy designed for maximum sig
 3. **Clean Code in Action**: Ready-to-use prompt blueprints, configuration templates, and automated verification scripts demonstrating primary patterns and advanced workflows.
 4. **Common Pitfalls & Developer Traps**: Crisp 2-column tables analyzing real-world developer failure modes and their exact practical remediations.
 5. **The 60-Second Memory Anchor**: A punchy, memorable rule of thumb locking the concept permanently into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: The Pragmatic Developer Prompt Templates & Cheatsheet** — Battle-tested prompts for feature scaffolding, bug fixing, test generation, and architectural reviews.
+- **Appendix B: The Daily AI Coding Checklist & Anti-Pattern Field Guide** — Daily operational checklist preventing silent regressions, hallucinated dependencies, and security oversights.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all developer AI, LLM, IDE, and Git workflow acronyms (LLM, MCP, PR, AST, TDD, BDD, LSP, CI/CD, etc.).
 
 ---
 

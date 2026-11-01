@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Docker & Con
 | **21-advanced-debugging-and-troubleshooting** | 🔒 *Full Edition* | 21. How Do You Troubleshoot and Debug Crashing or Unresponsive Containers in Production? |
 | **22-appendix-docker-cli-cheatsheet** | 🔒 *Full Edition* | Appendix A: Docker & Container CLI Cheatsheet |
 | **23-appendix-production-dockerfile-patterns** | 🔒 *Full Edition* | Appendix B: Production Dockerfile Reference Patterns |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

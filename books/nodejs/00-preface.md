@@ -18,7 +18,7 @@ Most technical books fall into one of two extremes:
 
 ## The 21-Question Curation Framework
 
-This volume distills Node.js into **21 foundational questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Node.js into **21 foundational questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -26,7 +26,7 @@ This volume distills Node.js into **21 foundational questions**, organized acros
 | **Tier 2** | **Core Abstractions & Operations** | Q06 – Q10 | Synchronous `EventEmitter` dispatch & listener memory leak mitigation, 4 core stream paradigms (`Readable`, `Writable`, `Duplex`, `Transform`), highWaterMark backpressure flow control, POSIX file handles & crash-resilient atomic writes, Layer 4/7 networking (`net.Socket`, HTTP Keep-Alive connection pooling, HTTP/2 multiplexing), process lifecycle & child processes (`spawn` vs `exec` vs `fork`) |
 | **Tier 3** | **Internals & Concurrency** | Q11 – Q15 | Libuv worker thread pool dynamics (`UV_THREADPOOL_SIZE`) & worker starvation traps, multi-threaded CPU parallelism with `Worker` threads, `SharedArrayBuffer` & `Atomics`, multi-core scaling with `cluster` & round-robin socket handoffs, asynchronous context propagation with `AsyncLocalStorage` for distributed tracing, production profiling (CPU flamegraphs, heap snapshots, event loop delay histograms) |
 | **Tier 4** | **Production, Security & Modern Standards** | Q16 – Q21 | Standardized cancellation via `AbortController` & `AbortSignal`, operational vs programmer errors, zero-downtime graceful shutdown coordination, stable C ABI native addons with Node-API (`node-addon-api`, `napi-rs`), modern native tooling (`node:test`, `--watch`, `--env-file`, permission models), security hardening (prototype pollution, ReDoS, SSRF, `node:vm` sandboxing myths), production performance tuning (Keep-Alive coordination, JSON schema compilation, V8 container memory sizing) |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Complete anatomy of the Libuv Event Loop & Microtask Lifecycle execution matrix, and the enterprise production readiness & security hardening checklist |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Complete anatomy of the Libuv Event Loop & Microtask Lifecycle execution matrix (Appendix A), enterprise production readiness & security hardening checklist (Appendix B), and the master glossary of Node.js, V8, and systems networking acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -39,6 +39,15 @@ To guarantee maximum signal and long-term retention, every core chapter (Chapter
 3. **Clean Code in Action**: Production-ready, modern Node.js 20/22+ code patterns featuring primary idioms (`### A.`) and advanced resilient practices (`### B.`).
 4. **Common Pitfalls & Interview Traps**: 2-column Markdown tables analyzing real-world concurrency bugs, memory leaks, event loop stalls, and interviewer curveballs.
 5. **60-Second Memory Anchor**: A punchy, memorable mental model permanently locking the concept into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Complete Anatomy of the Node.js Event Loop & Microtask Lifecycle** — Detailed phase-by-phase breakdown of Libuv timer, I/O polling, check, and microtask queues with tick execution invariants.
+- **Appendix B: Node.js Production Readiness & Hardening Reference Checklist** — A 30-point gatekeeper checklist covering process monitoring, memory bounds, signal handling, and security policies.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all Node.js, V8, Libuv, and POSIX acronyms (CJS, ESM, IPC, N-API, ABI, GC, TLS, etc.).
 
 ---
 

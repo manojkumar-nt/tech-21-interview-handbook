@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: OpenShift**,
 | **21-cluster-upgrades-and-machine-config-pools** | 🔒 *Full Edition* | 21. How Do MachineConfigPools and the MCO Execute Coordinated Zero-Downtime Cluster Node Upgrades? |
 | **22-appendix-openshift-oc-cli-cheatsheet** | 🔒 *Full Edition* | Appendix A: OpenShift oc CLI Reference Cheatsheet |
 | **23-appendix-production-openshift-reference-architecture** | 🔒 *Full Edition* | Appendix B: Production OpenShift Reference Architecture |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

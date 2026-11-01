@@ -20,7 +20,7 @@ Most Helm resources fall into two traps:
 
 ## The 21-Question Curation Framework
 
-This volume distills Helm and cloud-native package management into **21 foundational questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills Helm and cloud-native package management into **21 foundational questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -28,7 +28,7 @@ This volume distills Helm and cloud-native package management into **21 foundati
 | **Tier 2** | **Core Abstractions & Templating** | Q06 – Q10 | Truthiness logic, lexical scope shifting with `with` and `range`, named templates in `_helpers.tpl`, `include` vs `template` action mechanics, subchart isolation boundaries, global values propagation, library charts (`type: library`) for enterprise governance, and release lifecycle hooks with weight ordering and deletion policies. |
 | **Tier 3** | **Internals, Testing & Validation** | Q11 – Q15 | State storage in `sh.helm.release.v1` Secrets, append-only revision tracking, atomic rollbacks, in-cluster smoke tests (`helm test`), offline rendering vs server-side dry-run validation, JSON Schema Draft-07 type enforcement (`values.schema.json`), and OCI artifact layer packaging with Sigstore Cosign verification. |
 | **Tier 4** | **Security, Orchestration & GitOps** | Q16 – Q21 | Envelope encryption via Mozilla SOPS and `helm-secrets`, BDD unit testing with `helm-unittest`, CI/CD pull request integration via `ct` (Chart Testing), multi-environment DAG orchestration with Helmfile, GitOps reconciliation with ArgoCD and Flux, CLI plugin architecture (`helm-diff`), and three-way merge drift detection with pre-existing resource adoption. |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Comprehensive Helm CLI & Sprig Template Function Reference Cheatsheet (Appendix A), and Production-Grade Enterprise Helm Chart Architecture Blueprint (Appendix B). |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Comprehensive Helm CLI & Sprig Template Function Reference Cheatsheet (Appendix A), Production-Grade Enterprise Helm Chart Architecture Blueprint (Appendix B), and the master glossary of Helm and Kubernetes packaging acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -41,6 +41,15 @@ To ensure maximum signal density and rapid knowledge retention, every core chapt
 3. **Clean Code in Action**: Production-ready, validated Helm templates, helpers, schemas, and CLI workflows demonstrating primary idiomatic patterns (`### A.`) and advanced enterprise resilience patterns (`### B.`).
 4. **Common Pitfalls & Interview Traps**: Curated 2-column Markdown tables uncovering subtle syntax traps, indentation bugs, scope loss, race conditions, and classic interviewer traps.
 5. **60-Second Memory Anchor**: A punchy, concentrated blockquote takeaway that permanently locks the mental model into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: Helm CLI & Sprig Template Reference** — Complete CLI command options and frequently used Sprig template functions (string manipulation, math, lists, dicts).
+- **Appendix B: Production Helm Chart Reference Architecture** — Enterprise-ready chart layout with JSON Schema validation, lifecycle hooks, and library chart inheritance.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all Helm, Kubernetes, OCI, and GitOps abbreviations (OCI, CRD, RBAC, DAG, BDD, SOPS, etc.).
 
 ---
 

@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: System Desig
 | **21-designing-a-real-world-system-url-shortener-to-scale** | 🔒 *Full Edition* | 21. How Do You Design a High-Scale URL Shortener (Bitly) from API to Global Storage? |
 | **22-appendix-system-design-numbers-cheat-sheet** | 🔒 *Full Edition* | Appendix A: System Design Numbers Every Engineer Must Know |
 | **23-appendix-architecture-patterns-matrix** | 🔒 *Full Edition* | Appendix B: Architecture Patterns & Trade-offs Matrix |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

@@ -26,7 +26,7 @@ This edition in the **Tech-21** series distills the modern Angular landscape int
 | **Tier 2** | **Core Abstractions & Reactive Pipelines** | Q06–Q10 | Strictly typed reactive forms, directive composition via `hostDirectives`, dynamic content projection, functional routing and guards, and functional HTTP interceptors with `TransferState`. |
 | **Tier 3** | **Internals, Performance & Reactivity** | Q11–Q15 | Zoneless change detection internals, Ivy compiler runtime (`LView`/`TView`), RxJS interop (`toSignal`/`toObservable`), `@defer` bundle chunk splitting, and memory leak prevention. |
 | **Tier 4** | **Enterprise, Production & Tooling** | Q16–Q21 | Non-destructive hydration with event replay, NgRx SignalStore architecture, micro-frontends with Module Federation, XSS/CSP security, enterprise testing harnesses, and the esbuild/Vite build pipeline. |
-| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–B | Side-by-side legacy to modern Angular API migration matrix and a 30-point enterprise production readiness gatekeeper checklist. |
+| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–C | Side-by-side legacy to modern Angular API migration matrix, a 30-point enterprise production readiness gatekeeper checklist, and the master glossary of Angular and frontend abbreviations. |
 
 ---
 
@@ -44,9 +44,10 @@ Every chapter in this book adheres strictly to a predictable, zero-fluff 5-secti
 
 ## Reference Appendices
 
-Beyond the 21 core chapters, two comprehensive reference appendices provide immediate engineering utility:
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
 - **Appendix A: Modern Angular Migration Matrix** — A comprehensive, side-by-side lookup table contrasting legacy Angular (2–13) patterns with modern Angular (17+) paradigms across component models, reactivity, directives, lifecycle hooks, and build tooling.
 - **Appendix B: Enterprise Production Readiness Checklist** — A rigorous 30-point gatekeeper checklist covering architecture, reactivity invariants, bundle budgets, hydration safety, security policies, and CI/CD testing standards.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all Angular runtime, compiler, reactivity, and web architecture abbreviations (AOT, Ivy, DI, CD, SSR, SSG, CSP, XSS, etc.).
 
 ---
 

@@ -20,7 +20,7 @@ Most OpenShift documentation falls into two extremes:
 
 ## The 21-Question Curation Framework
 
-This volume distills OpenShift into **21 architectural questions**, systematically organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills OpenShift into **21 architectural questions**, systematically organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -28,7 +28,7 @@ This volume distills OpenShift into **21 architectural questions**, systematical
 | **Tier 2** | **Core Abstractions & Security** | Q06 – Q10 | Security Context Constraints (SCC) admission engine, UID/GID allocation & SELinux Multi-Category Security (MCS), OpenShift OAuth server & enterprise IdP federation, Projects & namespace multi-tenancy isolation, ImageStreams & internal integrated registry metadata triggers, and Source-to-Image (S2I) build container lifecycles. |
 | **Tier 3** | **Internals, Delivery & Observability** | Q11 – Q15 | BuildConfigs & cluster build strategies (Docker, S2I, Custom), OpenShift Pipelines (Tekton) custom tasks & PipelineRun lifecycles, OpenShift GitOps (ArgoCD) state reconciliation & sync waves, Cluster Monitoring Operator & Prometheus user workload telemetry, and OpenShift Logging with Vector collector pipelines & Loki multi-tenant aggregation. |
 | **Tier 4** | **Enterprise Services & Day-2 Operations** | Q16 – Q21 | OpenShift Serverless (Knative Serving/Eventing) & scale-to-zero activator queues, Red Hat OpenShift Service Mesh (OSSM / Istio) mTLS & Envoy sidecar data planes, OpenShift Data Foundation (ODF / Ceph) software-defined persistent storage & CSI plugins, Red Hat Advanced Cluster Management (RHACM) fleet governance & GitOps placement rules, OpenShift Virtualization (KubeVirt) VM orchestration inside pods, and MachineConfigPool zero-downtime cluster upgrade orchestration. |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | Comprehensive OpenShift `oc` CLI Reference Cheatsheet (Appendix A), and Production OpenShift Reference Architecture Blueprint & Multi-Tenant Security Checklist (Appendix B). |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | Comprehensive OpenShift `oc` CLI Reference Cheatsheet (Appendix A), Production OpenShift Reference Architecture Blueprint & Multi-Tenant Security Checklist (Appendix B), and the master glossary of OpenShift, Kubernetes, and enterprise platform acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -41,6 +41,15 @@ To guarantee rapid comprehension and permanent retention, every core chapter (Ch
 3. **Clean Code in Action**: Production-ready, validated OpenShift manifests and operational commands showcasing standard idiomatic implementations (`### A.`) and advanced enterprise resilience patterns (`### B.`).
 4. **Common Pitfalls & Interview Traps**: Curated 2-column Markdown tables uncovering subtle configuration bugs, race conditions, degraded operator states, and classic interviewer traps.
 5. **60-Second Memory Anchor**: A concentrated, punchy conceptual takeaway that permanently locks the mental model into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: OpenShift oc CLI Reference Cheatsheet** — High-signal CLI diagnostic commands for cluster administration, authentication, projects, routes, and MachineConfig inspection.
+- **Appendix B: Production OpenShift Reference Architecture** — Enterprise architecture blueprint covering multi-tenant security, SCC profiles, GitOps sync waves, and disaster recovery.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all OpenShift, Red Hat, and Kubernetes platform acronyms (RHCOS, OLM, SCC, S2I, ODF, RHACM, etc.).
 
 ---
 

@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: JavaScript C
 | **21-the-event-loop** | 🔒 *Full Edition* | 21. The Event Loop, Microtasks, Macrotasks, and Concurrency |
 | **22-appendix-prototypical-inheritance** | 🔒 *Full Edition* | Appendix A: Prototypal Inheritance Deep-Dive |
 | **23-appendix-primitives-vs-objects** | 🔒 *Full Edition* | Appendix B: Primitives vs. Object Wrappers and Autoboxing |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

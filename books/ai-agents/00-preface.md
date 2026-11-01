@@ -22,7 +22,7 @@ The reality of high-performance agentic engineering is that **coding agents are 
 
 ## The 21-Question Curation Framework
 
-This volume distills the entire discipline of Agentic Software Engineering into **21 foundational architectural questions**, organized across four progressive engineering tiers followed by two deep-dive reference appendices:
+This volume distills the entire discipline of Agentic Software Engineering into **21 foundational architectural questions**, organized across four progressive engineering tiers followed by three deep-dive reference appendices:
 
 | Tier | Focus Area | Chapters | Core Architectural Competencies |
 | :--- | :--- | :--- | :--- |
@@ -30,7 +30,7 @@ This volume distills the entire discipline of Agentic Software Engineering into 
 | **Tier 2** | **IDE Integration & Operational Patterns** | Q06 – Q10 | Rules files (`AGENTS.md`, `.cursorrules`) & dynamic skills, editor telemetry & active cursor context capture, multi-agent orchestrator-subagent topologies, persistent scratchpads vs memory drift, and non-interactive shell execution. |
 | **Tier 3** | **Internals, Reliability & Guardrails** | Q11 – Q15 | Human-in-the-loop (HITL) steering & interruption, loop detection & runaway token circuit breakers, zero-trust sandboxing & blast radius confinement, agentic TDD & test-tampering prevention, and compiler/linter LSP feedback loops. |
 | **Tier 4** | **Production Scale & Enterprise Engineering** | Q16 – Q21 | Git worktrees & atomic agent commits, custom MCP server architecture & schema validation, agent-friendly repository design, safe multi-file refactoring & migrations, SWE-bench evaluation frameworks, and unspoken anti-patterns (vibe coding vs verified engineering). |
-| **Tier 5** | **Reference Appendices** | Q22 – Q23 | The comprehensive coding agent telemetry & diagnostic cheatsheet, and the enterprise agentic production readiness & security checklist. |
+| **Tier 5** | **Reference Appendices** | Q22 – Q24 | The comprehensive coding agent telemetry & diagnostic cheatsheet (Appendix A), enterprise agentic production readiness & security checklist (Appendix B), and the master glossary of AI and agentic software engineering acronyms and abbreviations (Appendix C). |
 
 ---
 
@@ -43,6 +43,15 @@ To guarantee maximum signal and lifelong mental clarity, every core chapter foll
 3. **Clean Code in Action**: Production-ready, modern code implementations in TypeScript/JavaScript, Python, and shell demonstrating primary patterns and resilient production harnesses.
 4. **Common Pitfalls & Interview Traps**: Crisp 2-column tables analyzing real-world failure modes, security vulnerabilities, and subtle debugging edge cases with exact remediations.
 5. **The 60-Second Memory Anchor**: A punchy, memorable takeaway locking the architectural insight into memory.
+
+---
+
+## Reference Appendices
+
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
+- **Appendix A: The Coding Agent Reference Sheet & Diagnostic Matrix** — High-signal diagnostic decision matrix for context thrashing, tool failure recovery, loop interception, and model drift.
+- **Appendix B: Enterprise Agentic Coding Production Readiness & Security Checklist** — A 30-point gatekeeper checklist covering sandbox boundaries, credential isolation, test-tampering detection, and CI/CD agent verification.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all agentic AI, LLM, prompt engineering, and developer tooling acronyms (LLM, MCP, RAG, ReAct, CoT, AST, HITL, etc.).
 
 ---
 

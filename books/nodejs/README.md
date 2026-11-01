@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Node.js Core
 | **21-production-performance-tuning** | 🔒 *Full Edition* | 21. What are the Essential Performance Tuning Techniques for High-Throughput Node.js? |
 | **22-appendix-event-loop-anatomy** | 🔒 *Full Edition* | Appendix A: Complete Anatomy of the Node.js Event Loop & Microtask Lifecycle |
 | **23-appendix-production-checklist** | 🔒 *Full Edition* | Appendix B: Node.js Production Readiness & Hardening Reference Checklist |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

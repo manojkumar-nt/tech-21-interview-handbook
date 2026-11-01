@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Helm & Cloud
 | **21-advanced-migration-and-drift-management** | 🔒 *Full Edition* | 21. How Do You Detect Cluster Drift and Execute Safe Helm 2-to-3 and Three-Way Merge Upgrades? |
 | **22-appendix-helm-cli-and-sprig-cheatsheet** | 🔒 *Full Edition* | Appendix A: Helm CLI & Sprig Template Reference |
 | **23-appendix-production-helm-chart-blueprint** | 🔒 *Full Edition* | Appendix B: Production Helm Chart Reference Architecture |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

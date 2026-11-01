@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Java Core & 
 | **21-reflection-annotations-and-proxies** | 🔒 *Full Edition* | 21. How Do Reflection, Custom Annotations, and Dynamic Proxies Work Internally? |
 | **22-appendix-classloader-hierarchy** | 🔒 *Full Edition* | Appendix A: ClassLoader Hierarchy and Delegation Model |
 | **23-appendix-concurrent-collections-cheat-sheet** | 🔒 *Full Edition* | Appendix B: Concurrency and Collections Quick Reference |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

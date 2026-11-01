@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: React Core &
 | **21-testing-and-profiling-react-apps** | 🔒 *Full Edition* | 21. How Do You Test and Profile React Applications Using React DevTools and Testing Library? |
 | **22-appendix-hooks-rules-cheat-sheet** | 🔒 *Full Edition* | Appendix A: React Hooks Decision Matrix |
 | **23-appendix-performance-checklist** | 🔒 *Full Edition* | Appendix B: React Performance Audit Checklist |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 

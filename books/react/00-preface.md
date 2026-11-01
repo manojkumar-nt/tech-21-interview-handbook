@@ -26,7 +26,7 @@ This edition in the **Tech-21** series distills the entire React paradigm into *
 | **Tier 2** | **Core Hooks & State Mechanics** | Q06–Q10 | Mutable references via `useRef`, CPU memoization (`useMemo`/`useCallback`), state machine modeling (`useReducer`), Context API, and custom hooks. |
 | **Tier 3** | **Component Resilience & Code Splitting** | Q11–Q15 | Controlled vs. uncontrolled form paradigms, Error Boundary hierarchies, `React.lazy` code splitting, React 18 Concurrent rendering, and React Server Components (RSC). |
 | **Tier 4** | **Modern Standards & Ecosystem** | Q16–Q21 | React 19 `use()` and action hooks, client vs. server state management (RTK, Zustand, TanStack Query), SSR streaming hydration, SyntheticEvent delegation, key reconciliation, and profiling. |
-| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–B | Complete React hooks decision and timing matrix, and a production-grade 4-category performance audit checklist. |
+| **Tier 5** | **Deep-Dive Reference Appendices** | App. A–C | Complete React hooks decision and timing matrix, a production-grade 4-category performance audit checklist, and the master glossary of React and frontend acronyms and abbreviations. |
 
 ---
 
@@ -44,9 +44,10 @@ Every chapter in this book adheres strictly to a predictable, zero-fluff 5-secti
 
 ## Reference Appendices Overview
 
-Beyond the 21 core chapters, two comprehensive reference appendices provide immediate engineering utility:
+Beyond the 21 core chapters, three comprehensive reference appendices provide immediate engineering utility:
 - **Appendix A: React Hooks Decision Matrix** — A complete reference guide covering re-render behavior, execution phases, dependency arrays, and lifecycle timing across all standard and modern React hooks.
 - **Appendix B: React Performance Audit Checklist** — Step-by-step engineering audit pipeline covering profiling, re-render mitigation, bundle splitting, list virtualization, and concurrent transitions.
+- **Appendix C: Glossary of Acronyms and Technical Abbreviations** — Complete domain-categorized reference and alphabetical lookup table defining all React, Fiber, VDOM, concurrent rendering, and web architecture abbreviations (VDOM, RSC, SSR, CSR, HOC, TTFB, INP, etc.).
 
 ---
 

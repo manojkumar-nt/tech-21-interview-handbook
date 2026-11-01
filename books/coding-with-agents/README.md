@@ -45,6 +45,7 @@ This repository contains the **free public sampler** for **Tech-21: Coding with 
 | **21-what-are-the-critical-developer-habits-that-separate-great-ai-coders-from-vibe-coders** | 🔒 *Full Edition* | 21. What Are the Critical Developer Habits That Separate Great AI Coders from Vibe Coders? |
 | **22-appendix-developer-prompt-templates-cheatsheet** | 🔒 *Full Edition* | Appendix A: The Pragmatic Developer Prompt Templates & Cheatsheet |
 | **23-appendix-developer-checklist-and-antipatterns** | 🔒 *Full Edition* | Appendix B: The Daily AI Coding Checklist & Anti-Pattern Field Guide |
+| **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |
 
 ---
 
