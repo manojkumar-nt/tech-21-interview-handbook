@@ -50,6 +50,8 @@ How React stores multiple hooks sequentially inside a Fiber node's `memoizedStat
 
 ```javascript
 // Internal representation of Fiber memoizedState linked list:
+const UserProfile = () => null;
+
 const fiberNode = {
   type: UserProfile,
   memoizedState: {

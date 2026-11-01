@@ -70,8 +70,8 @@ function greet(user: User): string {
   return `Hello, ${user.name}!`;
 }
 
-// Emitted JavaScript output (Types completely erased!):
-function greet(user) {
+// Emitted JavaScript output (Types completely erased):
+function greetJs(user: any) {
   return `Hello, ${user.name}!`;
 }
 ```

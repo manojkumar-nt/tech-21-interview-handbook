@@ -82,7 +82,7 @@ export class ContextBudgetManager {
   public compactHistory(
     messages: Message[],
     summarizeFn: (text: string) => Promise<string>
-  ): async () => Promise<Message[]> {
+  ): () => Promise<Message[]> {
     return async () => {
       let totalTokens = messages.reduce(
         (sum, m) => sum + this.estimateTokens(m.content),

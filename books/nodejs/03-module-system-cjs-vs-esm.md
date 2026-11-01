@@ -57,6 +57,7 @@ graph LR
 ### A. Idiomatic Modern ESM with `import.meta` and Native Paths
 Writing modern, standards-compliant Node.js ESM modules:
 
+<!-- test:syntax-only -->
 ```javascript
 // file: server.js (with "type": "module" in package.json)
 import path from 'node:path';
