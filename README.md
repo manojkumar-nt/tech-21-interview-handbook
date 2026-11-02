@@ -131,27 +131,31 @@ Here is a preview of the architectural depth covered across the free chapters:
 
 ## 📦 Curated Track Bundles (Full Editions)
 
-Looking for the full editions with all 21 questions + reference appendices? The series is organized into 5 cohesive engineering tracks:
+Looking for the full editions with all 21 questions + 3 reference appendices per book? The series is organized into 5 cohesive career tracks and a complete All-Access Pass:
 
-### 1. Modern Frontend & Fullstack Suite
-> JavaScript • TypeScript • React • Node.js • Angular  
-Master the browser execution loop, V8 engine internals, the React Fiber reconciler, Node libuv thread pool, and Angular signals reactivity.
+### 1. The Modern Frontend Suite ($39)
+> JavaScript • TypeScript • React • Angular  
+Master the browser execution loop, V8 engine internals, the React Fiber reconciler, and fine-grained Angular signals reactivity. 84 questions, 12 appendices.
 
-### 2. Cloud-Native, DevOps & Platform Engineering Suite
+### 2. The Cloud-Native & DevOps Suite ($49)
 > Docker • Kubernetes • Helm • Red Hat OpenShift  
-Dive deep into Linux namespaces, cgroups v2, CRI-O, etcd distributed consensus, Operator Lifecycle Manager (OLM), and declarative GitOps.
+Dive deep into Linux namespaces, cgroups v2, CRI-O, etcd distributed consensus, Operator Lifecycle Manager (OLM), and declarative GitOps. 84 questions, 12 appendices.
 
-### 3. Enterprise Architecture & Systems Design Suite
-> System Design • Software Architect Technologies  
-Master back-of-the-envelope calculations, distributed consensus (Raft/Paxos), event-driven Kafka architectures, CAP theorem tradeoffs, and caching patterns.
+### 3. The Core Backend Engine Suite ($34)
+> Java • Node.js • Python  
+Master JVM generational garbage collection (ZGC/G1), Project Loom virtual threads, Node libuv event loop phases, and CPython GIL internals. 63 questions, 9 appendices.
 
-### 4. Backend & Systems Programming Suite
-> Java (JVM Internals) • Python (CPython Internals)  
-Understand JVM generational garbage collection (ZGC/G1), JIT compiler tiered compilation (C1/C2), CPython GIL mechanics, and object memory allocations.
+### 4. The Staff+ & System Architect Suite ($29)
+> System Design • Core Technologies for Modern Architects  
+Master back-of-the-envelope calculations, distributed consensus (Raft/Paxos), event-driven Kafka architectures, CAP/PACELC trade-offs, and enterprise tech selection. 42 questions, 6 appendices.
 
-### 5. AI & Agentic Engineering Suite
+### 5. The AI & Agentic Engineering Suite ($29)
 > Agentic Software Engineering • Coding with AI Agents  
-Master autonomous agent loops (ReAct / Plan-and-Solve), context windows & token economics, tool-use protocols (MCP), multi-agent coordination, test-driven AI pairing, and deterministic CI/CD guardrails.
+Master autonomous agent loops (ReAct / Plan-and-Solve), context windows & token economics, tool-use protocols (MCP), multi-agent coordination, test-driven AI pairing, and deterministic CI/CD guardrails. 42 questions, 6 appendices.
+
+### 6. The All-Access Tech-21 Lifetime Pass ($99 Early Bird / $129 Standard)
+> All 15 Books (EPUB + PDF + Web) + 45 Deep-Dive Reference Appendices + Lifetime Updates  
+The complete 315-question architectural library for continuous engineering mastery.
 
 --- 
 
