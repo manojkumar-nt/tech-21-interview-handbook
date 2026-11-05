@@ -2,7 +2,7 @@
 
 ---
 
-# 3. How Does Context Window Degradation and "Lost in the Middle" Impact Autonomous Coding? 
+# 3. How Does Context Window Degradation and "Lost in the Middle" Impact Autonomous Coding Agents? 
 
 ## 1. The Core Concept & Intuition
 

@@ -30,7 +30,7 @@ This repository contains the **free public sampler** for **Tech-21: Coding with 
 | **06-how-do-you-get-an-ai-agent-to-write-thorough-unit-and-integration-tests** | 🔒 *Full Edition* | 6. How Do You Get an AI Agent to Write Thorough Unit and Integration Tests? |
 | **07-how-do-you-use-ai-agents-to-diagnose-and-fix-complex-bugs** | 🔒 *Full Edition* | 7. How Do You Use AI Agents to Diagnose and Fix Complex Production Bugs? |
 | **08-how-do-you-safely-refactor-legacy-code-using-an-ai-agent** | 🔒 *Full Edition* | 8. How Do You Safely Refactor Legacy Code Using an AI Agent Without Breaking Things? |
-| **09-how-do-you-scaffold-new-features-and-boilerplate-rapidly** | 🔒 *Full Edition* | 9. How Do You Scaffold New Features and APIs Rapidly Without Introducing Bloat? |
+| **09-how-do-you-scaffold-new-features-and-boilerplate-rapidly** | 🔒 *Full Edition* | 9. How Do You Scaffold New Features and APIs Rapidly Using AI Agents Without Introducing Bloat? |
 | **10-how-do-you-navigate-and-understand-an-unfamiliar-codebase-with-an-agent** | 🔒 *Full Edition* | 10. How Do You Navigate and Understand an Unfamiliar Codebase Using an AI Agent? |
 | **11-how-do-you-review-ai-generated-pull-requests-and-diffs-effectively** | 🔒 *Full Edition* | 11. How Do You Review AI-Generated Pull Requests and Diffs Effectively? |
 | **12-how-do-you-prevent-the-agent-from-hallucinating-non-existent-libraries** | 🔒 *Full Edition* | 12. How Do You Prevent the Agent from Hallucinating Non-Existent Libraries and APIs? |

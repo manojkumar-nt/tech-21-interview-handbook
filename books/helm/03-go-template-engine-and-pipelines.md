@@ -2,7 +2,7 @@
 
 ---
 
-# 3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace Control? 
+# 3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace in Helm Templates? 
 
 > *"Helm manifests are not static YAML files; they are Go text templates parsed line-by-line by the Go template engine. Mastering the dot (.) scope, pipeline chaining (|), and whitespace trimming modifiers ({{- -}}) is what separates novice YAML hackers from expert Helm engineers."*
 

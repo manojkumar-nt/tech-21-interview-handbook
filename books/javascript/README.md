@@ -23,26 +23,26 @@ This repository contains the **free public sampler** for **Tech-21: JavaScript C
 | :--- | :---: | :--- |
 | **[00-preface](./00-preface.md)** | 🟢 **Free Sampler** | [Preface](./00-preface.md) |
 | **[01-what-is-javascript](./01-what-is-javascript.md)** | 🟢 **Free Sampler** | [1. What is JavaScript and How Does the Engine Work?](./01-what-is-javascript.md) |
-| **[02-declaration-and-data-types](./02-declaration-and-data-types.md)** | 🟢 **Free Sampler** | [2. Variable Declarations & JavaScript Data Types](./02-declaration-and-data-types.md) |
-| **[03-double-and-triple-equality](./03-double-and-triple-equality.md)** | 🟢 **Free Sampler** | [3. Double (`==`), Triple (`===`), and Same-Value (`Object.is`) Equality](./03-double-and-triple-equality.md) |
-| **04-control-flow** | 🔒 *Full Edition* | 4. Control Flow, Iteration, and Modern Logical Operators |
-| **05-manipulating-strings** | 🔒 *Full Edition* | 5. String Manipulation, Immutability, and Modern Methods |
-| **06-how-to-write-functions** | 🔒 *Full Edition* | 6. Function Declarations, Expressions, Arrow Functions, and Generators |
-| **07-working-with-json** | 🔒 *Full Edition* | 7. Working with JSON and Object Serialization |
-| **08-working-with-arrays** | 🔒 *Full Edition* | 8. Mastering JavaScript Arrays and Functional Methods |
-| **09-the-this-keyword** | 🔒 *Full Edition* | 9. Demystifying the `this` Keyword and Binding Rules |
-| **10-strict-mode** | 🔒 *Full Edition* | 10. Strict Mode and Modern ECMAScript Execution |
-| **11-hoisting** | 🔒 *Full Edition* | 11. Hoisting, Execution Context, and the Temporal Dead Zone (TDZ) |
-| **12-closures** | 🔒 *Full Edition* | 12. Closures, Lexical Scope, and Memory Management |
-| **13-call-bind-apply** | 🔒 *Full Edition* | 13. Explicit Context Binding: `call()`, `apply()`, and `bind()` |
-| **14-classes-and-prototypes** | 🔒 *Full Edition* | 14. ES6 Classes, Prototypal Inheritance, and Private Fields |
-| **15-error-handling** | 🔒 *Full Edition* | 15. Robust Error Handling, Custom Errors, and Error Chaining |
-| **16-string-types-and-templates** | 🔒 *Full Edition* | 16. String Literals, Template Literals, and Tagged Templates |
-| **17-settimeout-and-setinterval** | 🔒 *Full Edition* | 17. Timers, Delays, Drift, and Non-Blocking Scheduling |
-| **18-promises** | 🔒 *Full Edition* | 18. Promises, State Lifecycle, and Modern Combinators |
-| **19-rest-and-spread** | 🔒 *Full Edition* | 19. Rest Parameters, Spread Syntax, and Object Immutability |
-| **20-async-and-await** | 🔒 *Full Edition* | 20. Async / Await, Non-Blocking Syntax, and Parallelism |
-| **21-the-event-loop** | 🔒 *Full Edition* | 21. The Event Loop, Microtasks, Macrotasks, and Concurrency |
+| **[02-declaration-and-data-types](./02-declaration-and-data-types.md)** | 🟢 **Free Sampler** | [2. How Do `var`, `let`, and `const` Differ in JavaScript Scoping, and How Does the Engine Handle Primitive vs. Reference Types?](./02-declaration-and-data-types.md) |
+| **[03-double-and-triple-equality](./03-double-and-triple-equality.md)** | 🟢 **Free Sampler** | [3. How Do Loose Equality (`==`), Strict Equality (`===`), and Same-Value (`Object.is`) Differ in JavaScript Type Coercion?](./03-double-and-triple-equality.md) |
+| **04-control-flow** | 🔒 *Full Edition* | 4. How Do Truthy/Falsy Coercion, Nullish Coalescing (`??`), and Modern Iteration Loops Work in JavaScript? |
+| **05-manipulating-strings** | 🔒 *Full Edition* | 5. How Does JavaScript Enforce String Immutability, UTF-16 Code Units, and Memory Allocation During String Manipulation? |
+| **06-how-to-write-functions** | 🔒 *Full Edition* | 6. How Do Function Declarations, Expressions, Arrow Functions, and Generators Differ in JavaScript Hoisting and `this` Binding? |
+| **07-working-with-json** | 🔒 *Full Edition* | 7. How Does JSON Serialization Work in JavaScript, and What Data Types Are Silently Omitted or Transformed? |
+| **08-working-with-arrays** | 🔒 *Full Edition* | 8. How Do JavaScript Arrays Function in Memory, and How Do Mutating Methods Differ from Immutable Functional Methods? |
+| **09-the-this-keyword** | 🔒 *Full Edition* | 9. How Does JavaScript Determine the `this` Context Across Call-Sites, and What Are the Four Precedence Binding Rules? |
+| **10-strict-mode** | 🔒 *Full Edition* | 10. How Does JavaScript Strict Mode Opt Engines into Safer Execution, and What Silent Errors Does It Eliminate? |
+| **11-hoisting** | 🔒 *Full Edition* | 11. How Does JavaScript Hoisting Operate During the Execution Context Creation Phase, and What Is the Temporal Dead Zone (TDZ)? |
+| **12-closures** | 🔒 *Full Edition* | 12. How Do Closures and Lexical Scope Retain Outer Variables on the Heap After JavaScript Functions Return? |
+| **13-call-bind-apply** | 🔒 *Full Edition* | 13. How Do `call()`, `apply()`, and `bind()` Explicitly Control Execution Context and Function Invocation in JavaScript? |
+| **14-classes-and-prototypes** | 🔒 *Full Edition* | 14. How Do ES6 Classes Map to Prototypal Inheritance, Prototype Delegation Chains, and Private Fields (`#`) in JavaScript? |
+| **15-error-handling** | 🔒 *Full Edition* | 15. How Does JavaScript Implement Error Propagation, Custom Error Classes, and Modern Error Chaining with `cause`? |
+| **16-string-types-and-templates** | 🔒 *Full Edition* | 16. How Do Template Literals and Tagged Templates Process Expression Interpolation and AST Parsing in JavaScript? |
+| **17-settimeout-and-setinterval** | 🔒 *Full Edition* | 17. How Do `setTimeout` and `setInterval` Schedule Macrotasks in the JavaScript Runtime, and Why Does Timer Drift Occur? |
+| **18-promises** | 🔒 *Full Edition* | 18. How Does the Promise Lifecycle State Machine Work in JavaScript, and How Do the Four Promise Combinators Differ? |
+| **19-rest-and-spread** | 🔒 *Full Edition* | 19. How Do Rest Parameters and Spread Syntax Operate in JavaScript, and Why Does Spread Perform Shallow Copying? |
+| **20-async-and-await** | 🔒 *Full Edition* | 20. How Does `async`/`await` Desugar into Promises and Generators in JavaScript, and How Does the Runtime Suspend Execution Without Blocking? |
+| **21-the-event-loop** | 🔒 *Full Edition* | 21. How Does the JavaScript Event Loop Orchestrate Concurrency Across the Call Stack, Microtask Queue, and Macrotask Queue? |
 | **22-appendix-prototypical-inheritance** | 🔒 *Full Edition* | Appendix A: Prototypal Inheritance Deep-Dive |
 | **23-appendix-primitives-vs-objects** | 🔒 *Full Edition* | Appendix B: Primitives vs. Object Wrappers and Autoboxing |
 | **24-appendix-abbreviations** | 🔒 *Full Edition* | Appendix C: Glossary of Acronyms and Technical Abbreviations |

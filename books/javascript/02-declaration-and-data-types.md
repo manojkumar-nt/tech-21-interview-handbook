@@ -2,7 +2,7 @@
 
 ---
 
-# 2. Variable Declarations & JavaScript Data Types 
+# 2. How Do `var`, `let`, and `const` Differ in JavaScript Scoping, and How Does the Engine Handle Primitive vs. Reference Types? 
 
 ## 1. The Core Concept & Intuition
 

@@ -2,7 +2,7 @@
 
 ---
 
-# 2. How Do Primitive Types and Reference Types Differ, and What Are Autoboxing Traps? 
+# 2. How Do Primitive Types and Reference Types Differ in Java, and What Are Autoboxing Traps? 
 
 ## 1. The Core Concept & Intuition
 

@@ -54,8 +54,8 @@ Here is a preview of the architectural depth covered across the free chapters:
 
 ### Vol. 01: [Tech-21: JavaScript Core Concepts](./books/javascript/README.md)
 - 🟢 **Question 01**: [1. What is JavaScript and How Does the Engine Work?](./books/javascript/01-what-is-javascript.md)
-- 🟢 **Question 02**: [2. Variable Declarations & JavaScript Data Types](./books/javascript/02-declaration-and-data-types.md)
-- 🟢 **Question 03**: [3. Double (`==`), Triple (`===`), and Same-Value (`Object.is`) Equality](./books/javascript/03-double-and-triple-equality.md)
+- 🟢 **Question 02**: [2. How Do `var`, `let`, and `const` Differ in JavaScript Scoping, and How Does the Engine Handle Primitive vs. Reference Types?](./books/javascript/02-declaration-and-data-types.md)
+- 🟢 **Question 03**: [3. How Do Loose Equality (`==`), Strict Equality (`===`), and Same-Value (`Object.is`) Differ in JavaScript Type Coercion?](./books/javascript/03-double-and-triple-equality.md)
 
 ### Vol. 02: [Tech-21: TypeScript Deep Dive](./books/typescript/README.md)
 - 🟢 **Question 01**: [1. What is TypeScript and How Does the Compiler Pipeline Work?](./books/typescript/01-what-is-typescript-and-the-compiler-pipeline.md)
@@ -64,27 +64,27 @@ Here is a preview of the architectural depth covered across the free chapters:
 
 ### Vol. 03: [Tech-21: Java Core & Modern Concepts](./books/java/README.md)
 - 🟢 **Question 01**: [1. How Does JVM Architecture, Bytecode Execution, and the JIT Compiler Pipeline Work?](./books/java/01-jvm-architecture-and-execution-model.md)
-- 🟢 **Question 02**: [2. How Do Primitive Types and Reference Types Differ, and What Are Autoboxing Traps?](./books/java/02-primitives-objects-and-autoboxing.md)
-- 🟢 **Question 03**: [3. Why Must `equals()` and `hashCode()` Obey Their Contract, and How Does Hash Mapping Depend on Them?](./books/java/03-equals-and-hashcode-contract.md)
+- 🟢 **Question 02**: [2. How Do Primitive Types and Reference Types Differ in Java, and What Are Autoboxing Traps?](./books/java/02-primitives-objects-and-autoboxing.md)
+- 🟢 **Question 03**: [3. Why Must `equals()` and `hashCode()` Obey Their Contract in Java, and How Does Hash Mapping Depend on Them?](./books/java/03-equals-and-hashcode-contract.md)
 
 ### Vol. 04: [Tech-21: React Core & Modern Architecture](./books/react/README.md)
 - 🟢 **Question 01**: [1. What is React and How Does the Virtual DOM Work?](./books/react/01-what-is-react-and-the-virtual-dom.md)
 - 🟢 **Question 02**: [2. How Does the React Fiber Architecture Drive the WorkLoop and Reconciliation?](./books/react/02-the-react-fiber-architecture.md)
-- 🟢 **Question 03**: [3. How Do Components, Props, and Pure Functions Ensure Deterministic Rendering?](./books/react/03-components-props-and-pure-functions.md)
+- 🟢 **Question 03**: [3. How Do React Components, Props, and Pure Functions Ensure Deterministic Rendering?](./books/react/03-components-props-and-pure-functions.md)
 
 ### Vol. 05: [Tech-21: Python Mastery & Internals](./books/python/README.md)
 - 🟢 **Question 01**: [1. How Does the Python Execution Model and CPython Virtual Machine Work?](./books/python/01-python-execution-model-and-cpython-internals.md)
 - 🟢 **Question 02**: [2. What Does 'Everything is an Object' Mean, and How Does the `PyObject` Memory Model Work?](./books/python/02-everything-is-an-object-and-memory-model.md)
-- 🟢 **Question 03**: [3. How Do Mutability, Shallow/Deep Copying, and the Mutable Default Argument Trap Work?](./books/python/03-mutability-copying-and-default-argument-traps.md)
+- 🟢 **Question 03**: [3. How Do Mutability, Shallow/Deep Copying, and the Mutable Default Argument Trap Work in Python?](./books/python/03-mutability-copying-and-default-argument-traps.md)
 
 ### Vol. 06: [Tech-21: Node.js Core Concepts](./books/nodejs/README.md)
 - 🟢 **Question 01**: [1. What is Node.js Architecture and How Does Non-Blocking I/O Work?](./books/nodejs/01-nodejs-architecture.md)
 - 🟢 **Question 02**: [2. How Does the Node.js Event Loop Work and What are its Phases?](./books/nodejs/02-event-loop-phases.md)
-- 🟢 **Question 03**: [3. How Does the Module System Work: CommonJS vs ECMAScript Modules (ESM)?](./books/nodejs/03-module-system-cjs-vs-esm.md)
+- 🟢 **Question 03**: [3. How Does the Node.js Module System Work: CommonJS vs ECMAScript Modules (ESM)?](./books/nodejs/03-module-system-cjs-vs-esm.md)
 
 ### Vol. 07: [Tech-21: Angular Core Concepts](./books/angular/README.md)
 - 🟢 **Question 01**: [1. What is Modern Angular Architecture and How Do Standalone Components Work?](./books/angular/01-angular-architecture-and-standalone.md)
-- 🟢 **Question 02**: [2. How Does Component Lifecycle and Modern Built-in Control Flow Work?](./books/angular/02-component-lifecycle-and-control-flow.md)
+- 🟢 **Question 02**: [2. How Does Component Lifecycle and Modern Built-in Control Flow Work in Angular?](./books/angular/02-component-lifecycle-and-control-flow.md)
 - 🟢 **Question 03**: [3. What Are Angular Signals and How Does Fine-Grained Reactivity Work?](./books/angular/03-reactivity-with-signals.md)
 
 ### Vol. 08: [Tech-21: Docker & Container Runtimes](./books/docker/README.md)
@@ -100,7 +100,7 @@ Here is a preview of the architectural depth covered across the free chapters:
 ### Vol. 10: [Tech-21: Helm & Cloud-Native Packaging](./books/helm/README.md)
 - 🟢 **Question 01**: [1. How Does Helm 3 Architecture Eliminate Tiller and Interact with the Kubernetes API?](./books/helm/01-helm-architecture-and-helm3-evolution.md)
 - 🟢 **Question 02**: [2. What Is the Anatomical Structure of a Helm Chart and How Does `Chart.yaml` Function?](./books/helm/02-chart-structure-and-chart-yaml.md)
-- 🟢 **Question 03**: [3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace Control?](./books/helm/03-go-template-engine-and-pipelines.md)
+- 🟢 **Question 03**: [3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace in Helm Templates?](./books/helm/03-go-template-engine-and-pipelines.md)
 
 ### Vol. 11: [Tech-21: OpenShift](./books/openshift/README.md)
 - 🟢 **Question 01**: [1. How Does OpenShift Enterprise Architecture Differ from Kubernetes and How Does RHCOS Function?](./books/openshift/01-openshift-architecture-and-rhcos.md)
@@ -120,7 +120,7 @@ Here is a preview of the architectural depth covered across the free chapters:
 ### Vol. 14: [Tech-21: Agentic Software Engineering](./books/ai-agents/README.md)
 - 🟢 **Question 01**: [1. What is an Agentic Coding Loop and How Does the ReAct Engine Actually Execute?](./books/ai-agents/01-what-is-an-agentic-coding-loop.md)
 - 🟢 **Question 02**: [2. How Do Coding Agents Index, Navigate, and Understand Massive Codebases?](./books/ai-agents/02-how-do-coding-agents-index-and-navigate-codebases.md)
-- 🟢 **Question 03**: [3. How Does Context Window Degradation and "Lost in the Middle" Impact Autonomous Coding?](./books/ai-agents/03-how-does-context-window-degradation-impact-coding-agents.md)
+- 🟢 **Question 03**: [3. How Does Context Window Degradation and "Lost in the Middle" Impact Autonomous Coding Agents?](./books/ai-agents/03-how-does-context-window-degradation-impact-coding-agents.md)
 
 ### Vol. 15: [Tech-21: Coding with AI Agents](./books/coding-with-agents/README.md)
 - 🟢 **Question 01**: [1. How Should You Set Up Your Project and Rules Files for AI Coding Agents?](./books/coding-with-agents/01-how-should-you-set-up-your-project-for-ai-coding-agents.md)

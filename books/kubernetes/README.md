@@ -26,18 +26,18 @@ This repository contains the **free public sampler** for **Tech-21: Kubernetes**
 | **[02-kubelet-and-node-architecture](./02-kubelet-and-node-architecture.md)** | 🟢 **Free Sampler** | [2. How Does the Kubelet Manage Pod Lifecycles and Communicate with Worker Nodes?](./02-kubelet-and-node-architecture.md) |
 | **[03-etcd-distributed-key-value-store](./03-etcd-distributed-key-value-store.md)** | 🟢 **Free Sampler** | [3. How Does etcd Maintain Consistent Distributed State via the Raft Consensus Algorithm?](./03-etcd-distributed-key-value-store.md) |
 | **04-pod-lifecycle-and-phase-transitions** | 🔒 *Full Edition* | 4. How Does the Pod Lifecycle Manage Phase Transitions, Probes, and Init Containers? |
-| **05-health-probes-liveness-readiness-startup** | 🔒 *Full Edition* | 5. How Do Startup, Liveness, and Readiness Probes Safeguard Application Availability? |
-| **06-qos-classes-and-node-oom-eviction** | 🔒 *Full Edition* | 6. How Do Quality of Service (QoS) Classes and Node OOM Eviction Protect Cluster Stability? |
-| **07-workload-controllers-deployments-and-replicasets** | 🔒 *Full Edition* | 7. How Do Deployments and ReplicaSets Coordinate Declarative Zero-Downtime Rollouts? |
+| **05-health-probes-liveness-readiness-startup** | 🔒 *Full Edition* | 5. How Do Kubernetes Startup, Liveness, and Readiness Probes Safeguard Application Availability? |
+| **06-qos-classes-and-node-oom-eviction** | 🔒 *Full Edition* | 6. How Do Kubernetes Quality of Service (QoS) Classes and Node OOM Eviction Protect Cluster Stability? |
+| **07-workload-controllers-deployments-and-replicasets** | 🔒 *Full Edition* | 7. How Do Kubernetes Deployments and ReplicaSets Coordinate Declarative Zero-Downtime Rollouts? |
 | **08-statefulsets-and-headless-services** | 🔒 *Full Edition* | 8. How Do StatefulSets and Headless Services Preserve Persistent Pod Identity and Ordinal Storage? |
-| **09-daemonsets-jobs-and-cronjobs** | 🔒 *Full Edition* | 9. When Should You Deploy DaemonSets, Batch Jobs, or Scheduled CronJobs in a Cluster? |
-| **10-kubernetes-storage-pv-pvc-and-storageclass** | 🔒 *Full Edition* | 10. How Does the Storage Subsystem Bind PersistentVolumes, PVCs, and Dynamic StorageClasses? |
+| **09-daemonsets-jobs-and-cronjobs** | 🔒 *Full Edition* | 9. When Should You Deploy DaemonSets, Batch Jobs, or Scheduled CronJobs in a Kubernetes Cluster? |
+| **10-kubernetes-storage-pv-pvc-and-storageclass** | 🔒 *Full Edition* | 10. How Does the Kubernetes Storage Subsystem Bind PersistentVolumes, PVCs, and Dynamic StorageClasses? |
 | **11-container-storage-interface-csi** | 🔒 *Full Edition* | 11. How Does the Container Storage Interface (CSI) Enable Custom Storage Drivers and Volume Snapshots? |
 | **12-kubernetes-networking-and-cni** | 🔒 *Full Edition* | 12. How Does the Kubernetes IP-per-Pod Network Model and CNI Plugins Route East-West Traffic? |
 | **13-services-and-kube-proxy** | 🔒 *Full Edition* | 13. How Do Services and kube-proxy Direct Packets Using iptables and IPVS Modes? |
-| **14-coredns-and-cluster-service-discovery** | 🔒 *Full Edition* | 14. How Does CoreDNS Resolve In-Cluster Services and How Do You Prevent the ndots:5 DNS Bottleneck? |
+| **14-coredns-and-cluster-service-discovery** | 🔒 *Full Edition* | 14. How Does CoreDNS Resolve In-Cluster Services and How Do You Prevent the Kubernetes ndots:5 DNS Bottleneck? |
 | **15-ingress-controllers-and-gateway-api** | 🔒 *Full Edition* | 15. How Do Ingress Controllers and the Modern Gateway API Route External HTTP Traffic? |
-| **16-kubernetes-security-rbac-and-serviceaccounts** | 🔒 *Full Edition* | 16. How Do Role-Based Access Control (RBAC) and ServiceAccounts Secure Cluster API Interactions? |
+| **16-kubernetes-security-rbac-and-serviceaccounts** | 🔒 *Full Edition* | 16. How Do Role-Based Access Control (RBAC) and ServiceAccounts Secure Kubernetes API Interactions? |
 | **17-networkpolicies-and-zero-trust** | 🔒 *Full Edition* | 17. How Do Kubernetes NetworkPolicies Enforce East-West Microsegmentation and Zero-Trust? |
 | **18-pod-security-standards-and-admission-controllers** | 🔒 *Full Edition* | 18. How Do Pod Security Standards (PSS) and Validating Admission Webhooks Enforce Cluster Governance? |
 | **19-horizontal-pod-autoscaling-and-keda** | 🔒 *Full Edition* | 19. How Does the Horizontal Pod Autoscaler (HPA) and KEDA Scale Pods Based on Event Metrics? |

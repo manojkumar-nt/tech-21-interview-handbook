@@ -24,18 +24,18 @@ This repository contains the **free public sampler** for **Tech-21: Helm & Cloud
 | **[00-preface](./00-preface.md)** | 🟢 **Free Sampler** | [Preface](./00-preface.md) |
 | **[01-helm-architecture-and-helm3-evolution](./01-helm-architecture-and-helm3-evolution.md)** | 🟢 **Free Sampler** | [1. How Does Helm 3 Architecture Eliminate Tiller and Interact with the Kubernetes API?](./01-helm-architecture-and-helm3-evolution.md) |
 | **[02-chart-structure-and-chart-yaml](./02-chart-structure-and-chart-yaml.md)** | 🟢 **Free Sampler** | [2. What Is the Anatomical Structure of a Helm Chart and How Does `Chart.yaml` Function?](./02-chart-structure-and-chart-yaml.md) |
-| **[03-go-template-engine-and-pipelines](./03-go-template-engine-and-pipelines.md)** | 🟢 **Free Sampler** | [3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace Control?](./03-go-template-engine-and-pipelines.md) |
-| **04-values-hierarchy-and-merging-strategies** | 🔒 *Full Edition* | 4. How Does the Values Hierarchy Resolve and Merge Configurations Across Environments? |
+| **[03-go-template-engine-and-pipelines](./03-go-template-engine-and-pipelines.md)** | 🟢 **Free Sampler** | [3. How Does the Go Template Engine Process Pipelines, Variables, and Whitespace in Helm Templates?](./03-go-template-engine-and-pipelines.md) |
+| **04-values-hierarchy-and-merging-strategies** | 🔒 *Full Edition* | 4. How Does the Helm Values Hierarchy Resolve and Merge Configurations Across Environments? |
 | **05-built-in-objects-and-functions** | 🔒 *Full Edition* | 5. What Built-in Objects and Sprig Functions Power Dynamic Helm Manifest Templating? |
 | **06-flow-control-and-loops** | 🔒 *Full Edition* | 6. How Does Flow Control with `if`, `with`, and `range` Loops Structure Dynamic Helm Templates? |
-| **07-named-templates-and-helper-functions** | 🔒 *Full Edition* | 7. How Do Named Templates and `_helpers.tpl` Partial Definitions Promote Manifest Reuse? |
+| **07-named-templates-and-helper-functions** | 🔒 *Full Edition* | 7. How Do Named Templates and `_helpers.tpl` Partial Definitions Promote Helm Manifest Reuse? |
 | **08-subcharts-and-chart-dependencies** | 🔒 *Full Edition* | 8. How Do Subcharts, Chart Dependencies, and Global Values Coordinate Multi-Tier Deployments? |
 | **09-library-charts-and-code-reuse** | 🔒 *Full Edition* | 9. How Do Library Charts Abstract Common Boilerplate and Enforce Enterprise Standardization? |
 | **10-helm-chart-hooks-and-lifecycle** | 🔒 *Full Edition* | 10. How Do Helm Chart Hooks Control Release Lifecycles and Database Migrations? |
 | **11-release-management-and-state-secrets** | 🔒 *Full Edition* | 11. How Does Helm Manage Release Revisions, Cluster State Secrets, and Automatic Rollbacks? |
 | **12-chart-testing-and-helm-test** | 🔒 *Full Edition* | 12. How Do Post-Install Smoke Tests and `helm test` Validate Pod Health in Clusters? |
 | **13-dry-run-template-debugging-and-linting** | 🔒 *Full Edition* | 13. How Do `helm template`, `--dry-run`, and `helm lint` Debug Broken Kubernetes Manifests? |
-| **14-values-schema-validation-with-json-schema** | 🔒 *Full Edition* | 14. How Does JSON Schema Validation (`values.schema.json`) Enforce Strict Type Safety on User Inputs? |
+| **14-values-schema-validation-with-json-schema** | 🔒 *Full Edition* | 14. How Does JSON Schema Validation (`values.schema.json`) Enforce Strict Type Safety on Helm Inputs? |
 | **15-oci-chart-registries-and-packaging** | 🔒 *Full Edition* | 15. How Do OCI Registries Package, Sign, and Distribute Modern Helm Chart Artifacts? |
 | **16-chart-security-and-helm-secrets** | 🔒 *Full Edition* | 16. How Do `helm-secrets` and Mozilla SOPS Protect Sensitive Configuration in GitOps Repositories? |
 | **17-helm-chart-testing-with-ct-and-unittest** | 🔒 *Full Edition* | 17. How Do the Chart Testing CLI (`ct`) and `helm-unittest` Automate CI/CD Validation? |

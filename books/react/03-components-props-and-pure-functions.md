@@ -2,7 +2,7 @@
 
 ---
 
-# 3. How Do Components, Props, and Pure Functions Ensure Deterministic Rendering? 
+# 3. How Do React Components, Props, and Pure Functions Ensure Deterministic Rendering? 
 
 ## 1. The Core Concept & Intuition
 

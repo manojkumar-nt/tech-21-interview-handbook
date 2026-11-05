@@ -24,10 +24,10 @@ This repository contains the **free public sampler** for **Tech-21: Node.js Core
 | **[00-preface](./00-preface.md)** | 🟢 **Free Sampler** | [Preface](./00-preface.md) |
 | **[01-nodejs-architecture](./01-nodejs-architecture.md)** | 🟢 **Free Sampler** | [1. What is Node.js Architecture and How Does Non-Blocking I/O Work?](./01-nodejs-architecture.md) |
 | **[02-event-loop-phases](./02-event-loop-phases.md)** | 🟢 **Free Sampler** | [2. How Does the Node.js Event Loop Work and What are its Phases?](./02-event-loop-phases.md) |
-| **[03-module-system-cjs-vs-esm](./03-module-system-cjs-vs-esm.md)** | 🟢 **Free Sampler** | [3. How Does the Module System Work: CommonJS vs ECMAScript Modules (ESM)?](./03-module-system-cjs-vs-esm.md) |
+| **[03-module-system-cjs-vs-esm](./03-module-system-cjs-vs-esm.md)** | 🟢 **Free Sampler** | [3. How Does the Node.js Module System Work: CommonJS vs ECMAScript Modules (ESM)?](./03-module-system-cjs-vs-esm.md) |
 | **04-memory-management-and-gc** | 🔒 *Full Edition* | 4. How Does Node.js Manage Memory and V8 Garbage Collection? |
 | **05-buffers-and-binary-data** | 🔒 *Full Edition* | 5. How Do Buffers, TypedArrays, and Binary Data Work in Node.js? |
-| **06-event-emitter** | 🔒 *Full Edition* | 6. How Does the EventEmitter Work and How Do You Prevent Listener Leaks? |
+| **06-event-emitter** | 🔒 *Full Edition* | 6. How Does the Node.js EventEmitter Work and How Do You Prevent Listener Leaks? |
 | **07-streams-and-backpressure** | 🔒 *Full Edition* | 7. How Do Streams and Backpressure Work in Node.js? |
 | **08-file-system-operations** | 🔒 *Full Edition* | 8. How Do File System Operations and Atomic I/O Work in Node.js? |
 | **09-networking-and-http-core** | 🔒 *Full Edition* | 9. How Does Networking, HTTP Core, and HTTP/2 Work in Node.js? |
@@ -35,11 +35,11 @@ This repository contains the **free public sampler** for **Tech-21: Node.js Core
 | **11-libuv-threadpool** | 🔒 *Full Edition* | 11. How Does the Libuv Thread Pool Work and What Causes Starvation? |
 | **12-worker-threads** | 🔒 *Full Edition* | 12. How Do Worker Threads and CPU Parallelism Work in Node.js? |
 | **13-cluster-and-multi-process** | 🔒 *Full Edition* | 13. How Does Clustering and Multi-Process Scaling Work in Node.js? |
-| **14-async-local-storage** | 🔒 *Full Edition* | 14. How Does AsyncLocalStorage Work and How Do You Propagate Context? |
-| **15-diagnostics-and-profiling** | 🔒 *Full Edition* | 15. How Do You Profile Performance, Hunt Memory Leaks, and Monitor the Event Loop? |
-| **16-async-flow-and-abort-controller** | 🔒 *Full Edition* | 16. How Do You Manage Asynchronous Control Flow and Cancellation with AbortController? |
-| **17-error-handling-and-graceful-shutdown** | 🔒 *Full Edition* | 17. How Do You Handle Errors and Implement Graceful Shutdowns in Production? |
-| **18-native-addons-and-napi** | 🔒 *Full Edition* | 18. How Do Native C++ Addons and Node-API (N-API) Work? |
+| **14-async-local-storage** | 🔒 *Full Edition* | 14. How Does AsyncLocalStorage Work in Node.js and How Do You Propagate Context? |
+| **15-diagnostics-and-profiling** | 🔒 *Full Edition* | 15. How Do You Profile Performance, Hunt Memory Leaks, and Monitor the Event Loop in Node.js? |
+| **16-async-flow-and-abort-controller** | 🔒 *Full Edition* | 16. How Do You Manage Asynchronous Control Flow and Cancellation with AbortController in Node.js? |
+| **17-error-handling-and-graceful-shutdown** | 🔒 *Full Edition* | 17. How Do You Handle Errors and Implement Graceful Shutdowns in Production Node.js Applications? |
+| **18-native-addons-and-napi** | 🔒 *Full Edition* | 18. How Do Native C++ Addons and Node-API (N-API) Work in Node.js? |
 | **19-native-tooling-and-features** | 🔒 *Full Edition* | 19. How Do Modern Node.js Native Tooling, Test Runner, and Permission Models Work? |
 | **20-security-best-practices** | 🔒 *Full Edition* | 20. What are the Critical Security Best Practices and Vulnerability Mitigations in Node.js? |
 | **21-production-performance-tuning** | 🔒 *Full Edition* | 21. What are the Essential Performance Tuning Techniques for High-Throughput Node.js? |

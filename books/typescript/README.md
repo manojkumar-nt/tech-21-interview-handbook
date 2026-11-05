@@ -26,7 +26,7 @@ This repository contains the **free public sampler** for **Tech-21: TypeScript D
 | **[02-primitive-types-literal-types-and-type-widening](./02-primitive-types-literal-types-and-type-widening.md)** | 🟢 **Free Sampler** | [2. How Do Primitive Types, Literal Types, and Type Widening Interact?](./02-primitive-types-literal-types-and-type-widening.md) |
 | **[03-any-unknown-never-and-void](./03-any-unknown-never-and-void.md)** | 🟢 **Free Sampler** | [3. What Are Top and Bottom Types, and When Should You Use `any`, `unknown`, `never`, and `void`?](./03-any-unknown-never-and-void.md) |
 | **04-type-aliases-vs-interfaces** | 🔒 *Full Edition* | 4. How Do Type Aliases and Interfaces Differ in Extensibility and Declaration Merging? |
-| **05-structural-typing-and-duck-typing** | 🔒 *Full Edition* | 5. How Does Structural Typing Work, and Why Does Excess Property Checking Occur? |
+| **05-structural-typing-and-duck-typing** | 🔒 *Full Edition* | 5. How Does TypeScript Structural Typing Work, and Why Does Excess Property Checking Occur? |
 | **06-union-and-intersection-types** | 🔒 *Full Edition* | 6. How Do Union and Intersection Types Model Set-Theoretic Logic? |
 | **07-discriminated-unions-and-exhaustive-checking** | 🔒 *Full Edition* | 7. How Do Discriminated Unions Enable Exhaustive Type Checking? |
 | **08-type-narrowing-and-type-guards** | 🔒 *Full Edition* | 8. How Does Control Flow Analysis Narrow Types, and When Should You Use Custom Type Guards? |
@@ -36,12 +36,12 @@ This repository contains the **free public sampler** for **Tech-21: TypeScript D
 | **12-conditional-types-and-infer** | 🔒 *Full Edition* | 12. How Do Conditional Types Distribute Over Unions, and How Does `infer` Unpack Types? |
 | **13-template-literal-types** | 🔒 *Full Edition* | 13. How Do Template Literal Types Enable Type-Safe String Pattern Manipulation? |
 | **14-built-in-utility-types-internals** | 🔒 *Full Edition* | 14. How Do TypeScript's Built-in Utility Types Work Under the Hood? |
-| **15-enums-vs-const-enums-vs-objects** | 🔒 *Full Edition* | 15. Why Should You Prefer Object Literals (`as const`) Over Enums and Const Enums? |
-| **16-classes-access-modifiers-and-parameter-properties** | 🔒 *Full Edition* | 16. How Do Access Modifiers, Parameter Properties, and Private Fields Work in Classes? |
-| **17-function-overloads-and-this-parameter** | 🔒 *Full Edition* | 17. How Do Function Overloading and Contextual `this` Typing Work Internally? |
+| **15-enums-vs-const-enums-vs-objects** | 🔒 *Full Edition* | 15. Why Should You Prefer TypeScript Object Literals (`as const`) Over Enums and Const Enums? |
+| **16-classes-access-modifiers-and-parameter-properties** | 🔒 *Full Edition* | 16. How Do Access Modifiers, Parameter Properties, and Private Fields Work in TypeScript Classes? |
+| **17-function-overloads-and-this-parameter** | 🔒 *Full Edition* | 17. How Do Function Overloading and Contextual `this` Typing Work Internally in TypeScript? |
 | **18-ambient-declarations-and-d-ts-files** | 🔒 *Full Edition* | 18. What Are Ambient Declarations, and How Do `.d.ts` Files Bridge JavaScript and TypeScript? |
-| **19-modules-namespaces-and-module-resolution** | 🔒 *Full Edition* | 19. How Does Modern Module Resolution Work Across ESM, CommonJS, and Bundlers? |
-| **20-decorators-and-metadata-reflection** | 🔒 *Full Edition* | 20. How Do Modern Stage 3 Decorators Differ from Legacy Experimental Decorators? |
+| **19-modules-namespaces-and-module-resolution** | 🔒 *Full Edition* | 19. How Does Modern TypeScript Module Resolution Work Across ESM, CommonJS, and Bundlers? |
+| **20-decorators-and-metadata-reflection** | 🔒 *Full Edition* | 20. How Do Modern Stage 3 Decorators Differ from Legacy Experimental Decorators in TypeScript? |
 | **21-tsconfig-best-practices-and-strict-mode** | 🔒 *Full Edition* | 21. What Flags Constitute `strict` Mode in `tsconfig.json`, and Why Are They Essential? |
 | **22-appendix-type-system-cheat-sheet** | 🔒 *Full Edition* | Appendix A: Type Hierarchy and Assignability Matrix |
 | **23-appendix-utility-types-reference** | 🔒 *Full Edition* | Appendix B: Advanced Type Transformations Cheat Sheet |

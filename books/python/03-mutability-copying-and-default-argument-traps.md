@@ -2,7 +2,7 @@
 
 ---
 
-# 3. How Do Mutability, Shallow/Deep Copying, and the Mutable Default Argument Trap Work? 
+# 3. How Do Mutability, Shallow/Deep Copying, and the Mutable Default Argument Trap Work in Python? 
 
 ## 1. The Core Concept & Intuition
 

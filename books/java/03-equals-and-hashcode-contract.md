@@ -2,7 +2,7 @@
 
 ---
 
-# 3. Why Must `equals()` and `hashCode()` Obey Their Contract, and How Does Hash Mapping Depend on Them? 
+# 3. Why Must `equals()` and `hashCode()` Obey Their Contract in Java, and How Does Hash Mapping Depend on Them? 
 
 ## 1. The Core Concept & Intuition
 

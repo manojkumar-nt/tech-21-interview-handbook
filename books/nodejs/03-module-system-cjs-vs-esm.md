@@ -2,7 +2,7 @@
 
 ---
 
-# 3. How Does the Module System Work: CommonJS vs ECMAScript Modules (ESM)? 
+# 3. How Does the Node.js Module System Work: CommonJS vs ECMAScript Modules (ESM)? 
 
 ## 1. The Core Concept & Intuition
 

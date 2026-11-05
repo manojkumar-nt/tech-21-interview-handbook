@@ -2,7 +2,7 @@
 
 ---
 
-# 2. How Does Component Lifecycle and Modern Built-in Control Flow Work? 
+# 2. How Does Component Lifecycle and Modern Built-in Control Flow Work in Angular? 
 
 ## 1. The Core Concept & Intuition
 

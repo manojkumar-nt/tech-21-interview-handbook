@@ -2,7 +2,7 @@
 
 ---
 
-# 3. Double (`==`), Triple (`===`), and Same-Value (`Object.is`) Equality 
+# 3. How Do Loose Equality (`==`), Strict Equality (`===`), and Same-Value (`Object.is`) Differ in JavaScript Type Coercion? 
 
 ## 1. The Core Concept & Intuition
 

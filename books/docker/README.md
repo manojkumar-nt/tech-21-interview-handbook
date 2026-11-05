@@ -28,18 +28,18 @@ This repository contains the **free public sampler** for **Tech-21: Docker & Con
 | **04-oci-standards-and-runc** | 🔒 *Full Edition* | 4. What Are OCI Standards, Runtime Bundles, and How Does runc Spawn Containers? |
 | **05-containerd-and-cri-o** | 🔒 *Full Edition* | 5. How Do containerd and CRI-O Implement the Container Runtime Interface (CRI)? |
 | **06-dockerfile-production-engineering** | 🔒 *Full Edition* | 6. How Do Multi-Stage Builds and Dockerfile Engineering Optimize Production Images? |
-| **07-distroless-alpine-and-minimal-bases** | 🔒 *Full Edition* | 7. Why and When Should You Choose Distroless, Alpine, or Minimal Base Images? |
+| **07-distroless-alpine-and-minimal-bases** | 🔒 *Full Edition* | 7. Why and When Should You Choose Distroless, Alpine, or Minimal Base Images in Docker? |
 | **08-container-lifecycle-and-signal-handling** | 🔒 *Full Edition* | 8. How Does the Container Lifecycle Manage PID 1, Init Processes, and Unix Signals? |
 | **09-docker-networking-bridge-and-host** | 🔒 *Full Edition* | 9. How Do Bridge, Host, and Port-Mapping Networks Route Traffic in Docker? |
 | **10-docker-networking-macvlan-and-overlay** | 🔒 *Full Edition* | 10. How Do Macvlan, IPVlan, and Overlay Drivers Handle Advanced Container Networking? |
-| **11-storage-volumes-and-bind-mounts** | 🔒 *Full Edition* | 11. How Do Storage Volumes, Bind Mounts, and tmpfs Mounts Manage Persistent State? |
+| **11-storage-volumes-and-bind-mounts** | 🔒 *Full Edition* | 11. How Do Storage Volumes, Bind Mounts, and tmpfs Mounts Manage Persistent State in Docker? |
 | **12-docker-compose-for-local-development** | 🔒 *Full Edition* | 12. How Does Docker Compose Orchestrate Multi-Container Topologies for Local Development? |
 | **13-docker-buildkit-and-multi-arch-builds** | 🔒 *Full Edition* | 13. How Does Docker BuildKit Execute Concurrent Builds and Multi-Architecture Images? |
 | **14-container-security-and-non-root-execution** | 🔒 *Full Edition* | 14. Why Is Non-Root Execution Crucial for Hardening Container Security Boundaries? |
-| **15-linux-capabilities-and-seccomp** | 🔒 *Full Edition* | 15. How Do Linux Capabilities, Seccomp Profiles, and AppArmor Restrict Kernel Privileges? |
+| **15-linux-capabilities-and-seccomp** | 🔒 *Full Edition* | 15. How Do Linux Capabilities, Seccomp Profiles, and AppArmor Restrict Kernel Privileges in Docker? |
 | **16-rootless-docker-and-podman** | 🔒 *Full Edition* | 16. How Do Rootless Docker and Podman Execute Daemonless Containers Safely? |
-| **17-image-vulnerability-scanning-and-trivy** | 🔒 *Full Edition* | 17. How Do Static Vulnerability Scanners, SBOMs, and Trivy Secure Supply Chains? |
-| **18-image-signing-and-provenance-cosign** | 🔒 *Full Edition* | 18. How Does Cryptographic Image Signing with Sigstore Cosign Guarantee Image Provenance? |
+| **17-image-vulnerability-scanning-and-trivy** | 🔒 *Full Edition* | 17. How Do Static Vulnerability Scanners, SBOMs, and Trivy Secure Container Supply Chains? |
+| **18-image-signing-and-provenance-cosign** | 🔒 *Full Edition* | 18. How Does Cryptographic Container Image Signing with Sigstore Cosign Guarantee Image Provenance? |
 | **19-container-logging-and-log-drivers** | 🔒 *Full Edition* | 19. How Does Container Logging Architecture and Non-Blocking Log Drivers Prevent App Freezes? |
 | **20-container-healthchecks-and-restart-policies** | 🔒 *Full Edition* | 20. How Do Healthchecks and Restart Policies Keep Containerized Services Available? |
 | **21-advanced-debugging-and-troubleshooting** | 🔒 *Full Edition* | 21. How Do You Troubleshoot and Debug Crashing or Unresponsive Containers in Production? |
